@@ -6,9 +6,10 @@
       <%= f.error_notification %>
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
       <%= f.association :sale, as: :hidden %>
-      <%= f.association :pack, label: 'или выберите товар', collection: Pack.all.order('LOWER(name) ASC'), include_blank: true, input_html: { id: 'pack-select' } %>
+      <%= f.input :sell_by_piece, label: false, as: :hidden %>
+      <%= f.association :pack, label: 'выберите товар', collection: Pack.all.order('LOWER(name) ASC'), include_blank: true, input_html: { id: 'pack-select' } %>
       <div class='product-select-tag'>
-        <%= f.association :product, label: 'выберите размера', collection: Product.all.order('LOWER(name) ASC'), include_blank: false, input_html: { id: 'product-select', placeholder: 'выберите размер' } %>
+        <%= f.association :product, label: 'выберите размера', as: :hidden, collection: Product.all.order('LOWER(name) ASC'), include_blank: false, input_html: { id: 'product-select', placeholder: 'выберите размер' } %>
       </div>
       <%= f.input :amount, label: 'Количество', input_html: {value: ''} %>
       <div class='row'>
@@ -18,7 +19,7 @@
       <%= f.input :min_price_in_usd, label: 'Минимум цена в $', input_html: { disabled: true } %>
       <%= f.input :initial_remaining, label: 'остаток', input_html: { disabled: true } %>
       <div class='product-select-tag'>
-        <%= f.input :remaining_outside_pack, label: 'остаток вне пачки', input_html: { disabled: true } %>
+        <%= f.input :remaining_outside_pack, label: 'остаток вне пачки', as: :hidden, input_html: { disabled: true } %>
       </div>
 
       <%= f.input :rate, as: :hidden, input_html: { value: rate } %>

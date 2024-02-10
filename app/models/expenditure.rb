@@ -34,7 +34,7 @@ class Expenditure < ApplicationRecord
   def set_transaction_history_and_notify_via_tg
     self.transaction_histories.create(price: total_paid, first_record: true, user_id: user.id)
     message =
-      "<b>#{user.name.upcase} оформил расход</b>\n" \
+      "<b>#{user.name} оформил расход</b>\n" \
       "<b>Тип расхода:</b> #{expenditure_type}\n" \
       "<b>Тип оплаты:</b> #{payment_type}\n" \
       "<b>Цена расхода:</b> #{price} #{price_in_usd ? '$' : 'сум'}\n"

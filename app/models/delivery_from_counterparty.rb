@@ -49,7 +49,7 @@ class DeliveryFromCounterparty < ApplicationRecord
     if closed? && status_before_last_save != 'closed'
       if enable_to_send_sms
         price_sign = price_in_usd ? '$' : 'сум'
-        message =  "#{user.name.upcase} оформил приход товара от контрагента" \
+        message =  "#{user.name} оформил приход товара от контрагента" \
           "<b>Контрагент</b>: #{provider.name}\n" \
           "<b>Тип оплаты</b>: #{payment_type}\n" \
           "<b>Итого цена прихода:</b> #{total_price} #{price_sign}\n" \

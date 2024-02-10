@@ -53,7 +53,7 @@ class Sale < ApplicationRecord
     if closed? && status_before_last_save != 'closed'
       if enable_to_send_sms
         price_sign = price_in_usd ? '$' : 'сум'
-        message =  "#{user.name.upcase} оформил продажу на контрагента\n" \
+        message =  "#{user.name} оформил продажу на контрагента\n" \
           "<b>Покупатель</b>: #{buyer.name}\n" \
           "<b>Тип оплаты</b>: #{payment_type}\n" \
           "<b>Итого цена продажи:</b> #{total_price} #{price_sign}\n" \

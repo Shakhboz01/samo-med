@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-  <%= link_to 'URGUT', root_path, class: 'navbar-brand' %>
+  <%= link_to 'AUTEX', root_path, class: 'navbar-brand' %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -38,30 +38,8 @@
           <%= link_to 'Перекличку работников', new_participation_path, class: 'dropdown-item' %>
         </div>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Прочие
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <%= link_to 'Конвертация', currency_conversions_path, class: 'dropdown-item' %>
-          <%= link_to 'Шорткаты', shortcut_path, class: 'dropdown-item' %>
-          <%= link_to 'Cкидки при продаже', discounts_path, class: 'dropdown-item' %>
-          <%= link_to 'История пополнений', transaction_histories_path, class: 'dropdown-item' %>
-          <%= link_to 'История изменений остатки товара', product_remaining_inequalities_path, class: 'dropdown-item' %>
-          <%= link_to 'Настройки курса', currency_rates_path, class: 'dropdown-item' %>
-          <%= link_to 'Приходы/Расходы от руководителей', owners_operations_path, class: 'dropdown-item' %>
-          <%= link_to 'ежедневный отчет по кассе', daily_transaction_reports_path, class: 'dropdown-item' %>
-          <%= link_to 'Приём/отдача средств', debt_operations_path, class: 'dropdown-item' %>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Выручка
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <%= button_to 'от покупателя', default_create_sales_path(prepayment: true), method: :post, class: 'dropdown-item' %>
-          <%= button_to 'на поставщика', default_create_delivery_from_counterparties_path(prepayment: true), method: :post, class: 'dropdown-item' %>
-        </div>
+      <li class="nav-item">
+        <%= link_to "Склад", products_path, class: 'dropdown-item' %>
       </li>
       <% if %w[руководитель бухгалтер].include?(current_user.role) %>
         <li class="nav-item">
@@ -72,6 +50,9 @@
   </div>
   <ul class="text-center navbar-nav ml-auto">
     <% if user_signed_in? %>
+      <li class="nav-item">
+        <%= link_to "Курс: #{CurrencyRate.last.rate}", currency_rates_path, class: 'dropdown-item' %>
+      </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= current_user.name&.capitalize %>
