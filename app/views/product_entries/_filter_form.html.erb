@@ -4,7 +4,7 @@
     <div class="card shadow-lg">
       <div class="row card-body">
         <div class="form-group col-xs-12 col-sm-2">
-          <%= f.label :pack_id_eq, 'Пачка:', class: 'control-label' %>
+          <%= f.label :pack_id_eq, 'товар:', class: 'control-label' %>
           <%= f.select :pack_id_eq, Pack.pluck(:name, :id), { include_blank: true }, class: 'form-control' %>
         </div>
         <div class="form-group col-xs-12 col-sm-2">
