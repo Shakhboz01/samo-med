@@ -35,6 +35,9 @@ module ProductSells
         buy_price_in_uzs = average_buy_price
       end
 
+      sell_price_in_uzs = ProductSells::RoundPrice.run(number: sell_price_in_uzs).result
+      buy_price_in_uzs = ProductSells::RoundPrice.run(number: buy_price_in_uzs).result
+
       return {
                average_prices: {
                  average_sell_price_in_usd: sell_price_in_usd,

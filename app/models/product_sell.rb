@@ -51,7 +51,6 @@ class ProductSell < ApplicationRecord
         amount: amount,
         product: product
       )
-      byebug
       errors.add(:base, ps.errors.messages) unless ps.valid?
     else
       price_data.each do |data|
@@ -116,11 +115,24 @@ class ProductSell < ApplicationRecord
         self.sell_price = sell_price / rate
       else
         self.buy_price = average_prices["average_buy_price_in_uzs"]
-        self.sell_price = sell_price * rate
+        self.sell_price = round_to_nearest_thousand(sell_price * rate)
       end
     end
 
     profit = sell_price - buy_price
     self.total_profit = profit * amount
+  end
+
+  def round_to_nearest_thousand(number)
+    rounded_number = number.round(-3)  # Round to the nearest thousand
+    last_three_digits = rounded_number % 1000
+
+    if last_three_digits >= 500
+      rounded_number += (1000 - last_three_digits)
+    else
+      rounded_number -= last_three_digits
+    end
+
+    rounded_number
   end
 end

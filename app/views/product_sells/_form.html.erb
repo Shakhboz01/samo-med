@@ -31,14 +31,6 @@
 
 <script>
   $(document).ready(function() {
-    if (!localStorage.getItem("SellpageReloaded")) {
-     // Reload the page
-      localStorage.setItem("SellpageReloaded", "true");
-      location.reload();
-    } else {
-      // Clear the flag for subsequent reloads
-      localStorage.removeItem("SellpageReloaded");
-    }
     $('.product-select-tag').hide();
     $('form').on('keypress', e => {
       if (e.keyCode == 13) {
@@ -195,7 +187,8 @@
           .catch(error => console.error('Error:', error));
       }
     }
-    var sellPriceInput = document.getElementById('product_sell_sell_price');
+  })
+  var sellPriceInput = document.getElementById('product_sell_sell_price');
     var sellPriceInUzsInput = document.getElementById('product_sell_sell_price_in_uzs');
     var rateInput = document.getElementById('product_sell_rate');
 
@@ -224,5 +217,4 @@
       var rate = parseFloat(this.value);
       sellPriceInUzsInput.value = (sellPrice * rate).toFixed(2);
     });
-  })
 </script>
