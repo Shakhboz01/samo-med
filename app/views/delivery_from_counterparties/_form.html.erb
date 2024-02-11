@@ -4,17 +4,24 @@
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
     <%= f.input :status, as: :hidden, input_html: { value: 1 } %>
     <div class='form-inputs'>
-
-      <% if !params.dig(:prepayment).present? %>
-        <%= f.input :total_price, label: 'Итого цена', disabled: true %>
-      <% end %>
-      <%= f.input :total_paid, label: 'Итого оплачено' %>
-      <%= f.association :provider, label: 'Поставщик', collection: Provider.active.order(weight: :desc).order(name: :asc), include_blank: false %>
-      <%= f.input :payment_type, label: 'Тип оплаты', collection: DeliveryFromCounterparty.payment_types.keys.map { |unit| [DeliveryFromCounterparty.human_attribute_name("unit.#{unit}"), unit] }, include_blank: false %>
-      <%= f.label :price_in_usd, 'Договор в $' %>
+      <%= f.label :price_in_usd, 'dollarda' %>
       <%= f.input :price_in_usd, label: false %>
-      <%= f.input :comment, label: 'Комментарии' %>
-      <%= f.button :submit, 'Закрыть проводку' %>
+      <% if !params.dig(:prepayment).present? %>
+        <%= f.input :total_price, label: 'To\'lashimiz lozim', disabled: true %>
+      <% end %>
+      <%= f.input :total_paid, label: "To'langan summa" %>
+      <%= f.association :provider, label: 'Yuk beruvchini tanlang', collection: Provider.active.order(weight: :desc).order(name: :asc), include_blank: false %>
+      <%= f.input :payment_type, label: 'Tolov turini tanlang', collection: DeliveryFromCounterparty.payment_types.keys.map { |unit| [DeliveryFromCounterparty.human_attribute_name("unit.#{unit}"), unit] }, include_blank: false %>
+      <%= f.input :comment, label: 'Kommentariya' %>
+      <%= f.button :submit, 'Sotib olishni yakunlash' %>
     </div>
   <% end %>
 </div>
+
+<script>
+  document.querySelector('#delivery_from_counterparty_total_paid').addEventListener('focus', function(e) {
+    if(document.querySelector('#delivery_from_counterparty_total_paid').value == null || document.querySelector('#delivery_from_counterparty_total_paid').value == 0){
+      document.querySelector('#delivery_from_counterparty_total_paid').value = document.querySelector('#delivery_from_counterparty_total_price').value
+    }
+  })
+</script>

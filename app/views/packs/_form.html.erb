@@ -4,15 +4,15 @@
       <div style='box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;' class='form-inputs col-sm-12 col-md-10 m-2'>
         <%= f.error_notification %>
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-        <%= f.input :name, label: 'Название товара', input_html: {autofocus: 'true'} %>
-        <%= f.input :code, label: 'код', input_html: {value: @random_code} %>
+        <%= f.input :name, label: 'Tovar nomi', input_html: {autofocus: 'true'} %>
+        <%= f.input :code, label: 'Kodi', input_html: {value: @random_code} %>
         <%= f.input :delivery_id, input_html: {value: params[:delivery_id] }, as: :hidden  %>
-        <%= f.input :initial_remaining, label: 'остаток', input_html: { value: defined?(@initial_remaining) ? @initial_remaining : 0 }%>
-        <%= f.label :price_in_usd, 'цена в $' %>
+        <%= f.input :initial_remaining, label: 'Ostatkasi', input_html: { value: defined?(@initial_remaining) ? @initial_remaining : 0 }%>
+        <%= f.label :price_in_usd, 'Narx dollarda' %>
         <%= f.input :price_in_usd, label: false %>
-        <%= f.input :sell_price, label: 'цена продажи' %>
-        <%= f.input :buy_price, label: 'цена прихода' %>
-        <%= f.submit 'Заверщить', class: 'btn btn-primary' %>
+        <%= f.input :sell_price, label: 'Sotish narxi (1 dona)' %>
+        <%= f.input :buy_price, label: 'Sotib olgan narximiz (1 dona)' %>
+        <%= f.submit 'Saqlash', class: 'btn btn-primary' %>
       </div>
     </div>
   <% end %>
