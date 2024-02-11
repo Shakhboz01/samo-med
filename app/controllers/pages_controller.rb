@@ -58,7 +58,7 @@ class PagesController < ApplicationController
   def admin_page
     authorize PagesController, :access?
 
-    # @q = DeliveryFromCounterparty.ransack(params[:q])
+    @q = DeliveryFromCounterparty.ransack(params[:q])
     # @delivery_from_counterparties = @q.result
     # @product_categories = ProductCategory.where(weight: 0)
     # @local_category_info = []

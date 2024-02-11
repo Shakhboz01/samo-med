@@ -6,14 +6,13 @@
           <th>ID</th>
         <% end %>
 
-        <th>имя</th>
-        <th>итого разница в $</th>
-        <th>итого разница в суме</th>
+        <th>Ism</th>
+        <th>Dollarda qarzi</th>
+        <th>So'mda qarzi</th>
 
         <% unless defined?(shrink) %>
           <th>номер телефона</th>
           <th>Коммент</th>
-          <th>Оформлено в</th>
         <% end %>
       </tr>
     </thead>
@@ -29,10 +28,8 @@
           <% unless defined?(shrink) %>
             <td><%= buyer.phone_number %></td>
             <td><%= buyer.comment %></td>
-            <td><%= strf_datetime(buyer.created_at) %></td>
             <td>
-              <%= clink_to 'Посмотреть история оказания услуги', sales_path, 'fa-history' %>
-              <%= clink_to 'Редактировать', edit_buyer_path(buyer), 'fa-edit' %>
+              <%= clink_to 'Ozgartirish', edit_buyer_path(buyer), 'fa-edit' %>
               <% if buyer.active %>
                 <%= clink_to 'Деактивировать', toggle_active_buyer_path(buyer), 'fa-ban', :post %>
               <% else %>

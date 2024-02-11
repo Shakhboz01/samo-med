@@ -4,13 +4,12 @@
       <% unless defined?(shrink) %>
         <th>ID</th>
       <% end %>
-      <th>имя</th>
-      <th>итого разница в $</th>
-      <th>итого разница в суме</th>
+      <th>Ism</th>
+      <th>Dollarda qarzimiz</th>
+      <th>So'mda qarzimiz</th>
       <% unless defined?(shrink) %>
         <th>номер телефона</th>
         <th>Коммент</th>
-        <th>Оформлено в</th>
         <th colspan="3"></th>
       <% end %>
     </tr>
@@ -29,10 +28,9 @@
         <% unless defined?(shrink) %>
           <td><%= provider.phone_number %></td>
           <td><%= provider.comment %></td>
-          <td><%= strf_datetime(provider.created_at) %></td>
           <td>
-            <%= clink_to 'Редактировать', edit_provider_path(provider), 'fa-edit' %>
-            <%= clink_to 'История прихода товаров от поставщика', delivery_from_counterparties_path(q: {provider_id_eq: provider.id}), 'fa-history' %>
+            <%= clink_to 'Ozgartirish', edit_provider_path(provider), 'fa-edit' %>
+            <%= clink_to 'Tarixini korish', delivery_from_counterparties_path(q: {provider_id_eq: provider.id}), 'fa-history' %>
             <% if provider.active %>
               <%= clink_to 'Деактивировать', toggle_active_provider_path(provider), 'fa-ban', :post %>
             <% else %>

@@ -4,16 +4,16 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :name, label: 'Имя' %>
-    <%= f.input :phone_number, label: 'Номер телефона' %>
+    <%= f.input :name, label: 'Ism' %>
+    <%= f.input :phone_number, label: 'Telefon raqam' %>
     <% unless provider.persisted? %>
-      <%= f.input :debt_in_uzs, label: 'Наш долг в сум', as: :numeric %>
-      <%= f.input :debt_in_usd, label: 'Наш долг в $', as: :numeric %>
+      <%= f.input :debt_in_uzs, label: "So'mda qarzimiz", as: :numeric %>
+      <%= f.input :debt_in_usd, label: 'Dollarda qarzimiz', as: :numeric %>
     <% end %>
-    <%= f.input :comment, label: 'Коммент' %>
+    <%= f.input :comment, label: 'Komment' %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, 'Завершить' %>
+    <%= f.button :submit, 'Saqlash' %>
   </div>
 <% end %>

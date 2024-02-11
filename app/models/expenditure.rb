@@ -11,8 +11,8 @@ class Expenditure < ApplicationRecord
   has_many :transaction_histories, dependent: :destroy
   validates_presence_of :expenditure_type
   validates_presence_of :price
-  enum expenditure_type: %i[Корея qarz банк другие_расходы на_покупку_товаров]
-  enum payment_type: %i[наличные карта click другие]
+  enum expenditure_type: %i[bank boshqa_xarajatlar yol_kira qarz]
+  enum payment_type: %i[naqt карта click boshqa]
   scope :price_in_uzs, -> { where('price_in_usd = ?', false) }
   scope :price_in_usd, -> { where('price_in_usd = ?', true) }
 
