@@ -2,36 +2,18 @@
   <div class="card shadow-lg">
     <div class="card-header d-flex justify-content-between align-items-center">
       <div class="btn-group" role="group" aria-label="Basic example">
-        <%= link_to 'Продажа', sales_path, class: 'btn btn-secondary' %>
-        <button type="button" class="btn btn-primary">Посмотреть детально</button>
+        <%= link_to 'Umumiy korish', sales_path, class: 'btn btn-secondary' %>
+        <button type="button" class="btn btn-primary">Batafsil ko'rish</button>
       </div>
     </div>
     <div class="card-header d-flex justify-content-between align-items-center">
-      <h3 class="card-title font-weight-bold">Продажа товаров</h3>
+      <h3 class="card-title font-weight-bold">Sotilgan tovarlar</h3>
     </div>
 
     <div class="card-body">
       <%= render 'filter_form', q: @q, url: request.path %>
       <%= render 'product_sells', product_sells: @product_sells, rate: @rate %>
       <%= paginate @product_sells %>
-      <table class='table-bordered'>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Итого доход</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>В долларах </th>
-            <td><%= number_to_currency @product_sells_data.where(price_in_usd: true).sum(:total_profit) %></td>
-          </tr>
-          <tr>
-            <th>В сумах </th>
-            <td><%= num_to_usd @product_sells_data.where(price_in_usd: false).sum(:total_profit) %></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 </div>

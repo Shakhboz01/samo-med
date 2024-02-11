@@ -3,16 +3,15 @@
     <tr>
       <% unless defined?(shrink) %>
         <th><%= sort_link q, :id, 'ID' %></th>
-        <th>Поставщик</th>
+        <th>Yuk beruvchi</th>
       <% end %>
-      <th><%= sort_link q, :buy_price, 'Цена прихода' %></th>
-      <th><%= sort_link q, :sell_price, 'Цена продажи' %></th>
-      <th><%= sort_link q, :sell_price, 'Цена %' %></th>
-      <th>Пвчка</th>
-      <th><%= sort_link q, :amount, 'Кол.' %></th>
+      <th><%= sort_link q, :buy_price, 'Kelish narxi' %></th>
+      <th><%= sort_link q, :sell_price, 'Sotish narxi' %></th>
+      <th><%= sort_link q, :sell_price, 'Foizda %' %></th>
+      <th>Tovar</th>
+      <th><%= sort_link q, :amount, 'Soni' %></th>
       <% unless defined?(shrink) %>
-        <th><%= sort_link q, :created_at, 'Оформлено в' %></th>
-        <td>Исполнитель</td>
+        <th><%= sort_link q, :created_at, 'kelgan sana' %></th>
       <% end %>
       <th colspan="3"></th>
     </tr>
@@ -31,14 +30,13 @@
         <td><%= product_entry.amount %></td>
         <% unless defined?(shrink) %>
           <td><%= strf_datetime(product_entry.created_at) %></td>
-          <td><%= product_entry.user.name %></td>
         <% end %>
         <td>
           <% unless defined?(shrink) %>
-            <%= clink_to 'Редактировать цену продажи', edit_product_entry_path(product_entry), 'fa-edit' %>
+            <%= clink_to 'Sotish narxini ozgartirish', edit_product_entry_path(product_entry), 'fa-edit' %>
           <% end %>
           <% if defined?(deletable) %>
-            <%= cdlink_to 'Удалить', product_entry %>
+            <%= cdlink_to 'Ochirish', product_entry %>
           <% end %>
         </td>
       </tr>
