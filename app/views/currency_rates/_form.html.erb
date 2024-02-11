@@ -4,10 +4,10 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :rate, label: 'курс' %>
+    <%= f.input :rate, label: 'Yangi kursni kiriting' %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, 'Обновить курс' %>
+    <%= f.button :submit, 'Saqlash' %>
   </div>
 <% end %>

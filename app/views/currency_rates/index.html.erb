@@ -1,8 +1,8 @@
 <div class="container my-5">
   <div class="card shadow-lg">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <h3 class="card-title font-weight-bold">Kурсы</h3>
-      <%= link_to 'Обновить курс', new_currency_rate_path, class: "btn btn-success min-width-btn" %>
+      <h3 class="card-title font-weight-bold">Kурс</h3>
+      <%= link_to 'Yangi kurs o\'rnatish', new_currency_rate_path, class: "btn btn-success min-width-btn" %>
     </div>
 
     <div class="card-body">
@@ -11,8 +11,8 @@
           <tr>
             <th><%= sort_link @q, :rate, 'ID' %></th>
             <th><%= sort_link @q, :rate, 'Курс' %></th>
-            <th><%= sort_link @q, :created_at, 'От' %></th>
-            <th><%= sort_link @q, :finished_at, 'До' %></th>
+            <th><%= sort_link @q, :created_at, 'Dan' %></th>
+            <th><%= sort_link @q, :finished_at, 'Gacha' %></th>
             <th colspan="3"></th>
           </tr>
         </thead>

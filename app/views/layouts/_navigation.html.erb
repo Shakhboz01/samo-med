@@ -8,42 +8,40 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Посмотреть список
+          Ko'rish
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <%= link_to 'Продажи', sales_path, class: 'dropdown-item' %>
-          <%= link_to 'Приход товаров', delivery_from_counterparties_path, class: 'dropdown-item' %>
-          <%= link_to 'товары', packs_path, class: 'dropdown-item' %>
-          <%= link_to 'Расходов', expenditures_path, class: 'dropdown-item' %>
-          <%= link_to 'Поставщиков', providers_path, class: 'dropdown-item' %>
-          <%= link_to 'Покупателей', buyers_path, class: 'dropdown-item' %>
-          <%= link_to 'Курсов', currency_rates_path, class: 'dropdown-item' %>
-          <%= link_to 'Зарплат/Аванс', salaries_path, class: 'dropdown-item' %>
-          <%= link_to 'Работников', users_path, class: 'dropdown-item' %>
-          <%= link_to 'Переклички работников', participations_path, class: 'dropdown-item' %>
+          <%= link_to 'Sotuv tarixini', sales_path, class: 'dropdown-item' %>
+          <%= link_to 'Yuk olish tarixini', delivery_from_counterparties_path, class: 'dropdown-item' %>
+          <%= link_to 'Sklad', packs_path, class: 'dropdown-item' %>
+          <%= link_to 'Boshqa xarajatlar', expenditures_path, class: 'dropdown-item' %>
+          <%= link_to 'Yuk beruvchilar', providers_path, class: 'dropdown-item' %>
+          <%= link_to 'Mijozlar', buyers_path, class: 'dropdown-item' %>
+          <%= link_to 'Dollar kursi', currency_rates_path, class: 'dropdown-item' %>
+          <%= link_to 'Oylik/avans', salaries_path, class: 'dropdown-item' %>
+          <%= link_to 'Ishchilar', users_path, class: 'dropdown-item' %>
         </div>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Оформить
+          Amalga oshirish
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <%= button_to 'Продажу (alt + 2)', default_create_sales_path, method: :post, class: 'dropdown-item' %>
-          <%= button_to 'Приход товара (alt + 5)', default_create_delivery_from_counterparties_path, method: :post, class: 'dropdown-item' %>
-          <%= link_to 'Расход (alt + 0)', new_expenditure_path, class: 'dropdown-item' %>
-          <%= link_to 'Поставщика', new_provider_path, class: 'dropdown-item' %>
-          <%= link_to 'Покупателя', new_buyer_path, class: 'dropdown-item' %>
-          <%= link_to 'товар', new_pack_path, class: 'dropdown-item' %>
-          <%= link_to 'Зарплату/Аванс', new_salary_path, class: 'dropdown-item' %>
-          <%= link_to 'Перекличку работников', new_participation_path, class: 'dropdown-item' %>
+          <%= button_to 'Sotuv', default_create_sales_path, method: :post, class: 'dropdown-item' %>
+          <%= button_to 'Xarid', default_create_delivery_from_counterparties_path, method: :post, class: 'dropdown-item' %>
+          <%= link_to 'Xarajat', new_expenditure_path, class: 'dropdown-item' %>
+          <%= link_to 'Yuk beruvchi qo\'shish', new_provider_path, class: 'dropdown-item' %>
+          <%= link_to 'Mijoz qo\'shish', new_buyer_path, class: 'dropdown-item' %>
+          <%= link_to 'Tovar qo\'shish', new_pack_path, class: 'dropdown-item' %>
+          <%= link_to 'Oylik/avans berish', new_salary_path, class: 'dropdown-item' %>
         </div>
       </li>
       <li class="nav-item">
-        <%= link_to "Склад", products_path, class: 'dropdown-item' %>
+        <%= link_to "SKLAD", products_path, class: 'dropdown-item' %>
       </li>
       <% if %w[руководитель бухгалтер].include?(current_user.role) %>
         <li class="nav-item">
-          <%= link_to 'Админ', admin_page_path, class: 'nav-link' %>
+          <%= link_to 'Admin', admin_page_path, class: 'nav-link' %>
         </li>
       <% end %>
     </ul>
@@ -51,7 +49,7 @@
   <ul class="text-center navbar-nav ml-auto">
     <% if user_signed_in? %>
       <li class="nav-item">
-        <%= link_to "Курс: #{CurrencyRate.last.rate}", currency_rates_path, class: 'dropdown-item' %>
+        <%= link_to "KURS: #{CurrencyRate.last.rate}", currency_rates_path, class: 'dropdown-item' %>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

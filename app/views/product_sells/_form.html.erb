@@ -31,13 +31,13 @@
 
 <script>
   $(document).ready(function() {
-    if (!localStorage.getItem("pageReloaded")) {
+    if (!localStorage.getItem("SellpageReloaded")) {
      // Reload the page
-      localStorage.setItem("pageReloaded", "true");
+      localStorage.setItem("SellpageReloaded", "true");
       location.reload();
     } else {
       // Clear the flag for subsequent reloads
-      localStorage.removeItem("pageReloaded");
+      localStorage.removeItem("SellpageReloaded");
     }
     $('.product-select-tag').hide();
     $('form').on('keypress', e => {

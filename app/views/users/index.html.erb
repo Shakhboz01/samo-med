@@ -11,9 +11,8 @@
       <table class="table table-bordered table-hover shadow-lg table-striped">
         <thead>
           <tr>
-            <th>Имя</th>
-            <th>Роль</th>
-            <th>Ежедневный платеж</th>
+            <th>Ism</th>
+            <th>Roli</th>
             <th></th>
           </tr>
         </thead>
@@ -22,15 +21,12 @@
             <tr class="<%= !user.active && 'table-dark'  %>">
               <td><%= user.name %></td>
               <td><%= user.role.capitalize %></td>
-              <td><%= number_to_currency(user.daily_payment) %></td>
               <td>
-                <%= clink_to 'посмотреть историю зарплат/аванс', salaries_path(q: {user_id_eq: user.id}), 'fa-money' %>
-                <% unless %w[бухгалтер менеджер].include?(user.role) %>
-                  <%= clink_to 'История выполненных работ', local_services_path(q: {user_id_eq: user.id}), 'fa-hammer' %>
-                <% end %>
-                <%= clink_to 'Оформить зарплату/аванс', new_salary_path(team_id: user.id), 'fa-plus' %>
-                <%= clink_to 'Редактировать', edit_user_path(user), 'fa-edit' %>
-                <%= clink_to 'Изменить пароль', edit_user_path(user, password_change: true), 'fa-lock-open' %>
+                <%= clink_to 'oylik istoriyasini korish', salaries_path(q: {user_id_eq: user.id}), 'fa-money' %>
+
+                <%= clink_to 'зарплату/аванс berish', new_salary_path(team_id: user.id), 'fa-plus' %>
+                <%= clink_to 'Ozgartirish', edit_user_path(user), 'fa-edit' %>
+                <%= clink_to 'Parolni ozgartirish', edit_user_path(user, password_change: true), 'fa-lock-open' %>
                 <% if  user.active %>
                   <%= clink_to 'Деактивировать работника! (работник не будет получать оплату и не может использовать это приложение)', toggle_active_user_user_path(user), 'fa-ban' %>
                 <% else %>

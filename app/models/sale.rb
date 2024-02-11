@@ -53,11 +53,10 @@ class Sale < ApplicationRecord
     if closed? && status_before_last_save != 'closed'
       if enable_to_send_sms
         price_sign = price_in_usd ? '$' : 'сум'
-        message =  "#{user.name} tomonidan sotuv bo'ldi\n" \
+        message =  "Sotuv amalga oshirildi\n" \
           "<b>Mijoz</b>: #{buyer.name}\n" \
           "<b>To'lov turi</b>: #{payment_type}\n" \
-          "<b>Jami narx:</b> #{total_price} #{price_sign}\n" \
-          "<b>Jami foyda:</b> #{total_profit} #{price_sign}\n"
+          "<b>Jami narx:</b> #{total_price} #{price_sign}\n"
         message << "&#9888<b>To'landi:</b> #{total_paid} #{price_sign}\n" if total_price > total_paid
         message << "<b>Комментарие:</b> #{comment}\n" if comment.present?
         SendMessage.run(message: message)
