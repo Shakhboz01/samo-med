@@ -14,7 +14,7 @@ module ProductSells
       items = [
         ["<b></b>", "<b></b>", "<b>Mijozning qarzdorligi:</b>", "<b>#{num_to_usd(debt_with_exception)}</b>"],
         ['', '', '', ''],
-        ["<b>Товар</b>", "<b>Количество</b>", "<b>Цена</b>", "<b>Итого цена</b>"]
+        ["<b>Tovar</b>", "<b>Soni</b>", "<b>Narxi (1 dona)</b>", "<b>Jami narx</b>"]
       ]
       sale.product_sells.each do |product_sell|
         items.push(
@@ -30,13 +30,13 @@ module ProductSells
       items.push(
         ['', '', '', ''],
         [
-        '<b>Итого:</b>',
+        '<b>Jami:</b>',
         '',
         '',
         currency_convert(sale.price_in_usd, sale.total_price)
       ])
       items.push([
-        '<b>Итого оплачено:</b>', '', '', currency_convert(sale.price_in_usd, sale.total_paid)
+        '<b>Jami to\'landi:</b>', '', '', currency_convert(sale.price_in_usd, sale.total_paid)
       ])
       items.push([
         '', '', "<b>Xariddan keyingi qarzdorlik holati:</b>", "#{num_to_usd(total_debt)}"
@@ -49,23 +49,23 @@ module ProductSells
           normal: File.expand_path("./app/assets/fonts/Alice-Regular.ttf")
         },
         details: [
-          ["Номер чека:", sale.id],
-          ["Дата:", sale.created_at.strftime("%D - %H:%M")],
-          ['Исполнитель:', sale.user.name],
-          ["Тип оплаты:", sale.payment_type]
+          ["Chek nomeri:", sale.id],
+          ["Sana:", sale.created_at.strftime("%D - %H:%M")],
+          ["To\'lov turi:", sale.payment_type],
+          ['', '']
         ],
         company: {
-          name: "ООО 'PARTS-LINE AUTO'",
+          name: "ALUTEX JOMBOY",
           address: "Чупон Ота дом 171",
-          phone: '+998915257779',
-          email: "parts.line1@mail.ru",
-          logo: File.expand_path("./app/assets/images/logo2.png")
+          phone: '+99899.704.61.62',
+          email: "",
+          logo: File.expand_path("./app/assets/images/logo3.jpg")
         },
         recipient: [
-          "<b>Покупатель</b>: #{sale.buyer.name}"
+          "<b>Mijoz</b>: #{sale.buyer.name.upcase}"
         ],
         line_items: items,
-        footer: "Спасибо за покупку, ждём вас снова."
+        footer: "Xaridingiz uchun raxmat. Sizni kutib qolamiz!"
       )
 
       r.render

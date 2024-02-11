@@ -71,10 +71,10 @@ class Pack < ApplicationRecord
     return if difference.zero?
     self.initial_remaining = initial_remaining_was + difference
     SendMessage.run(
-      message: "Остаток товара изменён вручную \n
+      message: "Tovar ostatkasi qo'lda o'zgartirildi \n
       Товар: #{name} \n
-      Был: #{previous_remaining} \n
-      Сейсчас: #{self.calculate_product_remaining}"
+      Edi: #{previous_remaining} \n
+      Endi: #{self.calculate_product_remaining}"
     )
   end
 end

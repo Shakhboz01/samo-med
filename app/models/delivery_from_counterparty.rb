@@ -49,15 +49,14 @@ class DeliveryFromCounterparty < ApplicationRecord
     if closed? && status_before_last_save != 'closed'
       if enable_to_send_sms
         price_sign = price_in_usd ? '$' : 'сум'
-        message =  "#{user.name} оформил приход товара от контрагента" \
-          "<b>Контрагент</b>: #{provider.name}\n" \
-          "<b>Тип оплаты</b>: #{payment_type}\n" \
-          "<b>Итого цена прихода:</b> #{total_price} #{price_sign}\n" \
-          "<b>Итого цена продажи:</b> #{calculate_sell_price} #{price_sign}\n" \
-          "<b>предполагаемый доход:</b> #{calculate_sell_price - total_price} #{price_sign}\n"
-        message << "&#9888<b>Оплачено:</b> #{total_paid} #{price_sign}\n" if total_price > total_paid
+        message =  "#{user.name} yuk beruvchidan yuk qabul qildi" \
+          "<b>Yuk beruvchi</b>: #{provider.name}\n" \
+          "<b>Tolov turi</b>: #{payment_type}\n" \
+          "<b>Jami narx:</b> #{total_price} #{price_sign}\n" \
+          "<b>Jami sotish narx:</b> #{calculate_sell_price} #{price_sign}\n" \
+          "<b>taxminiy daromad:</b> #{calculate_sell_price - total_price} #{price_sign}\n"
+        message << "&#9888<b>To'landi:</b> #{total_paid} #{price_sign}\n" if total_price > total_paid
         message << "<b>Комментарие:</b> #{comment}\n" if comment.present?
-        message << "Нажмите <a href=\"https://#{ENV.fetch('HOST_URL')}/delivery_from_counterparties/#{self.id}\">здесь</a> для просмотра"
         SendMessage.run(message: message)
       else
         self.enable_to_send_sms = false

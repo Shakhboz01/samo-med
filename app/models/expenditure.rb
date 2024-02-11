@@ -34,12 +34,11 @@ class Expenditure < ApplicationRecord
   def set_transaction_history_and_notify_via_tg
     self.transaction_histories.create(price: total_paid, first_record: true, user_id: user.id)
     message =
-      "<b>#{user.name} оформил расход</b>\n" \
-      "<b>Тип расхода:</b> #{expenditure_type}\n" \
-      "<b>Тип оплаты:</b> #{payment_type}\n" \
-      "<b>Цена расхода:</b> #{price} #{price_in_usd ? '$' : 'сум'}\n"
+      "<b>#{user.name} tomonidan rasxod qilindi</b>\n" \
+      "<b>Turi:</b> #{expenditure_type}\n" \
+      "<b>To'lov turi:</b> #{payment_type}\n" \
+      "<b>Jami summa:</b> #{price} #{price_in_usd ? '$' : 'сум'}\n"
 
-    message << "&#9888<b>Оплачено:</b> #{total_paid}" if price > total_paid
     message << "<b>Комментарие:</b> #{comment}" if comment.present?
     SendMessage.run(message: message)
   end
