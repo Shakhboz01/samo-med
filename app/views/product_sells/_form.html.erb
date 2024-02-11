@@ -13,8 +13,8 @@
       </div>
       <%= f.input :amount, label: 'Soni', input_html: {value: ''} %>
       <div class='row'>
-        <div class='col-sm-6'><%= f.input :sell_price, label: 'Sotish narxi $ (1 шт.)' %></div>
-        <div class='col-sm-6'><%= f.input :sell_price_in_uzs, label: 'so\'mda (1 шт.)' %></div>
+        <div class='col-sm-6'><%= f.input :sell_price, label: 'Sotish narxi $' %></div>
+        <div class='col-sm-6'><%= f.input :sell_price_in_uzs, label: 'so\'mda (1 donasi)' %></div>
       </div>
       <%= f.input :min_price_in_usd, label: false, as: :hidden, input_html: { disabled: true } %>
       <%= f.input :initial_remaining, label: 'Tovar ostatkasi', input_html: { disabled: true } %>
