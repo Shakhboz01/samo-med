@@ -37,7 +37,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <%= link_to "SKLAD", products_path, class: 'dropdown-item' %>
+        <%= link_to "SKLAD", products_path, class: 'nav-link' %>
       </li>
       <% if %w[руководитель бухгалтер].include?(current_user.role) %>
         <li class="nav-item">
@@ -48,8 +48,8 @@
   </div>
   <ul class="text-center navbar-nav ml-auto">
     <% if user_signed_in? %>
-      <li class="nav-item">
-        <%= link_to "KURS: #{CurrencyRate.last.rate}", currency_rates_path, class: 'dropdown-item' %>
+      <li class="nav-item" style='color: white'>
+        <%= link_to "KURS: #{CurrencyRate.last.rate}", currency_rates_path, class: 'nav-link' %>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
