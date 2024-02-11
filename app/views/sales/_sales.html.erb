@@ -42,7 +42,7 @@
           <td><%= sale.user.name %></td>
         <% end %>
         <td>
-          <%= clink_to 'PDF чек', generate_pdf_sale_path(sale), 'fa-file-pdf', :post %>
+          <%= link_to raw("<i class=\"fa fa-fw fa-file-pdf\"></i>"), generate_pdf_sale_path(sale, format: :pdf), title: 'PDF чек' %>
           <%= clink_to 'Посмотреть', sale_path(sale), 'fa-search' %>
         </td>
       </tr>

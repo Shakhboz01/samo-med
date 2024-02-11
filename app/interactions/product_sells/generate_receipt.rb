@@ -6,7 +6,14 @@ module ProductSells
     object :sale
 
     def execute
+      rate = CurrencyRate.last.rate
+      # calculating debt in uzs
+      total_debt = (sale.buyer.calculate_debt_in_usd * rate) + sale.buyer.calculate_debt_in_uzs
+      current_total_price = sale.price_in_usd ? ((sale.total_price - sale.total_paid) * rate) : sale.total_price
+      debt_with_exception = total_debt - current_total_price
       items = [
+        ["<b></b>", "<b></b>", "<b>Mijozning qarzdorligi:</b>", "<b>#{num_to_usd(debt_with_exception)}</b>"],
+        ['', '', '', ''],
         ["<b>Товар</b>", "<b>Количество</b>", "<b>Цена</b>", "<b>Итого цена</b>"]
       ]
       sale.product_sells.each do |product_sell|
@@ -20,17 +27,19 @@ module ProductSells
         )
       end
 
-      items.push([
+      items.push(
+        ['', '', '', ''],
+        [
         '<b>Итого:</b>',
-        sale.product_sells.sum(:amount),
+        '',
         '',
         currency_convert(sale.price_in_usd, sale.total_price)
       ])
       items.push([
-        '<b>Итого оплачено:</b>',
-        '',
-        '',
-        currency_convert(sale.price_in_usd, sale.total_paid)
+        '<b>Итого оплачено:</b>', '', '', currency_convert(sale.price_in_usd, sale.total_paid)
+      ])
+      items.push([
+        '', '', "<b>Xariddan keyingi qarzdorlik holati:</b>", "#{num_to_usd(total_debt)}"
       ])
       r = Receipts::Receipt.new(
         title: 'AUTEX',
@@ -61,8 +70,10 @@ module ProductSells
 
       r.render
       downloads_directory = File.join(Dir.home, "Downloads")
-      file_path = File.join(downloads_directory, "чек-#{sale.id}-#{DateTime.current.to_i}.pdf")
+      filename = "чек-#{sale.id}-#{DateTime.current.to_i}.pdf"
+      file_path = File.join(downloads_directory, filename)
       r.render_file(file_path)
+      { filename: filename, file_path: file_path }
     end
   end
 end
