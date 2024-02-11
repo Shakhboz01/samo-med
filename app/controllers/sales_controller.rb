@@ -81,7 +81,6 @@ class SalesController < ApplicationController
       if sfs.save
         redirect_to sale_url(sfs), notice: 'Теперь добавьте продажу товаров'
       else
-        byebug
         redirect_to request.referrer, notice: "Something went wrong"
       end
     end
