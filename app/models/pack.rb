@@ -59,8 +59,6 @@ class Pack < ApplicationRecord
         size_names << " #{size}"
       end
     end
-
-    self.name = "#{name} | #{size_names}"
   end
 
   def handle_initial_remaining
