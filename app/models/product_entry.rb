@@ -9,10 +9,9 @@ class ProductEntry < ApplicationRecord
   belongs_to :pack
 
   validates :amount, comparison: { greater_than: 0 }
-  validates :sell_price, :buy_price, comparison: { greater_than_or_equal_to: 0 }
-  validates :sell_price, comparison: { greater_than_or_equal_to: :buy_price }
   validates_presence_of :buy_price
 
+  before_validation :set_sell_price
   before_validation :verify_delivery_from_counterparty_is_not_closed
   before_destroy :verify_delivery_from_counterparty_is_not_closed
   after_create :update_delivery_currency
@@ -22,6 +21,12 @@ class ProductEntry < ApplicationRecord
   scope :unsold, -> { where('amount > amount_sold') }
 
   private
+
+  def set_sell_price
+    return unless new_record?
+
+    self.sell_price = pack.sell_price
+  end
 
   def verify_delivery_from_counterparty_is_not_closed
     throw(:abort) if delivery_from_counterparty.closed? && sell_price == sell_price_before_last_save && amount >= amount_sold

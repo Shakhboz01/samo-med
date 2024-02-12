@@ -8,10 +8,9 @@
         <% end %>
         <th>Tovar</th>
         <th>Soni</th>
-        <th>Umumiy narx</th>
-        <% if defined?(shrink) %>
-          <th>So'mda</th>
-        <% else %>
+        <th>Narxi</th>
+        <th>Jami</th>
+        <% unless defined?(shrink) %>
           <th>Kim tomondan</th>
           <th>Sotilgan sana</th>
         <% end %>
@@ -33,16 +32,15 @@
               <% end %>
             </td>
             <td><%= product_sell.amount.to_i %></td>
-            <% if defined?(shrink) %>
-              <td><%= calculate_sale_price_in_usd(rate, product_sell) %></td>
-              <td><%= calculate_sale_price_in_uzs(rate, product_sell) %></td>
-            <% else %>
+            <td><%= num_to_usd product_sell.sell_price %></td>
+            <td><%= num_to_usd(product_sell.sell_price * product_sell * amount) %></td>
+            <td><%= product_sell.sell_price %></td>
+            <% unless defined?(shrink) %>
               <td><%= currency_convert(product_sell.price_in_usd, product_sell.sell_price) %></td>
             <% end %>
             <% unless defined?(shrink) %>
               <td><%= product_sell.user.name %></td>
               <td><%= strf_datetime(product_sell.created_at) %></td>
-              <td><%= clink_to 'Посмотреть с какой партии прихода был продан этот товар', product_sell, 'fa-search' %></td>
             <% end %>
             <td><%= cdlink_to 'Удалить', product_sell %></td>
           </tr>
@@ -53,10 +51,7 @@
   <% if defined?(shrink) %>
     <div class='d-flex justify-content-around'>
     <% rate = CurrencyRate.last.rate %>
-    <% total_in_usd = product_sells.price_in_usd.sum('(sell_price * amount)') + (product_sells.price_in_uzs.sum('(sell_price * amount)') / rate) %>
-    <% total_in_uzs = product_sells.price_in_uzs.sum('(sell_price * amount)') + (product_sells.price_in_usd.sum('(sell_price * amount)') * rate) %>
-    <b>UMUMIY NARX: <%= number_to_currency total_in_usd %></b>
-    <b>SO'MDA: <%=  show_rounded_total_price(total_in_uzs) %></b>
+    <b>JAMI: <%= num_to_usd product_sells.sum('(sell_price * amount)') %></b>
     <b>UMUMIY TOVARLAR SONI: <%= @sale.product_sells.sum(:amount) %></b>
   </div>
   <% end %>

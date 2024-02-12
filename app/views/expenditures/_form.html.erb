@@ -7,7 +7,6 @@
     <%= f.association :delivery_from_counterparty, as: :hidden %>
     <%= f.input :payment_type, label: 'Tolov turini tanlang', collection: Expenditure.payment_types.keys.map { |unit| [Expenditure.human_attribute_name("unit.#{unit}"), unit] }, include_blank: false %>
     <%= f.input :price, as: :numeric, label: 'Narxni kiriting:' %>
-    <%= f.input :price_in_usd, label: 'Dollalda' %>
     <%= f.input :expenditure_type, label: 'xarajat turini tanlang', collection: Expenditure.expenditure_types.keys.map { |unit| [Expenditure.human_attribute_name("unit.#{unit}"), unit] }, include_blank: false %>
     <%= f.input :comment, label: 'Kommentariya', input_html: { placeholder: 'Shart emas' } %>
   </div>

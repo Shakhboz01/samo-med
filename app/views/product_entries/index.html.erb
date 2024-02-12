@@ -17,9 +17,14 @@
         <th>Umumiy Sotish narxi</th>
         <th>Umumiy kelish narxi</th>
         <th>Farq</th>
+        <th>Jami soni</th>
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td></td><td></td><td></td><td></td>
+        <td><%= @product_entries_data.sum(:amount) %></td>
+      </tr>
       <tr>
         <th>Dollarda </th>
         <td><%= number_to_currency @product_entries_data.paid_in_usd.sum(:sell_price) %></td>
@@ -32,6 +37,7 @@
         <td><%= num_to_usd @product_entries_data.paid_in_uzs.sum(:buy_price) %></td>
         <td><%= num_to_usd(@product_entries_data.paid_in_uzs.sum(:sell_price) - @product_entries_data.paid_in_uzs.sum(:buy_price)) %></td>
       </tr>
+
     </tbody>
   </table>
 </div>
