@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :product_size_colors
   resources :packs do
+    post :toggle_active, on: :member
     get :filtered_packs, on: :collection
     get :calculate_product_remaining, on: :member
   end

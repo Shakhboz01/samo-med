@@ -199,7 +199,7 @@
       <%= f.input :sell_by_piece, label: false, as: :hidden %>
       <div class='row'>
         <div class='col-sm-8'>
-          <%= f.association :pack, label: 'Tovarni tanlang', collection: Pack.all.order('LOWER(name) ASC'), include_blank: true, input_html: { id: 'pack-select' } %>
+          <%= f.association :pack, label: 'Tovarni tanlang', collection: Pack.where(active: true).order('LOWER(name) ASC'), include_blank: true, input_html: { id: 'pack-select' } %>
         </div>
         <div class='col-sm-4 align-self-center'>
           <%= f.submit "Sotish", class: 'btn btn-primary'%>

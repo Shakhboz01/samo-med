@@ -18,12 +18,19 @@
         </thead>
         <tbody>
           <% @packs.each do |pack| %>
-            <tr>
+            <tr class="<%= active_tr(pack.active) %>">
               <td><%= pack.name %></td>
               <td><%= pack.code %></td>
               <td><%= pack.calculate_product_remaining %></td>
               <td><%= currency_convert(pack.price_in_usd, pack.sell_price) %></td>
-              <td><%= clink_to 'O\'zgartirish', edit_pack_path(pack), 'fa-edit' %></td>
+              <td>
+                <%= clink_to 'O\'zgartirish', edit_pack_path(pack), 'fa-edit' %>
+                <% if pack.active %>
+                  <%= clink_to 'Деактивировать', toggle_active_pack_path(pack), 'fa-ban', :post %>
+                <% else %>
+                  <%= clink_to 'Активировать', toggle_active_pack_path(pack), 'fa-chart-line', :post %>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>

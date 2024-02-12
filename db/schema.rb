@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_12_141304) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_12_150446) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -167,6 +167,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_12_141304) do
     t.decimal "sell_price", precision: 17, scale: 2
     t.decimal "buy_price", precision: 17, scale: 2
     t.boolean "price_in_usd", default: false
+    t.boolean "active", default: true
   end
 
   create_table "participations", force: :cascade do |t|

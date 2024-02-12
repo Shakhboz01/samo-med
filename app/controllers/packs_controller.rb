@@ -1,9 +1,14 @@
 class PacksController < ApplicationController
-  before_action :set_pack, only: %i[ show edit update destroy calculate_product_remaining]
+  before_action :set_pack, only: %i[ toggle_active show edit update destroy calculate_product_remaining]
+
+  def toggle_active
+    @pack.toggle(:active).save
+    redirect_to packs_url, notice: "Successfully updated"
+  end
 
   # GET /packs or /packs.json
   def index
-    @packs = Pack.all.page(params[:page]).per(40)
+    @packs = Pack.all.order(active: :desc).page(params[:page]).per(40)
   end
 
   # GET /packs/1 or /packs/1.json
