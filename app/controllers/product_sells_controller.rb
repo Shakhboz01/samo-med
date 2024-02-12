@@ -69,33 +69,13 @@ class ProductSellsController < ApplicationController
   def ajax_sell_price_request
     return render json: ('Please fill forms') if product_sell_params[:pack_id].empty? || product_sell_params[:amount].to_i.zero?
 
-    message = ''
-    product_sell = ProductSell.new(
-      pack_id: product_sell_params[:pack_id],
-      amount: product_sell_params[:amount]
-    )
-
-    response = ProductSells::CalculateSellAndBuyPrice.run(
-      product_sell: product_sell,
-      sell_by_piece: product_sell_params[:sell_by_piece]
-    )
-    Rails.logger.warn '-----------------------------'
-    Rails.logger.warn response.result
-
-    if response.valid?
-      average_sell_price = response.result[:average_prices][:average_sell_price_in_usd].to_f.round(2)
-      average_buy_price = response.result[:average_prices][:average_buy_price_in_usd].to_f.round(2)
-      minimum_buy_price = average_buy_price + (average_buy_price * 2 / 100)
-      minimum_buy_price = average_sell_price if minimum_buy_price >= average_sell_price
-      render json:
-              {
-                average_sell_price_in_usd: average_sell_price,
-                average_sell_price_in_uzs: response.result[:average_prices][:average_sell_price_in_uzs].to_f.round(2),
-                minimum_buy_price_in_usd: minimum_buy_price.to_i
-              }
-    else
-      render json: { error: response.errors.full_messages.join('. ') }
-    end
+    pack = Pack.find(params[:pack_id])
+    render json:
+            {
+              average_sell_price_in_usd: pack.sell_price,
+              average_sell_price_in_uzs: pack.sell_price,
+              minimum_buy_price_in_usd: pack.sell_price
+            }
   end
 
   private

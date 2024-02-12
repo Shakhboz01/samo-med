@@ -33,8 +33,7 @@
             </td>
             <td><%= product_sell.amount.to_i %></td>
             <td><%= num_to_usd product_sell.sell_price %></td>
-            <td><%= num_to_usd(product_sell.sell_price * product_sell * amount) %></td>
-            <td><%= product_sell.sell_price %></td>
+            <td><%= num_to_usd(product_sell.sell_price * product_sell.amount) %></td>
             <% unless defined?(shrink) %>
               <td><%= currency_convert(product_sell.price_in_usd, product_sell.sell_price) %></td>
             <% end %>
