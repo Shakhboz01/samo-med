@@ -37,7 +37,7 @@ class ProductSell < ApplicationRecord
   end
 
   def decrease_total_price
-    sale.calculate_total_price
+    sale.decrement!(:total_price, (sell_price * amount))
   end
 
   def deccrease_amount_sold

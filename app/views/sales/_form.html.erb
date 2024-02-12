@@ -5,8 +5,7 @@
     <%= f.input :status, as: :hidden, input_html: { value: 1 } %>
 
     <div class="form-inputs">
-      <%= f.label :price_in_usd, 'Dollarda' %>
-      <%= f.input :price_in_usd, label: false %>
+      <%= f.input :price_in_usd, label: false, as: :hidden %>
       <%= f.input :total_price, label: false, disabled: true, as: :hidden, input_html: {id: 'total-price'} %>
       <%= f.association :buyer, label: 'Mijozni tanlang', collection: Buyer.active.order(weight: :desc).order(name: :asc), include_blank: false %>
       <%= f.input :total_paid, label: params.dig(:prepayment).present? ? 'цена выручки' : 'Mijoz to\'lagan summa' %>
@@ -19,8 +18,16 @@
 
 <script>
   document.querySelector('#sale_total_paid').addEventListener('focus', function(e) {
+    toggleTotalPaid()
+  })
+
+  document.querySelector('#sale_buyer_id').addEventListener('focus', function(e) {
+    toggleTotalPaid()
+  })
+
+  function toggleTotalPaid(){
     if(document.querySelector('#sale_total_paid').value == null || document.querySelector('#sale_total_paid').value == 0){
       document.querySelector('#sale_total_paid').value = document.querySelector('#total-price').value
     }
-  })
+  }
 </script>

@@ -1,34 +1,3 @@
-<% rate = CurrencyRate.last.rate %>
-
-<div class='p-3' style='color: black; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;'>
-  <%= simple_form_for(product_sell) do |f| %>
-    <div class='form-inputs'>
-      <%= f.error_notification %>
-      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-      <%= f.association :sale, as: :hidden %>
-      <%= f.input :sell_by_piece, label: false, as: :hidden %>
-      <%= f.association :pack, label: 'Tovarni tanlang', collection: Pack.all.order('LOWER(name) ASC'), include_blank: true, input_html: { id: 'pack-select' } %>
-      <div class='product-select-tag'>
-        <%= f.association :product, label: 'выберите размера', as: :hidden, collection: Product.all.order('LOWER(name) ASC'), include_blank: false, input_html: { id: 'product-select', placeholder: 'выберите размер' } %>
-      </div>
-      <%= f.input :amount, label: 'Soni', input_html: {value: ''} %>
-      <div class='row'>
-        <div class='col-sm-6'><%= f.input :sell_price, label: 'Sotish narxi $' %></div>
-        <div class='col-sm-6'><%= f.input :sell_price_in_uzs, label: 'so\'mda (1 donasi)' %></div>
-      </div>
-      <%= f.input :min_price_in_usd, label: false, as: :hidden, input_html: { disabled: true } %>
-      <%= f.input :initial_remaining, label: 'Tovar ostatkasi', input_html: { disabled: true } %>
-      <div class='product-select-tag'>
-        <%= f.input :remaining_outside_pack, label: 'остаток вне пачки', as: :hidden, input_html: { disabled: true } %>
-      </div>
-
-      <%= f.input :rate, as: :hidden, input_html: { value: rate } %>
-      <%= f.submit "Sotish", class: 'btn btn-primary'%>
-    </div>
-  <% end %>
-</div>
-
-
 <script>
   $(document).ready(function() {
     $('.product-select-tag').hide();
@@ -218,3 +187,39 @@
       sellPriceInUzsInput.value = (sellPrice * rate).toFixed(2);
     });
 </script>
+
+<% rate = CurrencyRate.last.rate %>
+
+<div class='p-3' style='color: black; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;'>
+  <%= simple_form_for(product_sell) do |f| %>
+    <div class='form-inputs'>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+      <%= f.association :sale, as: :hidden %>
+      <%= f.input :sell_by_piece, label: false, as: :hidden %>
+      <div class='row'>
+        <div class='col-sm-8'>
+          <%= f.association :pack, label: 'Tovarni tanlang', collection: Pack.all.order('LOWER(name) ASC'), include_blank: true, input_html: { id: 'pack-select' } %>
+        </div>
+        <div class='col-sm-4 align-self-center'>
+          <%= f.submit "Sotish", class: 'btn btn-primary'%>
+        </div>
+      </div>
+      <div class='product-select-tag'>
+        <%= f.association :product, label: 'выберите размера', as: :hidden, collection: Product.all.order('LOWER(name) ASC'), include_blank: false, input_html: { id: 'product-select', placeholder: 'выберите размер' } %>
+      </div>
+      <div class='row'>
+        <div class='col-sm-6'><%= f.input :amount, label: 'Soni', input_html: {value: ''} %></div>
+        <div class='col-sm-6'><%= f.input :sell_price, label: 'Sotish narxi' %></div>
+      </div>
+      <%= f.input :sell_price_in_uzs, label: false, as: :hidden %>
+      <%= f.input :min_price_in_usd, label: false, as: :hidden, input_html: { disabled: true } %>
+      <%= f.input :initial_remaining, label: 'Tovar ostatkasi', input_html: { disabled: true } %>
+      <div class='product-select-tag'>
+        <%= f.input :remaining_outside_pack, label: 'остаток вне пачки', as: :hidden, input_html: { disabled: true } %>
+      </div>
+
+      <%= f.input :rate, as: :hidden, input_html: { value: rate } %>
+    </div>
+  <% end %>
+</div>
