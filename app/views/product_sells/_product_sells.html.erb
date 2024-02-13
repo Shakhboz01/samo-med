@@ -11,7 +11,6 @@
         <th>Narxi</th>
         <th>Jami</th>
         <% unless defined?(shrink) %>
-          <th>Kim tomondan</th>
           <th>Sotilgan sana</th>
         <% end %>
         <th colspan="3"></th>
@@ -35,10 +34,8 @@
             <td><%= num_to_usd product_sell.sell_price %></td>
             <td><%= num_to_usd(product_sell.sell_price * product_sell.amount.to_f) %></td>
             <% unless defined?(shrink) %>
-              <td><%= currency_convert(product_sell.price_in_usd, product_sell.sell_price) %></td>
             <% end %>
             <% unless defined?(shrink) %>
-              <td><%= product_sell.user.name %></td>
               <td><%= strf_datetime(product_sell.created_at) %></td>
             <% end %>
             <td><%= cdlink_to 'Удалить', product_sell %></td>
