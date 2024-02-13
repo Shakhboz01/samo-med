@@ -21,7 +21,7 @@ class ProductSell < ApplicationRecord
   before_create :set_prices_and_profit
   before_create :increase_amount_sold # TASK 1
   before_update :set_prices_and_profit
-  after_create :increase_total_price
+  after_create :increase_total_price_and_send_notify
   before_destroy :decrease_amount_sold # TASK 2
   before_destroy :decrease_total_price
 
@@ -30,10 +30,12 @@ class ProductSell < ApplicationRecord
 
   private
 
-  def increase_total_price
+  def increase_total_price_and_send_notify
     if !sale.nil?
       sale.increment!(:total_price, (sell_price * amount))
     end
+
+    SendMessage.run(message: "#{pack.name} - #{pack.initial_remaining}", chat: 'report')
   end
 
   def decrease_total_price

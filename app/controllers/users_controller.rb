@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   include Pundit::Authorization
 
   def index
-    authorize User, :manage?
 
     @users = User.all.order(active: :desc).order(:name)
   end

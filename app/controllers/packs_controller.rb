@@ -9,7 +9,9 @@ class PacksController < ApplicationController
   # GET /packs or /packs.json
   def index
     @q = Pack.all.ransack(params[:q])
-    @packs = @q.result.order(active: :desc).order(name: :asc).page(params[:page]).per(40)
+    @packs = @q.result.order(active: :desc).order(name: :asc)
+    @all_packs = @packs.where(active: true).where('initial_remaining > 0')
+    @packs = @packs.page(params[:page]).per(40)
   end
 
   # GET /packs/1 or /packs/1.json

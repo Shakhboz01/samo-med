@@ -21,7 +21,7 @@
             <tr class="<%= active_tr(pack.active) %>">
               <td><%= pack.name %></td>
               <td><%= pack.code %></td>
-              <td><%= pack.calculate_product_remaining %></td>
+              <td><%= pack.initial_remaining %></td>
               <td><%= currency_convert(pack.price_in_usd, pack.sell_price) %></td>
               <td>
                 <%= clink_to 'O\'zgartirish', edit_pack_path(pack), 'fa-edit' %>
@@ -37,5 +37,15 @@
       </table>
       <%= paginate @packs %>
     </div>
+    <table>
+      <tr>
+        <th>Jami tovarlar soni</th>
+        <th>Jami summa miqdori</th>
+      </tr>
+      <tr>
+        <td><%= @all_packs.sum(:initial_remaining) %></td>
+        <td><%= num_to_usd @all_packs.sum('initial_remaining * sell_price') %></td>
+      </tr>
+    </table>
   </div>
 </div>

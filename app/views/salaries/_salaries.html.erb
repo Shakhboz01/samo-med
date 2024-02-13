@@ -26,7 +26,7 @@
               <td><%= salary.month %></td>
               <td><%= salary.team&.name || salary.user&.name %></td>
               <td><%= active_check(salary.prepayment) %></td>
-              <td><%= number_to_currency(salary.price) %></td>
+              <td><%= num_to_usd(salary.price) %></td>
               <td><%= salary.payment_type %></td>
               <th><%= clink_to 'Редактировать', edit_salary_url(salary), 'fa-edit' %></th>
             </tr>

@@ -4,7 +4,9 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     @q = Product.ransack(params[:q])
-    @products = @q.result.order(active: :desc).order(name: :asc).page(params[:page]).per(70)
+    @products = @q.result.order(active: :desc).order(name: :asc)
+    @all_products = @products
+    @products = @products.page(params[:page]).per(40)
     @product_categories = ProductCategory.all
   end
 
