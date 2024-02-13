@@ -8,7 +8,7 @@
     <%= f.input :phone_number, label: 'Telefon raqam' %>
     <% unless provider.persisted? %>
       <%= f.input :debt_in_uzs, label: "So'mda qarzimiz", as: :numeric %>
-      <%= f.input :debt_in_usd, label: 'Dollarda qarzimiz', as: :numeric %>
+      <%= f.input :debt_in_usd, label: false, as: :hidden %>
     <% end %>
     <%= f.input :comment, label: 'Komment' %>
   </div>

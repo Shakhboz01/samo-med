@@ -4,15 +4,13 @@
     <thead>
       <tr>
         <th></th>
-        <th>So'mda</th>
-        <th>Dollarda</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>Sotishdan tushgan pullar</td>
         <td><%= num_to_usd @sales_in_uzs %></td>
-        <td><%= number_to_currency @sales_in_usd %></td>
       </tr>
       <%# <tr>
         <td>Прибыль от продаж</td>
@@ -22,7 +20,6 @@
       <tr>
         <td>Yuk beruvchilarga berilgan pullar</td>
         <td><%= num_to_usd @delivery_from_counterparties_in_uzs %></td>
-        <td><%= number_to_currency @delivery_from_counterparties_in_usd %></td>
       </tr>
       <tr>
         <td>Ishchilarga oylik</td>
@@ -37,12 +34,10 @@
       <tr>
         <td>Boshqa xarajatlar</td>
         <td><%= num_to_usd @expenditures_in_uzs %></td>
-        <td><%= number_to_currency @expenditures_in_usd %></td>
       </tr>
       <tr>
         <td style='color: green; font-weight: bold'>Shundan qolgan foyda:</td>
         <td><%= num_to_usd @overall_income_in_uzs %></td>
-        <td><%= number_to_currency @overall_income_in_usd %></td>
       </tr>
     </tbody>
   </table>

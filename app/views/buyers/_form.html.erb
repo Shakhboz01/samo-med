@@ -8,6 +8,7 @@
     <%= f.input :phone_number, label: 'Telefon nomer' %>
     <% unless buyer.persisted? %>
       <%= f.input :debt_in_uzs, label: "So'mda qarzi", as: :numeric %>
+      <%= f.input :debt_in_usd, label: false, as: :hidden %>
     <% end %>
     <%= f.input :comment, label: 'Kommentariya' %>
   </div>

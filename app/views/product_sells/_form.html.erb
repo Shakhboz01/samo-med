@@ -199,7 +199,12 @@
       <%= f.input :sell_by_piece, label: false, as: :hidden %>
       <div class='row'>
         <div class='col-sm-8'>
-          <%= f.association :pack, label: 'Tovarni tanlang', collection: Pack.where(active: true).order('LOWER(name) ASC'), include_blank: true, input_html: { id: 'pack-select' } %>
+          <div class='pack-select'>
+            <%= f.association :pack, label: 'Tovarni tanlang', collection: Pack.where(active: true).order('LOWER(name) ASC'), include_blank: true, input_html: { id: 'pack-select' } %>
+          </div>
+          <div id='pack_name' style='display: none'>
+            <%= f.input :pack_name, label: 'Xizmat nomini kiriting' %>
+          </div>
         </div>
         <div class='col-sm-4 align-self-center'>
           <%= f.submit "Sotish", class: 'btn btn-primary'%>
@@ -210,11 +215,12 @@
       </div>
       <div class='row'>
         <div class='col-sm-6'><%= f.input :amount, label: 'Soni', input_html: {value: ''} %></div>
-        <div class='col-sm-6'><%= f.input :sell_price, label: 'Sotish narxi' %></div>
+        <div class='col-sm-6'><%= f.input :sell_price, label: 'Sotish narxi (1 donasi)' %></div>
       </div>
       <%= f.input :sell_price_in_uzs, label: false, as: :hidden %>
       <%= f.input :min_price_in_usd, label: false, as: :hidden, input_html: { disabled: true } %>
       <%= f.input :initial_remaining, label: 'Tovar ostatkasi', input_html: { disabled: true } %>
+      <a id='add_manually' style='color: blue; cursor: pointer'>Qo'lda kiritish</a>
       <div class='product-select-tag'>
         <%= f.input :remaining_outside_pack, label: 'остаток вне пачки', as: :hidden, input_html: { disabled: true } %>
       </div>
@@ -223,3 +229,13 @@
     </div>
   <% end %>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $('#add_manually').click(function(){
+      console.log('clicked');
+      $('#pack_name').toggle();
+      $('.pack-select').toggle();
+    });
+  });
+</script>

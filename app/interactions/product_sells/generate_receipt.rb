@@ -9,13 +9,17 @@ module ProductSells
       rate = CurrencyRate.last.rate
       # calculating debt in uzs
       total_debt = (sale.buyer.calculate_debt_in_usd * rate) + sale.buyer.calculate_debt_in_uzs
-      current_total_price = sale.price_in_usd ? ((sale.total_price - sale.total_paid) * rate) : sale.total_price
+      current_total_price = sale.total_price - sale.total_paid
       debt_with_exception = total_debt - current_total_price
+
       items = [
-        ["<b></b>", "<b></b>", "<b>Mijozning qarzdorligi:</b>", "<b>#{num_to_usd(debt_with_exception)}</b>"],
         ['', '', '', ''],
         ["<b>Tovar</b>", "<b>Soni</b>", "<b>Narxi (1 dona)</b>", "<b>Jami narx</b>"]
       ]
+      if debt_with_exception > 0
+        items.unshift(["<b></b>", "<b></b>", "<b>Mijozning qarzdorligi:</b>", "<b>#{num_to_usd(debt_with_exception)}</b>"])
+      end
+
       sale.product_sells.each do |product_sell|
         items.push(
           [
@@ -30,19 +34,21 @@ module ProductSells
       items.push(
         ['', '', '', ''],
         [
+        '',
+        '',
         '<b>Jami:</b>',
-        '',
-        '',
         currency_convert(sale.price_in_usd, sale.total_price)
       ])
       items.push([
-        '<b>Jami to\'landi:</b>', '', '', currency_convert(sale.price_in_usd, sale.total_paid)
+        '', '', '<b>Jami to\'landi:</b>', currency_convert(sale.price_in_usd, sale.total_paid)
       ])
-      items.push([
-        '', '', "<b>Xariddan keyingi qarzdorlik holati:</b>", "#{num_to_usd(total_debt)}"
-      ])
+      if debt_with_exception > 0
+        items.push([
+          '', '', "<b>Xariddan keyingi qarzdorlik holati:</b>", "#{num_to_usd(total_debt)}"
+        ])
+      end
       r = Receipts::Receipt.new(
-        title: 'AUTEX',
+        title: 'ALUTEX',
         font: {
           bold: File.expand_path("./app/assets/fonts/CharisSILB.ttf"),
           italic: File.expand_path("./app/assets/fonts/CharisSILB.ttf"),

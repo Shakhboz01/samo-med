@@ -8,7 +8,8 @@ class PacksController < ApplicationController
 
   # GET /packs or /packs.json
   def index
-    @packs = Pack.all.order(active: :desc).page(params[:page]).per(40)
+    @q = Pack.all.ransack(params[:q])
+    @packs = @q.result.order(active: :desc).order(name: :asc).page(params[:page]).per(40)
   end
 
   # GET /packs/1 or /packs/1.json

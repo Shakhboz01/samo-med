@@ -115,7 +115,8 @@ class PagesController < ApplicationController
 
     @delivery_from_counterparties_in_usd = delivery_from_counterparties.price_in_usd.sum(:total_paid)
     @delivery_from_counterparties_in_uzs = delivery_from_counterparties.price_in_uzs.sum(:total_paid)
-
+    rate = CurrencyRate.last.rate
+    @delivery_from_counterparties_in_uzs += (rate * @delivery_from_counterparties_in_usd)
     @expenditures_in_usd = expenditures.price_in_usd.sum(:price)
     @expenditures_in_uzs = expenditures.price_in_uzs.sum(:price)
 
@@ -131,20 +132,6 @@ class PagesController < ApplicationController
     sale_total_paid = sales.sum(:total_paid)
     unpaid_difference_in_percent_in_usd = sales.where('sales.price_in_usd = ?', true).sum(:total_paid) * 100 / sales.where('sales.price_in_usd = ?', true).sum(:total_price)
     unpaid_difference_in_percent_in_uzs = sales.where('sales.price_in_usd = ?', false).sum(:total_paid) * 100 / sales.where('sales.price_in_usd = ?', false).sum(:total_price)
-
-    # if unpaid_difference_in_percent_in_usd >= 100
-    #   @profit_from_sale_in_usd = product_sells.price_in_usd.sum(:total_profit)
-    # else
-    #   sell_profit_in_usd = product_sells.price_in_usd.sum(:total_profit)
-    #   @profit_from_sale_in_usd = unpaid_difference_in_percent_in_usd * sell_profit_in_usd / 100
-    # end
-
-    # if unpaid_difference_in_percent_in_uzs >= 100
-    #   @profit_from_sale_in_uzs = product_sells.price_in_uzs.sum(:total_profit)
-    # else
-    #   sell_profit_in_uzs = product_sells.price_in_uzs.sum(:total_profit)
-    #   @profit_from_sale_in_uzs = unpaid_difference_in_percent_in_uzs * sell_profit_in_uzs / 100
-    # end
 
     @overall_income_in_usd = @sales_in_usd - (@expenditures_in_usd + @delivery_from_counterparties_in_usd)
     @overall_income_in_uzs = @sales_in_uzs - (@prepayment + @salaries + @expenditures_in_uzs + @delivery_from_counterparties_in_uzs)

@@ -33,6 +33,14 @@ class ProductSellsController < ApplicationController
   def create
     @product_sell = ProductSell.new(product_sell_params)
 
+    unless (pack_name = product_sell_params[:pack_name]).empty?
+      pack = Pack.create(
+        name: pack_name, active: false, sell_price: product_sell_params[:sell_price],
+        buy_price: product_sell_params[:sell_price], code: '1111'
+      )
+      @product_sell.pack_id = pack.id
+    end
+
     respond_to do |format|
       if @product_sell.save
         format.html { redirect_to request.referrer, notice: "Product sell was successfully created." }
@@ -90,7 +98,7 @@ class ProductSellsController < ApplicationController
     params.require(:product_sell).permit(
       :sale_from_local_service_id, :sale_id, :combination_of_local_product_id,
       :sell_price, :sell_price_in_uzs, :product_id, :total_profit, :amount, :payment_type, :pack_id, :barcode,
-      :sell_by_piece
+      :sell_by_piece, :pack_name
     )
   end
 end
