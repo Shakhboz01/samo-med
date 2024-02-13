@@ -16,6 +16,7 @@ gem 'pundit'
 gem 'simple_form'
 gem "bulma-rails", "~> 0.9.4"
 gem 'active_link_to'
+gem "image_processing", ">= 1.2"
 gem 'receipts'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
