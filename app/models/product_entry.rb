@@ -14,13 +14,23 @@ class ProductEntry < ApplicationRecord
   before_validation :set_sell_price
   before_validation :verify_delivery_from_counterparty_is_not_closed
   before_destroy :verify_delivery_from_counterparty_is_not_closed
+  after_destroy :decrement_pack_remaining
   after_create :update_delivery_currency
+  after_create :increment_pack_remaining
 
   scope :paid_in_uzs, -> { where('paid_in_usd = ?', false) }
   scope :paid_in_usd, -> { where('paid_in_usd = ?', true) }
   scope :unsold, -> { where('amount > amount_sold') }
 
   private
+
+  def decrement_pack_remaining
+      pack.decrement!(:initial_remaining, amount)
+  end
+
+  def increment_pack_remaining
+    pack.increment!(:initial_remaining, amount)
+  end
 
   def set_sell_price
     return unless new_record?
