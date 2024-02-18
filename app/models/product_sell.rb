@@ -49,7 +49,6 @@ class ProductSell < ApplicationRecord
   end
 
   def increase_amount_sold
-    # TODO: consider sell_by piece
     pack.decrement!(:initial_remaining, amount)
   end
 
