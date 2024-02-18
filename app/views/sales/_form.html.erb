@@ -6,7 +6,8 @@
 
     <div class="form-inputs">
       <%= f.input :price_in_usd, label: false, as: :hidden %>
-      <%= f.input :total_price, label: false, disabled: true, as: :hidden, input_html: {id: 'total-price'} %>
+      <% not_disabled = sale.persisted? && sale.product_sells.empty? %>
+      <%= f.input :total_price, label: not_disabled ? "Jami to'lo'v" : false, input_html: { hidden: !not_disabled, id: 'total-price' } %>
       <%= f.association :buyer, label: 'Mijozni tanlang', collection: Buyer.active.order(weight: :desc).order(name: :asc), include_blank: false %>
       <%= f.input :total_paid, label: params.dig(:prepayment).present? ? 'цена выручки' : 'Mijoz to\'lagan summa' %>
       <%= f.input :payment_type, label: 'To\'lov turi', collection: Sale.payment_types.keys.map { |unit| [Sale.human_attribute_name("unit.#{unit}"), unit] }, include_blank: false %>
