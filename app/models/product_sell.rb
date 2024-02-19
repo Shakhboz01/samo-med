@@ -35,7 +35,7 @@ class ProductSell < ApplicationRecord
       sale.increment!(:total_price, (sell_price * amount))
     end
 
-    SendMessage.run(message: "#{pack.name} - #{pack.initial_remaining}", chat: 'report')
+    SendMessage.run(message: "Ostatka: #{pack.name} - #{pack.initial_remaining}", chat: 'report')
   end
 
   def decrease_total_price
