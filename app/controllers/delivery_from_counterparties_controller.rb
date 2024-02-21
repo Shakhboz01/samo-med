@@ -58,8 +58,7 @@ class DeliveryFromCounterpartiesController < ApplicationController
   def update
     respond_to do |format|
       if @delivery_from_counterparty.update(delivery_from_counterparty_params.merge(
-          status: delivery_from_counterparty_params[:status].to_i,
-          total_price: @delivery_from_counterparty.calculate_total_price(false)
+          status: delivery_from_counterparty_params[:status].to_i
          ))
         format.html { redirect_to delivery_from_counterparties_url, notice: "Delivery from counterparty was successfully updated." }
         format.json { render :show, status: :ok, location: @delivery_from_counterparty }

@@ -18,9 +18,7 @@ class ProductSell < ApplicationRecord
   enum payment_type: %i[наличные карта click предоплата перечисление дригие]
   scope :price_in_uzs, -> { where('price_in_usd = ?', false) }
   scope :price_in_usd, -> { where('price_in_usd = ?', true) }
-  before_create :set_prices_and_profit
   before_create :increase_amount_sold # TASK 1
-  before_update :set_prices_and_profit
   after_create :increase_total_price_and_send_notify
   before_destroy :decrease_amount_sold # TASK 2
   before_destroy :decrease_total_price
@@ -50,11 +48,5 @@ class ProductSell < ApplicationRecord
 
   def increase_amount_sold
     pack.decrement!(:initial_remaining, amount)
-  end
-
-  def set_prices_and_profit
-    self.buy_price = pack.buy_price
-    profit = sell_price - buy_price
-    self.total_profit = profit * amount
   end
 end

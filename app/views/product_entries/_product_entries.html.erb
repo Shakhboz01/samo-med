@@ -6,7 +6,7 @@
         <th>Yuk beruvchi</th>
       <% end %>
       <th><%= sort_link q, :buy_price, 'Kelish narxi' %></th>
-      <th><%= sort_link q, :sell_price, 'Sotish narxi' %></th>
+      <th>Jami</th>
       <th>Tovar</th>
       <th><%= sort_link q, :amount, 'Soni' %></th>
       <% unless defined?(shrink) %>
@@ -22,8 +22,8 @@
           <td class="<%= active_tr(product_entry.amount > product_entry.amount_sold) %>"><%= product_entry.id %></td>
           <td><%= product_entry.provider.name %></td>
         <% end %>
-        <td><%= currency_convert(product_entry.paid_in_usd, product_entry.buy_price) %> (<%= currency_convert(product_entry.paid_in_usd, product_entry.buy_price * product_entry.amount) %>)</td>
-        <td><%= currency_convert(product_entry.paid_in_usd, product_entry.sell_price) %> (<%= currency_convert(product_entry.paid_in_usd, product_entry.sell_price * product_entry.amount) %>)</td>
+        <td><%= currency_convert(product_entry.paid_in_usd, product_entry.buy_price) %></td>
+        <td><%= currency_convert(product_entry.paid_in_usd, product_entry.amount * product_entry.buy_price) %></td>
         <td><%= product_entry.pack.name %></td>
         <td><%= product_entry.amount %></td>
         <% unless defined?(shrink) %>

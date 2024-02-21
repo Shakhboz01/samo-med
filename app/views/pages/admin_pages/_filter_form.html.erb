@@ -22,7 +22,7 @@
   <% end %>
 </div>
 <script>
-  $(document).ready(function() {
+  $(document).on('turbo:load', function() {
     if (!localStorage.getItem("pageReloaded")) {
      // Reload the page
       localStorage.setItem("pageReloaded", "true");

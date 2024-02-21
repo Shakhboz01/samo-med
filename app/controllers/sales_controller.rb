@@ -49,8 +49,7 @@ class SalesController < ApplicationController
   def update
     respond_to do |format|
       if @sale.update(sale_params.merge(
-          status: sale_params[:status].to_i,
-          total_price: @sale.calculate_total_price(false)
+          status: sale_params[:status].to_i
         ))
         format.html { redirect_to sales_url, notice: "Sale was successfully updated." }
         format.json { render :show, status: :ok, location: @sale }
@@ -97,12 +96,10 @@ class SalesController < ApplicationController
     authorize Sale, :access?
 
     pdf_generator = ProductSells::GenerateReceipt.run(sale: @sale)
-    file_path = pdf_generator.result[:file_path] # Assuming your GenerateReceipt returns the file path
-    filename = pdf_generator.result[:filename]
     # NOTE I included mime_type.rb to receive pdf
     respond_to do |format|
       format.pdf do
-        send_file(file_path, filename: filename, type: 'application/pdf')
+        send_data(pdf_generator.result, filename: "check-#{@sale.id}-#{DateTime.current}", type: 'application/pdf', disposition: 'inline')
       end
     end
   end

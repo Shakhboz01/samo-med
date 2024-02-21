@@ -17,28 +17,7 @@
     color: white
   }
 </style>
-<script>
-  $(document).ready(function() {
-    const productSearchInput = document.getElementById('product_search_input');
-    const products = document.querySelectorAll('.product_list');
-
-    productSearchInput.addEventListener('input', function() {
-      const searchTerm = productSearchInput.value.trim().toLowerCase();
-
-      products.forEach(function(product) {
-        const productName = product.dataset.productName.toLowerCase();
-
-        if (productName.includes(searchTerm)) {
-          product.style.display = 'block'; // Show the product
-        } else {
-          product.style.display = 'none'; // Hide the product
-        }
-      });
-    });
-  });
-</script>
-
-<% Pack.where(active: true).all.each do |product| %>
+<% Pack.where(active: true).order(:name).all.each do |product| %>
   <p data-product-name="<%= product.name %>" data-product-id="<%= product.id %>" class='product_list'>
     <%= product.name %>
   </p>

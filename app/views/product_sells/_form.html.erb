@@ -1,5 +1,23 @@
 <script>
-  $(document).ready(function() {
+  $(document).on('turbo:load',function() {
+    console.log('hello I wm working')
+    const productSearchInput = document.getElementById('product_search_input');
+    const products = document.querySelectorAll('.product_list');
+
+    productSearchInput.addEventListener('input', function() {
+      const searchTerm = productSearchInput.value.trim().toLowerCase();
+
+      products.forEach(function(product) {
+        const productName = product.dataset.productName.toLowerCase();
+
+        if (productName.includes(searchTerm)) {
+          product.style.display = 'block'; // Show the product
+        } else {
+          product.style.display = 'none'; // Hide the product
+        }
+      });
+    });
+
     $("#product_search_input").focus();
     $('.products p').click(function() {
       $('.products p').removeClass('active');
@@ -18,14 +36,12 @@
     function calculateSalePrice(){
       var product_id = document.querySelector('#pack-select').value;
       var sell_price = document.querySelector('#product_sell_sell_price').value;
-      var sell_by_piece = document.querySelector('#product_sell_sell_by_piece').checked;
-      console.log('sell_by_piece ',sell_by_piece)
       var amount = document.querySelector('#product_sell_amount').value;
       var customActionURL = '/product_sells/ajax_sell_price_request';
       var data = {
         pack_id: product_id,
         amount: amount,
-        sell_by_piece: sell_by_piece
+        sell_by_piece: false
       };
       var csrfToken = $('meta[name="csrf-token"]').attr('content');
       if(sell_price != 0 || sell_price != null){
@@ -47,8 +63,6 @@
         })
         .then(function(responseText) {
           document.querySelector('#product_sell_sell_price').value = responseText.average_sell_price_in_usd;
-          document.querySelector('#product_sell_sell_price_in_uzs').value = responseText.average_sell_price_in_uzs;
-          document.querySelector('#product_sell_min_price_in_usd').value = responseText.minimum_buy_price_in_usd;
         })
         .catch(function(error) {
           console.error(error);
@@ -57,35 +71,6 @@
       }
     }
   })
-  var sellPriceInput = document.getElementById('product_sell_sell_price');
-    var sellPriceInUzsInput = document.getElementById('product_sell_sell_price_in_uzs');
-    var rateInput = document.getElementById('product_sell_rate');
-
-    // Function to update sell price in uzs when sell price changes
-    sellPriceInput.addEventListener('input', function() {
-      console.log('changed')
-      var sellPrice = parseFloat(this.value);
-      console.log('sellPrice: ', this.value)
-      var rate = parseFloat(rateInput.value);
-      console.log('rate: ', this.value)
-      var result = (sellPrice * rate).toFixed(2)
-      console.log('reult is ', result)
-      sellPriceInUzsInput.value = result;
-    });
-
-    // Function to update sell price when sell price in uzs changes
-    sellPriceInUzsInput.addEventListener('input', function() {
-      var sellPriceInUzs = parseFloat(this.value);
-      var rate = parseFloat(rateInput.value);
-      sellPriceInput.value = (sellPriceInUzs / rate).toFixed(2);
-    });
-
-    // Function to update sell price in uzs when rate changes
-    rateInput.addEventListener('input', function() {
-      var sellPrice = parseFloat(sellPriceInput.value);
-      var rate = parseFloat(this.value);
-      sellPriceInUzsInput.value = (sellPrice * rate).toFixed(2);
-    });
 </script>
 
 <% rate = CurrencyRate.last.rate %>
@@ -100,7 +85,7 @@
       <div class='row'>
         <div class='col-sm-8'>
           <div class='pack-select'>
-            <%= f.association :pack, label: false, collection: Pack.where(active: true).order('LOWER(name) ASC'), include_blank: true, input_html: { hidden: true, id: 'pack-select' } %>
+            <%= f.association :pack, label: false, collection: Pack.where(active: true).order(:name), include_blank: true, input_html: { hidden: true, id: 'pack-select' } %>
           </div>
           <div id='pack_name' style='display: none'>
             <%= f.input :pack_name, label: 'Xizmat nomini kiriting' %>
@@ -117,7 +102,6 @@
           <%= f.submit "Sotish", class: 'btn btn-primary'%>
         </div>
       </div>
-      <%= f.input :sell_price_in_uzs, label: false, as: :hidden %>
       <%= f.input :min_price_in_usd, label: false, as: :hidden, input_html: { disabled: true } %>
       <%= f.input :initial_remaining, label: false, input_html: { disabled: true, hidden: true } %>
       <a id='add_manually' style='color: blue; cursor: pointer'>Qo'lda kiritish</a>
@@ -145,7 +129,7 @@
 </div>
 
 <script>
-  $(document).ready(function() {
+  $(document).on('turbo:load', function() {
     $('#add_manually').click(function(){
       console.log('clicked');
       $('#pack_name').toggle();
