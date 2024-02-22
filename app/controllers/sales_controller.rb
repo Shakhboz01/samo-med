@@ -71,8 +71,10 @@ class SalesController < ApplicationController
   end
 
   def default_create
-    buyer = Buyer.first
-    last_one = Sale.last
+    return request.referrer unless params[:buyer_id].present?
+
+    buyer = Buyer.find(params[:buyer_id])
+    last_one = buyer.sales.order(created_at: :asc).first
     if !last_one.nil? && last_one.total_price == 0 && last_one.total_paid == 0 && !last_one.closed?
       redirect_to sale_url(last_one), notice: "Теперь добавьте продажу товаров"
     else

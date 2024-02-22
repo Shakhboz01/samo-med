@@ -15,7 +15,7 @@
     </tr>
   </thead>
   <tbody>
-    <% providers.each do |provider| %>
+    <% providers.order(:name).each do |provider| %>
       <tr class="<%= active_tr(provider.active) %>">
         <% unless defined?(shrink) %>
         <td><%= provider.id %></td>
