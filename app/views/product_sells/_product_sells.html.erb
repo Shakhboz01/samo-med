@@ -1,5 +1,25 @@
 <%= turbo_frame_tag 'product_sells' do %>
-  <table class="table table-hover table-bordered table-striped">
+  <% if defined?(shrink) %>
+    <div class='d-flex table-warning justify-content-around'>
+      <% rate = CurrencyRate.last.rate %>
+      <% unless defined?(datetime) %>
+        <b>UMUMIY TOVARLAR SONI: <%= product_sells.sum(:amount) %></b>
+      <% end %>
+
+      <b>Jami: <%= num_to_usd sale.total_price %></b>
+      <% if defined?(total_paid) %>
+        <b>Jami to'landi: <%= num_to_usd(total_paid) %></b>
+      <% end %>
+      <% if defined?(datetime) %>
+        <b>Sana: <%= strf_datetime(datetime, true)  %></b>
+      <% end %>
+
+      <% if defined?(buyer) %>
+        <b>Jami qarzi bilan: <%= num_to_usd(buyer.calculate_debt_in_uzs) %></b>
+      <% end %>
+    </div>
+  <% end %>
+  <table class="table table-sm table-hover table-bordered table-striped">
     <thead>
       <tr>
         <% unless defined?(shrink) %>
@@ -17,7 +37,7 @@
       </tr>
     </thead>
       <tbody>
-        <% product_sells.each do |product_sell| %>
+        <% product_sells.order(created_at: :desc).each do |product_sell| %>
           <tr>
             <% unless defined?(shrink) %>
               <td><%= product_sell.id %></td>
@@ -43,12 +63,4 @@
         <% end %>
       </tbody>
   </table>
-
-  <% if defined?(shrink) %>
-    <div class='d-flex justify-content-around'>
-    <% rate = CurrencyRate.last.rate %>
-    <b>UMUMIY TOVARLAR SONI: <%= @sale.product_sells.sum(:amount) %></b>
-    <b>JAMI: <%= num_to_usd product_sells.sum('(sell_price * amount)') %></b>
-  </div>
-  <% end %>
 <% end %>

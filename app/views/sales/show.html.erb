@@ -3,17 +3,34 @@
   <div class="text-centerjustify-content-between align-items-center">
     <h3 class="card-title text-center font-weight-bold" id='pack-name'></h3>
   </div>
+  <h3 class='m-1'>
+    <%= @sale.buyer.name.capitalize %>
+    <% if @sale.product_sells.empty? %>
+      | qarzi: <%= num_to_usd @sale.buyer.calculate_debt_in_uzs %>
+    <% end %>
+  </h3>
   <div class='row'>
     <% unless @sale.closed? || params.dig(:prepayment) %>
       <div class='col-sm-12 col-md-3'>
         <%= render 'product_sells/form', product_sell: @product_sell, rate: @rate %>
       </div>
     <% end %>
-    <div class='col-sm-12 col-md-7'>
+
+    <div class='col-sm-12 col-md-7' style='max-height: 800px; overflow: auto'>
       <% unless @product_sells.count.zero? || params.dig(:prepayment) %>
-        <%= render 'product_sells/product_sells', shrink: true, product_sells: @product_sells, rate: @rate %>
+        <div style='border: 5px solid #6bf56b'>
+          <%= render 'product_sells/product_sells', shrink: true, sale: @sale, buyer: @sale.buyer, product_sells: @product_sells, rate: @rate %>
+        </div>
       <% end %>
+
+      <% @sales.each do |sale| %>
+        <div style='border: 3px solid black; margin-top: 45px'>
+          <%= render 'product_sells/product_sells', shrink: true, sale: sale, total_paid: sale.total_paid, datetime: sale.created_at, product_sells: sale.product_sells, rate: @rate %>
+        </div>
+      <% end %>
+      <br/><p class='text-center'><%= paginate @sales %></p>
     </div>
+
     <% unless @sale.closed? %>
       <div class='col-sm-12 col-md-2'>
         <%= render 'sales/form', sale: @sale %>
