@@ -12,7 +12,8 @@
             <th>Nomi</th>
             <th>Kodi</th>
             <th>Ostatkasi</th>
-            <th>Narxi</th>
+            <th>Sotish Narxi</th>
+            <th>Sotib olish narxi</th>
             <th colspan="3"></th>
           </tr>
         </thead>
@@ -23,6 +24,7 @@
               <td><%= pack.code %></td>
               <td><%= pack.initial_remaining %></td>
               <td><%= currency_convert(pack.price_in_usd, pack.sell_price) %></td>
+              <td><%= find_by_price(pack) %></td>
               <td>
                 <%= clink_to 'O\'zgartirish', edit_pack_path(pack), 'fa-edit' %>
                 <% if pack.active %>

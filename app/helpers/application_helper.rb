@@ -87,4 +87,15 @@ module ApplicationHelper
       "table-success"
     end
   end
+
+  def find_by_price(pack)
+    product_entries = pack.product_entries
+
+    if product_entries.empty?
+      currency_convert(pack.price_in_usd, pack.buy_price)
+    else
+      product_entry = product_entries.order(created_at: :asc).last
+      currency_convert(product_entry.paid_in_usd, product_entry.buy_price)
+    end
+  end
 end
