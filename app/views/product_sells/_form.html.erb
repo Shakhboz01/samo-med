@@ -1,6 +1,26 @@
 <script>
   $(document).on('turbo:load',function() {
-    console.log('hello I wm working')
+    $('.category-row').click(function() {
+      $('.category-row').removeClass('active-category');
+      $(this).addClass('active-category');
+
+      var categoryId = $(this).data('category-id');
+
+      $('#product-table tbody tr').each(function() {
+        var productCategoryId = $(this).data('category-id');
+        if (categoryId == productCategoryId || categoryId == "all") {
+          $(this).show();
+        } else {
+          $(this).hide();
+        }
+      });
+    });
+
+    $('#add_manually').click(function(){
+      console.log('clicked');
+      $('#pack_name').toggle();
+      $('.pack-select').toggle();
+    });
     const productSearchInput = document.getElementById('product_search_input');
     const products = document.querySelectorAll('.product_list');
 
@@ -19,8 +39,8 @@
     });
 
     $("#product_search_input").focus();
-    $('.products p').click(function() {
-      $('.products p').removeClass('active');
+    $('.products tr').click(function() {
+      $('.products tr').removeClass('active');
       $(this).addClass('active');
       var h1Element = document.querySelector('#pack-name');
       var selectedProductText = $(this).data('product-name');
@@ -61,25 +81,25 @@
         <div class='col-sm-4'><%= f.input :amount, label: 'Soni', input_html: {value: 1} %></div>
         <div class='col-sm-4'><%= f.input :sell_price, label: 'dona narxi' %></div>
         <div class='col-sm-4 align-self-center'>
-          <%= f.submit "Sotish", class: 'btn btn-primary'%>
+          <%= f.submit "Sotish", class: 'btn btn-primary'%><br/>
+          <a id='add_manually' style='color: blue; cursor: pointer'>Qo'lda kiritish</a>
         </div>
       </div>
       <%= f.input :min_price_in_usd, label: false, as: :hidden, input_html: { disabled: true } %>
       <%= f.input :initial_remaining, label: false, input_html: { disabled: true, hidden: true } %>
-      <a id='add_manually' style='color: blue; cursor: pointer'>Qo'lda kiritish</a>
       <div class='product-select-tag'>
         <%= f.input :remaining_outside_pack, label: false, as: :hidden, input_html: { disabled: true } %>
       </div>
-
       <%= f.input :rate, as: :hidden, input_html: { value: rate } %>
     </div>
   <% end %>
 
+  <%= render 'product_sells/product_categories_select' %>
+  <hr>
   <div class='row'>
     <div class='col-sm-12'>
       <div class="form-group decimal required product_sell_amount">
-        <label class="control-label decimal required" for="product_sell_amount">Qidirish:</label>
-        <input class="form-control text required" type="text" id="product_search_input" style='box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;'/>
+        <input class="form-control text required" type="text" id="product_search_input" placeholder='Qidirish' style='box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;'/>
       </div>
     </div>
   </div>
@@ -89,13 +109,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  $(document).on('turbo:load', function() {
-    $('#add_manually').click(function(){
-      console.log('clicked');
-      $('#pack_name').toggle();
-      $('.pack-select').toggle();
-    });
-  });
-</script>

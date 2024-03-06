@@ -1,5 +1,4 @@
  <div class='mx-2'>
-  <h2 class='text-center'>Sotuv bo'limi</h2>
   <div class="text-centerjustify-content-between align-items-center">
     <h3 class="card-title text-center font-weight-bold" id='pack-name'></h3>
   </div>
@@ -11,12 +10,12 @@
   </h3>
   <div class='row'>
     <% unless @sale.closed? || params.dig(:prepayment) %>
-      <div class='col-sm-12 col-md-3'>
+      <div class='col-sm-12 col-md-4'>
         <%= render 'product_sells/form', product_sell: @product_sell, rate: @rate %>
       </div>
     <% end %>
 
-    <div class='col-sm-12 col-md-7' style='max-height: 800px; overflow: auto'>
+    <div class='col-sm-12 col-md-6' style='max-height: 800px; overflow: auto'>
       <% unless @product_sells.count.zero? || params.dig(:prepayment) %>
         <div style='border: 5px solid #6bf56b'>
           <%= render 'product_sells/product_sells', shrink: true, sale: @sale, buyer: @sale.buyer, product_sells: @product_sells, rate: @rate %>

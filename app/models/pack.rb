@@ -1,4 +1,5 @@
 class Pack < ApplicationRecord
+  belongs_to :product_category
   has_many :product_size_colors
   has_many :product_entries
   has_many :products

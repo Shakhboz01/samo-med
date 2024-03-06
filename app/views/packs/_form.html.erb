@@ -7,6 +7,7 @@
         <%= f.input :name, label: 'Tovar nomi', input_html: {autofocus: 'true'} %>
         <%= f.input :code, label: 'Kodi', input_html: {value: @random_code} %>
         <%= f.input :delivery_id, input_html: {value: params[:delivery_id] }, as: :hidden  %>
+        <%= f.association :product_category, label: 'Papkani tanlang'  %>
         <%= f.input :initial_remaining, label: 'Ostatkasi' %>
         <%= f.input :sell_price, label: 'Sotish narxi (1 dona)' %>
         <%= f.input :buy_price, label: 'Sotib olgan narximiz (1 dona)' %>

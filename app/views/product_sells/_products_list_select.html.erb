@@ -48,9 +48,7 @@
           let displayStyle = 'none'; // Default: hide the product
 
           if (productName.startsWith(searchTerm)) {
-              displayStyle = 'block'; // Show the product if it starts with the search term
-          } else if (productName.includes(searchTerm)) {
-              displayStyle = 'block'; // Show the product if it includes the search term
+              displayStyle = 'revert'; // Show the product if it starts with the search term
           }
           product.style.display = displayStyle;
       });
@@ -95,8 +93,21 @@
   });
 </script>
 
-<% Pack.where(active: true).order(name: :desc).all.each do |product| %>
-  <p data-product-sell-price="<%= product.sell_price %>" data-product-name="<%= product.name %>" data-product-id="<%= product.id %>" class='product_list'>
-    <%= product.name %>
-  </p>
-<% end %>
+<table class='table table-sm' id="product-table">
+  <thead>
+    <tr>
+      <th>Nomi</th>
+      <th>Narxi</th>
+      <th>Ostatka</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% Pack.where(active: true).order(name: :asc).all.each do |product| %>
+      <tr data-category-id="<%= product.product_category.id %>" data-product-sell-price="<%= product.sell_price %>" data-product-name="<%= product.name %>" data-product-id="<%= product.id %>" class='product_list'>
+        <td><%= product.name %></td>
+        <td><%= product.sell_price %></td>
+        <td><%= product.initial_remaining %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

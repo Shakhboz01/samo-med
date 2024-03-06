@@ -1,0 +1,21 @@
+<script>
+  $(document).on('turbo:load',function() {
+    $('#eye').on('click', function(){
+      $('#product-categories').toggle()
+    })
+  });
+</script>
+<i class="fa-regular fa-eye" id='eye'></i>
+<div class='row categories' id='product-categories' style='display: none'>
+  <div class='col-sm-12'>
+    <table class='table table-sm'>
+      <tbody>
+        <% ProductCategory.all.order(:name).each do |category| %>
+          <tr class="category-row" data-category-id="<%= category.id %>">
+            <td><%= category.name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

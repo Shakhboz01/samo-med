@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_13_075822) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_06_144156) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -196,6 +196,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_13_075822) do
     t.decimal "buy_price", precision: 17, scale: 2
     t.boolean "price_in_usd", default: false
     t.boolean "active", default: true
+    t.bigint "product_category_id"
+    t.index ["product_category_id"], name: "index_packs_on_product_category_id"
   end
 
   create_table "participations", force: :cascade do |t|
@@ -318,7 +320,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_13_075822) do
 
   create_table "salaries", force: :cascade do |t|
     t.boolean "prepayment"
-    t.date "month", default: "2024-02-10"
+    t.date "month", default: "2024-02-20"
     t.bigint "team_id"
     t.bigint "user_id"
     t.decimal "price", precision: 10, scale: 2
@@ -477,6 +479,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_13_075822) do
   add_foreign_key "local_services", "sale_from_local_services"
   add_foreign_key "local_services", "users"
   add_foreign_key "owners_operations", "users"
+  add_foreign_key "packs", "product_categories"
   add_foreign_key "participations", "users"
   add_foreign_key "product_entries", "combination_of_local_products"
   add_foreign_key "product_entries", "delivery_from_counterparties"

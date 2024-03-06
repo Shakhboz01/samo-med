@@ -1,0 +1,14 @@
+.categories{
+  max-height: 200px;
+  overflow: auto;
+  background-color: aliceblue;
+ }
+.active-category {
+  background-color: blue;
+  color: white;
+}
+
+#eye{
+  cursor: pointer;
+  color: blue;
+}
