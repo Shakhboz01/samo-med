@@ -26,50 +26,12 @@
       var selectedProductText = $(this).data('product-name');
       h1Element.textContent = selectedProductText;
       document.querySelector('#pack-select').value = $(this).data('product-id');
-      calculateSalePrice();
+      document.querySelector('#product_sell_sell_price').value = $(this).data('product-sell-price')
 		});
     $('.product-select-tag').hide();
     $("input").focus(function() {
       $(this).select();
     });
-
-    function calculateSalePrice(){
-      var product_id = document.querySelector('#pack-select').value;
-      var sell_price = document.querySelector('#product_sell_sell_price').value;
-      var amount = document.querySelector('#product_sell_amount').value;
-      var customActionURL = '/product_sells/ajax_sell_price_request';
-      var data = {
-        pack_id: product_id,
-        amount: amount,
-        sell_by_piece: false
-      };
-      var csrfToken = $('meta[name="csrf-token"]').attr('content');
-      if(sell_price != 0 || sell_price != null){
-        fetch(customActionURL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-Token': csrfToken
-          },
-          body: JSON.stringify(data)
-        })
-        .then(function(response) {
-          if (response.ok) {
-            return response.json();;
-          } else {
-            console.log('error occured: ', response)
-            throw new Error('Error: ' + response.text());
-          }
-        })
-        .then(function(responseText) {
-          document.querySelector('#product_sell_sell_price').value = responseText.average_sell_price_in_usd;
-        })
-        .catch(function(error) {
-          console.error(error);
-          throw new Error('Error: ' + error);
-        });
-      }
-    }
   })
 </script>
 

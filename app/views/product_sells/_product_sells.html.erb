@@ -2,6 +2,10 @@
   <% if defined?(shrink) %>
     <div class='d-flex table-warning justify-content-around'>
       <% rate = CurrencyRate.last.rate %>
+      <% if defined?(datetime) %>
+        <b>Sana: <%= strf_datetime(datetime, true)  %></b>
+      <% end %>
+
       <% unless defined?(datetime) %>
         <b>UMUMIY TOVARLAR SONI: <%= product_sells.sum(:amount) %></b>
       <% end %>
@@ -9,9 +13,6 @@
       <b>Jami: <%= num_to_usd sale.total_price %></b>
       <% if defined?(total_paid) %>
         <b>Jami to'landi: <%= num_to_usd(total_paid) %></b>
-      <% end %>
-      <% if defined?(datetime) %>
-        <b>Sana: <%= strf_datetime(datetime, true)  %></b>
       <% end %>
 
       <% if defined?(buyer) %>

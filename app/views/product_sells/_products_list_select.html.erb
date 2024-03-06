@@ -17,8 +17,86 @@
     color: white
   }
 </style>
-<% Pack.where(active: true).order(:name).all.each do |product| %>
-  <p data-product-name="<%= product.name %>" data-product-id="<%= product.id %>" class='product_list'>
+<script>
+  $(document).on('turbo:load', function() {
+    const productSearchInput = document.getElementById('product_search_input');
+    const products = document.querySelectorAll('.product_list');
+    let activeIndex = -1;
+
+    function setActive(index) {
+      products.forEach((product, i) => {
+        if (i === index) {
+          product.classList.add('active');
+          product.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          product.classList.remove('active');
+        }
+      });
+    }
+
+    function handleClick(index) {
+      if (index >= 0 && index < products.length) {
+        products[index].dispatchEvent(new Event('click'));
+      }
+    }
+
+    productSearchInput.addEventListener('input', function() {
+      const searchTerm = productSearchInput.value.trim().toLowerCase();
+
+      products.forEach(function(product) {
+          const productName = product.dataset.productName.toLowerCase();
+          let displayStyle = 'none'; // Default: hide the product
+
+          if (productName.startsWith(searchTerm)) {
+              displayStyle = 'block'; // Show the product if it starts with the search term
+          } else if (productName.includes(searchTerm)) {
+              displayStyle = 'block'; // Show the product if it includes the search term
+          }
+          product.style.display = displayStyle;
+      });
+
+      setActive(-1);
+      activeIndex = -1;
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (document.activeElement.id === 'product_sell_amount') {
+        return;
+      }
+
+      if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+        event.preventDefault();
+
+        let newIndex;
+        if (event.key === 'ArrowUp') {
+          newIndex = activeIndex <= 0 ? products.length - 1 : activeIndex - 1;
+        } else {
+          newIndex = activeIndex >= products.length - 1 ? 0 : activeIndex + 1;
+        }
+
+        while (products[newIndex].style.display === 'none') {
+          if (event.key === 'ArrowUp') {
+            newIndex = newIndex <= 0 ? products.length - 1 : newIndex - 1;
+          } else {
+            newIndex = newIndex >= products.length - 1 ? 0 : newIndex + 1;
+          }
+        }
+        setActive(newIndex);
+        activeIndex = newIndex;
+        handleClick(newIndex);
+      }
+    });
+
+    $(document).on('keypress', function(event) {
+      if ($('.product_list.active').length && event.key === 'Enter') {
+        $('#product_sell_amount').focus();
+      }
+    });
+  });
+</script>
+
+<% Pack.where(active: true).order(name: :desc).all.each do |product| %>
+  <p data-product-sell-price="<%= product.sell_price %>" data-product-name="<%= product.name %>" data-product-id="<%= product.id %>" class='product_list'>
     <%= product.name %>
   </p>
 <% end %>
