@@ -9,7 +9,8 @@
     <div class='col-sm-6 main-page-header'>
       <div>
         <h4 class='text-center'>Mijozlar</h4>
-        <div style="max-height: 420px; overflow: auto">
+        <input type='text' placeholder='qidirish' id='searchInput'>
+        <div style="max-height: 720px; overflow: auto">
           <%= render 'buyers/buyers', buyers: @buyers, shrink: true %>
         </div>
       </div>
@@ -17,42 +18,33 @@
     <div class='col-sm-6'>
       <div>
         <h4 class='text-center'>Yuk beruvchilar</h4>
-        <div style="max-height: 420px; overflow: auto">
+        <div style="max-height: 720px; overflow: auto">
           <%= render 'providers/providers', providers: @providers, shrink: true %>
         </div>
       </div>
-    </div>
-
-  </div>
-  <br><br><br><br>
-  <div class='row'>
-    <div class='col-sm-6 main-page-body', style='max-height: 950px; overflow: auto'>
-      <h4 class='text-center'>Sotuvlar</h4>
-      <%= render 'sales/sales', sales: @sales, shrink: true %>
-    </div>
-    <div class='col-sm-12 col-md-6' style='max-height: 950px; overflow: auto'>
-      <h4 class='text-center'>Yuk kelishlar</h4>
-      <%= render 'delivery_from_counterparties/delivery_from_counterparties', delivery_from_counterparties: @delivery_from_counterparties, shrink: true %>
-    </div>
-  </div>
-  <br>
-  <div class='row'>
-    <div class='col-sm-12 col-md-12'>
-      <h4 class='text-center'>Xarajatlar</h4>
-      <%= render 'expenditures/expenditures', expenditures: @expenditures, shrink: true %>
     </div>
   </div>
 </div>
 
 <script>
-    const searchParams = new URLSearchParams(window.location.search);
-    const id = searchParams.get('name'); // price_descending
-    console.log('this is hash', id)
-    if (id) {
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }
+  $(document).on('turbo:load', function(){
+    $('#searchInput').focus()
+    document.getElementById('searchInput').addEventListener('input', function() {
+        var input, filter, table, tr, nameAttr, i;
+        input = this.value.toUpperCase();
+        table = document.getElementById('buyers-list');
+        tr = table.getElementsByTagName('tr');
+
+        for (i = 0; i < tr.length; i++) {
+            nameAttr = tr[i].getAttribute('data-buyer-name');
+            if (nameAttr) {
+                if (nameAttr.toUpperCase().startsWith(input)) {
+                    tr[i].style.display = '';
+                } else {
+                    tr[i].style.display = 'none';
+                }
+            }
+        }
+    });
+  })
 </script>
-<script>$(function(){$(".datepicker").datepicker({dateFormat: 'dd-mm-yy'})})</script>
