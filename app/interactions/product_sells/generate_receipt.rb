@@ -62,8 +62,8 @@ module ProductSells
         ],
         company: {
           name: "ALUTEX JOMBOY",
-          address: "Чупон Ота дом 171",
-          phone: '+99899.704.61.62',
+          address: "Bulung'ur tumani",
+          phone: '+99899-280-50-90',
           email: "",
           logo: File.expand_path("./app/assets/images/logo3.jpg")
         },
