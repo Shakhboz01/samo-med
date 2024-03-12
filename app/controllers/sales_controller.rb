@@ -19,7 +19,8 @@ class SalesController < ApplicationController
     @product_sell = ProductSell.new(sale_id: @sale.id)
     @products = Product.active.order(:name)
     @rate = CurrencyRate.last.rate
-    @sales = @sale.buyer.sales.where.not(id: @sale.id).page(params[:page]).per(12)
+    @sales = @sale.buyer.sales.where.not(id: @sale.id).where(created_at: :desc).page(params[:page]).per(12)
+
   end
 
   # GET /sales/new
