@@ -19,7 +19,7 @@ class SalesController < ApplicationController
     @product_sell = ProductSell.new(sale_id: @sale.id)
     @products = Product.active.order(:name)
     @rate = CurrencyRate.last.rate
-    @sales = @sale.buyer.sales.where.not(id: @sale.id).where(created_at: :desc).page(params[:page]).per(12)
+    @sales = @sale.buyer.sales.where.not(id: @sale.id).order(created_at: :desc).page(params[:page]).per(12)
 
   end
 
@@ -77,7 +77,7 @@ class SalesController < ApplicationController
 
     buyer = Buyer.find(params[:buyer_id])
     last_one = buyer.sales.order(created_at: :asc).last
-    if (!last_one.nil? && last_one.total_price == 0 && last_one.total_paid == 0) || !last_one.closed?
+    if !last_one.nil? && !last_one.closed?
       redirect_to sale_url(last_one), notice: "Теперь добавьте продажу товаров"
     else
       sfs = Sale.new(buyer: buyer, user: current_user)
