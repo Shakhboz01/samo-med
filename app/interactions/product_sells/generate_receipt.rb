@@ -48,7 +48,7 @@ module ProductSells
         ])
       end
       r = Receipts::Receipt.new(
-        title: 'ALUTEX',
+        page_size: 'A5',
         font: {
           bold: File.expand_path("./app/assets/fonts/CharisSILB.ttf"),
           italic: File.expand_path("./app/assets/fonts/CharisSILB.ttf"),
@@ -57,21 +57,17 @@ module ProductSells
         details: [
           ["Chek nomeri:", sale.id],
           ["Sana:", sale.created_at.strftime("%D - %H:%M")],
-          ["To\'lov turi:", sale.payment_type],
-          ['', '']
         ],
         company: {
-          name: "ALUTEX JOMBOY",
+          name: "ALUTEX BULUNG'UR",
           address: "Bulung'ur tumani",
           phone: '+99899-280-50-90',
           email: "",
-          logo: File.expand_path("./app/assets/images/logo3.jpg")
         },
         recipient: [
-          "<b>Mijoz</b>: #{sale.buyer.name.upcase}"
+          "<b>Mijoz</b>: #{sale.buyer.name.upcase} #{sale.buyer.phone_number}"
         ],
-        line_items: items,
-        footer: "Xaridingiz uchun raxmat. Sizni kutib qolamiz!"
+        line_items: items
       )
 
       r.render
