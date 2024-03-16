@@ -2,7 +2,7 @@ default: &default
   adapter: postgresql
   encoding: unicode
   host:     <%= ENV.fetch('DB_HOST', 'localhost') %>
-  database: bulungur_xurshed_aka_development
+  database: bulungur_door_development
   username: postgres
   password: 998915309764
   pool:     <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>

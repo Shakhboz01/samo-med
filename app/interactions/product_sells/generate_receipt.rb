@@ -59,9 +59,9 @@ module ProductSells
           ["Sana:", sale.created_at.strftime("%D - %H:%M")],
         ],
         company: {
-          name: "ALUTEX BULUNG'UR",
-          address: "Bulung'ur tumani",
-          phone: '+99899-280-50-90',
+          name: "ALUTEX JOMBOY",
+          address: "Чупон Ота дом 171",
+          phone: '+99899.704.61.62',
           email: "",
         },
         recipient: [
