@@ -32,7 +32,6 @@ module ProductSells
       end
 
       items.push(
-        ['', '', '', ''],
         [
         '',
         '',
@@ -49,6 +48,7 @@ module ProductSells
       end
       r = Receipts::Receipt.new(
         page_size: 'A5',
+        title: '',
         font: {
           bold: File.expand_path("./app/assets/fonts/CharisSILB.ttf"),
           italic: File.expand_path("./app/assets/fonts/CharisSILB.ttf"),
@@ -60,14 +60,14 @@ module ProductSells
         ],
         company: {
           name: "ALUTEX BULUNG'UR",
-          address: "Bulung'ur tumani",
           phone: '+99899-280-50-90',
           email: "",
         },
         recipient: [
           "<b>Mijoz</b>: #{sale.buyer.name.upcase} #{sale.buyer.phone_number}"
         ],
-        line_items: items
+        line_items: items,
+        footer: ""
       )
 
       r.render
