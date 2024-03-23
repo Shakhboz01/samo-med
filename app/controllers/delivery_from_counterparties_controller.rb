@@ -7,7 +7,7 @@ class DeliveryFromCounterpartiesController < ApplicationController
     @q = DeliveryFromCounterparty.ransack(params[:q])
     @delivery_from_counterparties =
       @q.result.filter_by_total_paid_less_than_price(params.dig(:q_other, :total_paid_less_than_price))
-        .order(id: :desc)
+        .order(created_at: :desc)
 
     @delivery_from_counterparties_data = @delivery_from_counterparties
     @delivery_from_counterparties = @delivery_from_counterparties.page(params[:page]).per(70)

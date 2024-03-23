@@ -7,7 +7,7 @@ class SalesController < ApplicationController
     @q = Sale.ransack(params[:q])
     @sales =
       @q.result.filter_by_total_paid_less_than_price(params.dig(:q_other, :total_paid_less_than_price))
-        .order(id: :desc)
+        .order(created_at: :desc)
 
     @sales_data = @sales
     @sales = @sales.page(params[:page]).per(70)
