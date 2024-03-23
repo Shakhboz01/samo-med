@@ -32,7 +32,6 @@ module ProductSells
       end
 
       items.push(
-        ['', '', '', ''],
         [
         '',
         '',
@@ -49,6 +48,7 @@ module ProductSells
       end
       r = Receipts::Receipt.new(
         page_size: 'A5',
+        title: '',
         font: {
           bold: File.expand_path("./app/assets/fonts/CharisSILB.ttf"),
           italic: File.expand_path("./app/assets/fonts/CharisSILB.ttf"),
@@ -67,7 +67,8 @@ module ProductSells
         recipient: [
           "<b>Mijoz</b>: #{sale.buyer.name.upcase} #{sale.buyer.phone_number}"
         ],
-        line_items: items
+        line_items: items,
+        footer: ""
       )
 
       r.render

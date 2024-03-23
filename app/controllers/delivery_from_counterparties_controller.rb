@@ -7,7 +7,7 @@ class DeliveryFromCounterpartiesController < ApplicationController
     @q = DeliveryFromCounterparty.ransack(params[:q])
     @delivery_from_counterparties =
       @q.result.filter_by_total_paid_less_than_price(params.dig(:q_other, :total_paid_less_than_price))
-        .order(id: :desc)
+        .order(created_at: :desc)
 
     @delivery_from_counterparties_data = @delivery_from_counterparties
     @delivery_from_counterparties = @delivery_from_counterparties.page(params[:page]).per(70)
@@ -83,7 +83,11 @@ class DeliveryFromCounterpartiesController < ApplicationController
     provider = Provider.first
     last_one = DeliveryFromCounterparty.last
     if !last_one.nil? && last_one.total_price == 0 && last_one.total_paid.nil? && !last_one.closed?
-      redirect_to delivery_from_counterparty_url(last_one, prepayment: params.dig(:prepayment).present?), notice: "Теперь добавьте продажу товаров"
+      if last_one.product_entries.empty?
+        last_one.update(created_at: DateTime.current)
+      end
+
+      redirect_to delivery_from_counterparty_url(last_one), notice: "Теперь добавьте продажу товаров"
     else
       sfs = DeliveryFromCounterparty.new(provider: provider, user_id: current_user.id)
       if sfs.save
