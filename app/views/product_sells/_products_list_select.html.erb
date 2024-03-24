@@ -19,8 +19,8 @@
 </style>
 <script>
   $(document).on('turbo:load', function() {
-    const productSearchInput = document.getElementById('product_search_input');
-    const products = document.querySelectorAll('.product_list');
+    var productSearchInput = document.getElementById('product_search_input');
+    var products = document.querySelectorAll('.product_list');
     let activeIndex = -1;
 
     function setActive(index) {
@@ -40,17 +40,20 @@
       }
     }
 
-    productSearchInput.addEventListener('input', function() {
-      const searchTerm = productSearchInput.value.trim().toLowerCase();
+    document.getElementById('product_search_input').addEventListener('input', function() {
+      const searchTerm = productSearchInput.value.toLowerCase();
+      const selectedCategoryId = $('.category-row.active-category').data('category-id');
 
       products.forEach(function(product) {
+        if (window.getComputedStyle(product).display !== 'none') {
           const productName = product.dataset.productName.toLowerCase();
           let displayStyle = 'none'; // Default: hide the product
 
           if (productName.startsWith(searchTerm)) {
-              displayStyle = 'revert'; // Show the product if it starts with the search term
+            displayStyle = 'revert'; // Show the product if it starts with the search term
           }
           product.style.display = displayStyle;
+        }
       });
 
       setActive(-1);
@@ -90,24 +93,66 @@
         $('#product_sell_amount').focus();
       }
     });
+
+    // Function to handle product filtering based on category and input value
+    function filterProducts() {
+      const searchTerm = productSearchInput.value.toLowerCase();
+      const selectedCategoryId = $('.category-row.active-category').data('category-id');
+
+      products.forEach(function(product) {
+        const productName = product.dataset.productName.toLowerCase();
+        const productCategoryId = product.dataset.categoryId;
+
+        // Check if the product name includes the search term and if it belongs to the selected category
+        if ((productName.includes(searchTerm) || searchTerm === '') &&
+            (selectedCategoryId === undefined || productCategoryId == selectedCategoryId)) {
+          product.style.display = 'revert'; // Show the product
+        } else {
+          product.style.display = 'none'; // Hide the product
+        }
+      });
+    }
+
+    // Event listener for input event (typing and backspace)
+    productSearchInput.addEventListener('input', filterProducts);
+
+    // Event listener for backspace key press
+    productSearchInput.addEventListener('keydown', function(event) {
+      if (event.key === 'Backspace') {
+        // Call the filterProducts function when the backspace key is pressed
+        filterProducts();
+      }
+    });
+
   });
 </script>
 
-<table class='table table-sm' id="product-table">
-  <thead>
-    <tr>
-      <th>Nomi</th>
-      <th>Narxi</th>
-      <th>Ostatka</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% Pack.where(active: true).order(name: :asc).all.each do |product| %>
-      <tr data-category-id="<%= product.product_category.id %>" data-product-sell-price="<%= product.sell_price %>" data-product-name="<%= product.name %>" data-product-id="<%= product.id %>" class='product_list'>
-        <td><%= product.name %></td>
-        <td><%= product.sell_price %></td>
-        <td><%= product.initial_remaining %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class='row'>
+  <div class='col-sm-12'>
+    <div class="form-group decimal required product_sell_amount">
+      <input class="form-control text required"  type="text" id="product_search_input" placeholder='Qidirish' autocomplete="off" style='box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;'/>
+    </div>
+  </div>
+</div>
+<div style='max-height: 650px; overflow: auto' class='row'>
+  <div id='products-list' class='col-sm-12 products'>
+    <table class='table table-sm' id="product-table">
+      <thead>
+        <tr>
+          <th>Nomi</th>
+          <th>Narxi</th>
+          <th>Ostatka</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @packs.each do |product| %>
+          <tr data-category-id="<%= product.product_category.id %>" data-product-sell-price="<%= product.sell_price %>" data-product-name="<%= product.name %>" data-product-id="<%= product.id %>" class='product_list'>
+            <td><%= product.name %></td>
+            <td><%= product.sell_price %></td>
+            <td><%= product.initial_remaining %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

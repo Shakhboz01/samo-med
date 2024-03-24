@@ -24,7 +24,7 @@
 
       <% @sales.each do |sale| %>
         <div style='border: 3px solid black; margin-top: 45px'>
-          <%= render 'product_sells/product_sells', shrink: true, sale: sale, total_paid: sale.total_paid, datetime: sale.created_at, product_sells: sale.product_sells, rate: @rate %>
+          <%= render 'product_sells/product_sells', shrink: true, sale: sale, total_paid: sale.total_paid, datetime: sale.created_at, product_sells: sale.product_sells.includes(:buyer, :pack, :product), rate: @rate %>
         </div>
       <% end %>
       <br/><p class='text-center'><%= paginate @sales %></p>

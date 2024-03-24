@@ -1,40 +1,8 @@
 <script>
   $(document).on('turbo:load',function() {
-    $('.category-row').click(function() {
-      $('.category-row').removeClass('active-category');
-      $(this).addClass('active-category');
-
-      var categoryId = $(this).data('category-id');
-
-      $('#product-table tbody tr').each(function() {
-        var productCategoryId = $(this).data('category-id');
-        if (categoryId == productCategoryId || categoryId == "all") {
-          $(this).show();
-        } else {
-          $(this).hide();
-        }
-      });
-    });
-
     $('#add_manually').click(function(){
       $('#pack_name').toggle();
       $('.pack-select').toggle();
-    });
-    const productSearchInput = document.getElementById('product_search_input');
-    const products = document.querySelectorAll('.product_list');
-
-    productSearchInput.addEventListener('input', function() {
-      const searchTerm = productSearchInput.value.trim().toLowerCase();
-
-      products.forEach(function(product) {
-        const productName = product.dataset.productName.toLowerCase();
-
-        if (productName.includes(searchTerm)) {
-          product.style.display = 'block'; // Show the product
-        } else {
-          product.style.display = 'none'; // Hide the product
-        }
-      });
     });
 
     $("#product_search_input").focus();
@@ -56,7 +24,7 @@
 
 <% rate = CurrencyRate.last.rate %>
 
-<div class='p-3' style='color: black; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;'>
+<div class='px-3' style='color: black; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;'>
   <%= simple_form_for(product_sell) do |f| %>
     <div class='form-inputs'>
       <%= f.error_notification %>
@@ -94,17 +62,5 @@
   <% end %>
 
   <%= render 'product_sells/product_categories_select' %>
-  <hr>
-  <div class='row'>
-    <div class='col-sm-12'>
-      <div class="form-group decimal required product_sell_amount">
-        <input class="form-control text required"  type="text" id="product_search_input" placeholder='Qidirish' autocomplete="off" style='box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;'/>
-      </div>
-    </div>
-  </div>
-  <div style='max-height: 650px; overflow: auto' class='row'>
-    <div id='products-list' class='col-sm-12 products'>
-      <%= render 'product_sells/products_list_select' %>
-    </div>
-  </div>
+  <%= render 'product_sells/products_list_select' %>
 </div>

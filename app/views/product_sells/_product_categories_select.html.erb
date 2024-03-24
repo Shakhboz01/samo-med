@@ -1,5 +1,22 @@
 <script>
-  $(document).on('turbo:load',function() {
+  $(document).ready(function() {
+    $('.category-row').click(function() {
+      $('.category-row').removeClass('active-category');
+      $(this).addClass('active-category');
+
+      var categoryId = $(this).data('category-id');
+
+      $('#product-table tbody tr').each(function() {
+        var productCategoryId = $(this).data('category-id');
+        if (categoryId == productCategoryId) {
+          $(this).show();
+        } else {
+          $(this).hide();
+        }
+      });
+      $('#product-categories').toggle();
+      $('#product_search_input').focus()
+    });
     $('#eye').on('click', function(){
       $('#product-categories').toggle()
     })

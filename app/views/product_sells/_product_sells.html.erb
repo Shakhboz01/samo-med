@@ -1,7 +1,6 @@
 <%= turbo_frame_tag 'product_sells' do %>
   <% if defined?(shrink) %>
     <div class='d-flex table-warning justify-content-around'>
-      <% rate = CurrencyRate.last.rate %>
       <% if defined?(datetime) %>
         <b>Sana: <%= strf_datetime(datetime, true)  %></b>
       <% end %>

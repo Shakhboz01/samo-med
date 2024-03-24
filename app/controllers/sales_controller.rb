@@ -4,7 +4,7 @@ class SalesController < ApplicationController
   include Pundit::Authorization
   # GET /sales or /sales.json
   def index
-    @q = Sale.ransack(params[:q])
+    @q = Sale.includes(:buyer, :user).ransack(params[:q])
     @sales =
       @q.result.filter_by_total_paid_less_than_price(params.dig(:q_other, :total_paid_less_than_price))
         .order(created_at: :desc)
@@ -15,12 +15,12 @@ class SalesController < ApplicationController
 
   # GET /sales/1 or /sales/1.json
   def show
-    @product_sells = @sale.product_sells
+    @product_sells = @sale.product_sells.includes(:buyer, :pack, :product)
     @product_sell = ProductSell.new(sale_id: @sale.id)
     @products = Product.active.order(:name)
     @rate = CurrencyRate.last.rate
-    @sales = @sale.buyer.sales.where.not(id: @sale.id).order(created_at: :desc).page(params[:page]).per(12)
-
+    @sales = @sale.buyer.sales.where.not(id: @sale.id).order(created_at: :desc).page(params[:page]).per(7)
+    @packs = Pack.includes(:product_category).where(active: true).order(:name)
   end
 
   # GET /sales/new

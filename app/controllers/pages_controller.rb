@@ -1,6 +1,5 @@
 class PagesController < ApplicationController
   def main_page
-    # TODO include discount when calculating a remaining balance
     @buyers = Buyer.all.order(active: :desc)
     @providers = Provider.all.order(active: :desc)
   end
