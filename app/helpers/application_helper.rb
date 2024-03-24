@@ -7,22 +7,23 @@ module ApplicationHelper
     end
   end
 
-  def clink_to(title, link, css_class = nil, method = :get)
-    styled_title =
-      css_class.nil? ? t(title) : raw("<i class=\"fa fa-fw #{css_class}\"></i>")
+  def clink_to(title, link, image_name, method = :get)
+    styled_image = image_tag(image_url("#{image_name}.png"), style: 'width: 25px; height: 25px; object-fit: cover;')
     if method == :get
-      link_to styled_title, link, title: title, method: method
+      link_to link, title: title, method: method do
+        styled_image
+      end
     else
-      button_to styled_title, link, title: title, style: 'cursor: pointer; background: none; border: none', method: method
+      button_to link, title: title, style: 'cursor: pointer; background: none; border: none', method: method do
+        styled_image
+      end
     end
   end
 
   def cdlink_to(title, link, icon = "fa-remove", confirm_text = "вы уверены?")
-    button_to icon.blank? ? title : content_tag(:i, "", class: %i[fa fa-fw].push(icon)),
-            link,
-            title: title,
-            style: 'color: blue; cursor: pointer; border: none; background: none',
-            method: :delete, data: { confirm: strip_tags(confirm_text) }
+    button_to link, title: title, style: 'color: blue; cursor: pointer; border: none; background: none', method: :delete, data: { confirm: strip_tags(confirm_text) } do
+      image_tag(image_url("delete.png"), style: 'width: 30px; height: 25px; object-fit: cover;')
+    end
   end
 
   def active_check(active)
