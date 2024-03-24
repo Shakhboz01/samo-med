@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   end
   resources :sales do
     get :pdf_view, on: :collection
+    get :html_view, on: :member
     post :default_create, on: :collection
     post :toggle_status, on: :member
     get :generate_pdf, on: :member
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
   resources :delivery_from_counterparties do
     post :default_create, on: :collection
     post :toggle_status, on: :member
+    get :html_view, on: :member
   end
   resources :product_sells do
     post :ajax_sell_price_request, on: :collection

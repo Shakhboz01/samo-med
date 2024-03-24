@@ -1,5 +1,5 @@
 class SalesController < ApplicationController
-  before_action :set_sale, only: %i[ show edit update destroy toggle_status generate_pdf]
+  before_action :set_sale, only: %i[ show edit update destroy toggle_status generate_pdf html_view]
 
   include Pundit::Authorization
   # GET /sales or /sales.json
@@ -53,7 +53,7 @@ class SalesController < ApplicationController
       if @sale.update(sale_params.merge(
           status: sale_params[:status].to_i
         ))
-        format.html { redirect_to sales_url, notice: "Sale was successfully updated." }
+        format.html { redirect_to html_view_sale_url(@sale) }
         format.json { render :show, status: :ok, location: @sale }
       else
         format.html { redirect_to request.referrer, notice: @sale.errors.messages.values }
@@ -114,6 +114,13 @@ class SalesController < ApplicationController
 
   def pdf_view
     @file_path = params[:file_path]
+  end
+
+  def html_view
+    rate = CurrencyRate.last.rate
+    @total_debt = (@sale.buyer.calculate_debt_in_usd * rate) + @sale.buyer.calculate_debt_in_uzs
+    current_total_price = @sale.total_price - @sale.total_paid
+    @debt_with_exception = @total_debt - current_total_price
   end
 
   private
