@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   end
   resources :sales do
     get :pdf_view, on: :collection
+    get :excel, on: :collection
     get :html_view, on: :member
     post :default_create, on: :collection
     post :toggle_status, on: :member

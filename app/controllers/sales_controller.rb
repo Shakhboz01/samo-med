@@ -112,6 +112,11 @@ class SalesController < ApplicationController
     end
   end
 
+  def excel
+    @sales = Sale.where(id: params[:sales_data][:sale_ids].split(','))
+                 .order(created_at: :desc)
+  end
+
   def pdf_view
     @file_path = params[:file_path]
   end

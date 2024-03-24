@@ -1,0 +1,38 @@
+<div class='container'>
+  <span onclick='window.print()' title='printerda chiqarish'>
+    <%= image_tag image_url('printer.png'), style: 'width: 40px; height: 40px; cursor: pointer' %>
+  </span>
+  <table class='table table-sm table-bordered' style='font-size: small'>
+    <thead>
+      <tr>
+        <th>Tovar nomi</th>
+        <th>Soni</th>
+        <th>Narxi</th>
+        <th>Jami</th>
+      </tr>
+    </thead>
+    <% @sales.each do |sale| %>
+      <% sale.product_sells.includes(:pack).each do |product_sell| %>
+        <tr>
+          <td><%= product_sell.pack.name %></td>
+          <td><%= product_sell.amount %></td>
+          <td><%= num_to_usd(product_sell.sell_price) %></td>
+          <td><%= num_to_usd(product_sell.amount * product_sell.sell_price) %></td>
+        </tr>
+      <% end %>
+
+      <tr class="table-secondary" rowspan="2">
+        <th></th>
+        <th>Jami: <%= num_to_usd(sale.total_price) %></th>
+        <th>To'landi: <%= num_to_usd(sale.total_paid) %></th>
+        <th>Sana: <%= strf_datetime(sale.created_at) %></th>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<script>
+  $(document).ready(function(){
+    window.print();
+  })
+</script>
