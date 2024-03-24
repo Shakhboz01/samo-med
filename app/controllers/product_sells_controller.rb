@@ -36,7 +36,9 @@ class ProductSellsController < ApplicationController
     unless (pack_name = product_sell_params[:pack_name]).empty?
       pack = Pack.create(
         name: pack_name, active: false, sell_price: product_sell_params[:sell_price],
-        buy_price: product_sell_params[:sell_price], code: '1111'
+        buy_price: product_sell_params[:sell_price],
+        code: '1111',
+        product_category: ProductCategory.last
       )
       @product_sell.pack_id = pack.id
     end
