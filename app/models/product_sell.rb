@@ -12,6 +12,7 @@ class ProductSell < ApplicationRecord
   belongs_to :sale
   belongs_to :pack
   belongs_to :product, optional: true
+  has_one :product_category, through: :pack
   has_one :buyer, through: :sale
   has_one :user, through: :sale
   validates_presence_of :amount

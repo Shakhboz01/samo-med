@@ -1,5 +1,18 @@
 <script>
   $(document).ready(function() {
+    function triggerCategoryRowClick(categoryId) {
+      $('.category-row[data-category-id="' + categoryId + '"]').addClass('active-category');
+      $('#product-table tbody tr').each(function() {
+        var productCategoryId = $(this).data('category-id');
+        if (categoryId == productCategoryId) {
+          $(this).show();
+        } else {
+          $(this).hide();
+        }
+      });
+      $('#product_search_input').focus()
+    }
+
     $('.category-row').click(function() {
       $('.category-row').removeClass('active-category');
       $(this).addClass('active-category');
@@ -20,8 +33,14 @@
     $('#eye').on('click', function(){
       $('#product-categories').toggle()
     })
+
+    var value = $('#last-category').val()
+    if (value) {
+      triggerCategoryRowClick(value);
+    }
   });
 </script>
+
 <i class="fa-regular fa-eye" id='eye'></i>
 <div class='row categories' id='product-categories' style='display: none'>
   <div class='col-sm-12'>
