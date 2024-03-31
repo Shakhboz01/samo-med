@@ -1,5 +1,5 @@
 class SalesController < ApplicationController
-  before_action :set_sale, only: %i[ show edit update destroy toggle_status generate_pdf html_view]
+  before_action :set_sale, only: %i[ show edit update destroy toggle_status html_view]
 
   include Pundit::Authorization
   # GET /sales or /sales.json
@@ -98,18 +98,6 @@ class SalesController < ApplicationController
 
     @sale.update(status: @sale.closed? ? 0 : 1)
     redirect_to request.referrer, notice: 'Successfully updated'
-  end
-
-  def generate_pdf
-    authorize Sale, :access?
-
-    pdf_generator = ProductSells::GenerateReceipt.run(sale: @sale)
-    # NOTE I included mime_type.rb to receive pdf
-    respond_to do |format|
-      format.pdf do
-        send_data(pdf_generator.result, filename: "check-#{@sale.id}-#{DateTime.current}", type: 'application/pdf', disposition: 'inline')
-      end
-    end
   end
 
   def excel
