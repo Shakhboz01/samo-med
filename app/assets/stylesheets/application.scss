@@ -40,3 +40,8 @@
   background-color: yellow;
   transition: background-color 2s;
 }
+
+.counterparties-max-height {
+  max-height: 720px;
+  overflow: auto
+}

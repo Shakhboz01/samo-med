@@ -2,8 +2,8 @@
   <div class='col-sm-6 main-page-header'>
     <div>
       <h4 class='text-center'>Mijozlar</h4>
-      <input type='text' placeholder='qidirish' id='searchInput'>
-      <div style="max-height: 720px; overflow: auto">
+      <input class='form-control' type='text' placeholder='qidirish' id='searchInput'>
+      <div class='counterparties-max-height'>
         <%= render 'buyers/buyers', buyers: @buyers, shrink: true %>
       </div>
     </div>
@@ -11,7 +11,7 @@
   <div class='col-sm-6'>
     <div>
       <h4 class='text-center'>Yuk beruvchilar</h4>
-      <div style="max-height: 720px; overflow: auto">
+      <div class='counterparties-max-height'>
         <%= render 'providers/providers', providers: @providers, shrink: true %>
       </div>
     </div>
