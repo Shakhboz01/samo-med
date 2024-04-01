@@ -4,10 +4,20 @@
  *= require_self
 */
 @import "jquery-ui/datepicker";
+.categories span {
+  padding: 5px 10px;
+  border: 1px solid grey;
+  font-size: large;
+  font-weight: bold;
+}
 .categories{
-  max-height: 200px;
+  max-width: 100%;
   overflow: auto;
   background-color: aliceblue;
+  top: 55px;
+  left: 0;
+  display: flex;
+  flex-direction: row;
 }
 .active-category {
   background-color: blue;
@@ -44,4 +54,14 @@
 .counterparties-max-height {
   max-height: 720px;
   overflow: auto
+}
+
+@media screen and (max-width: 1000px){
+  .categories{
+    top: 85px;
+  }
+  .categories span {
+    padding: 4px 8px;
+    font-size: medium;
+  }
 }

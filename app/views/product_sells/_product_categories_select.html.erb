@@ -27,12 +27,8 @@
           $(this).hide();
         }
       });
-      $('#product-categories').toggle();
       $('#product_search_input').focus()
     });
-    $('#eye').on('click', function(){
-      $('#product-categories').toggle()
-    })
 
     var value = $('#last-category').val()
     if (value) {
@@ -41,17 +37,8 @@
   });
 </script>
 
-<i class="fa-regular fa-eye" id='eye'></i>
-<div class='row categories' id='product-categories' style='display: none'>
-  <div class='col-sm-12'>
-    <table class='table table-sm'>
-      <tbody>
-        <% ProductCategory.all.order(:name).each do |category| %>
-          <tr class="category-row" data-category-id="<%= category.id %>">
-            <td><%= category.name %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+<div class='categories' id='product-categories'>
+  <% ProductCategory.all.order(:name).each do |category| %>
+    <span class="category-row" data-category-id="<%= category.id %>"><%= category.name %></span>
+  <% end %>
 </div>

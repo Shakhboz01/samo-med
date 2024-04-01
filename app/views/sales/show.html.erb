@@ -1,3 +1,4 @@
+<%= render 'product_sells/product_categories_select' %>
  <div class='mx-2'>
   <div class="text-centerjustify-content-between align-items-center">
     <h3 class="card-title text-center font-weight-bold" id='pack-name'></h3>
@@ -37,4 +38,4 @@
     <% end %>
   </div>
 </div>
-<input id='last-category' value="<%= @sale.product_sells.last&.product_category&.id %>" >
+<input id='last-category' value="<%= @sale.product_sells.last&.product_category&.id %>" hidden=true >
