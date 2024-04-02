@@ -10,6 +10,9 @@ class Pack < ApplicationRecord
   before_create :set_buy_price
   before_update :send_notify_on_remaining_change, if: :saved_change_to_initial_remaining?
 
+  scope :price_in_uzs, -> { where('price_in_usd = ?', false) }
+  scope :price_in_usd, -> { where('price_in_usd = ?', true) }
+
   attr_accessor :delivery_id
 
   def product_size_colors_attributes=(product_size_colors_attributes)

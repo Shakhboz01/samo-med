@@ -13,7 +13,7 @@
       <% end %>
     </tr>
   </thead>
-  <tbody id='buyers-list'>
+  <tbody style='font-size: large' id='buyers-list'>
     <% buyers.order(:name).each do |buyer| %>
       <tr data-buyer-name="<%= buyer.name %>" class="<%= active_tr(buyer.active) %>">
         <% unless defined?(shrink) %>
