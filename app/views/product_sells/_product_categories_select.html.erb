@@ -15,10 +15,9 @@
 
     $('.category-row').click(function() {
       $('.category-row').removeClass('active-category');
+      $('#product_search_input').focus();
       $(this).addClass('active-category');
-
       var categoryId = $(this).data('category-id');
-
       $('#product-table tbody tr').each(function() {
         var productCategoryId = $(this).data('category-id');
         if (categoryId == productCategoryId) {
@@ -27,8 +26,15 @@
           $(this).hide();
         }
       });
-      $('#product_search_input').focus()
     });
+
+    $('#show-all-products').click(function(){
+      $('.category-row').removeClass('active-category');
+      $(this).addClass('active-category');
+      $('#product-table tbody tr').each(function() {
+        $(this).show();
+      });
+    })
 
     var value = $('#last-category').val()
     if (value) {
@@ -38,6 +44,7 @@
 </script>
 
 <div class='categories' id='product-categories'>
+  <span id="show-all-products" class='category-row active-category'>Все</span>
   <% ProductCategory.all.order(:name).each do |category| %>
     <span class="category-row" data-category-id="<%= category.id %>"><%= category.name %></span>
   <% end %>
