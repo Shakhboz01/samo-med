@@ -62,7 +62,8 @@ class Sale < ApplicationRecord
     return if product_sells.empty?
 
     product_sells.each do |ps|
-      ps.update(price_in_usd: price_in_usd)
+      ps.price_in_usd = price_in_usd
+      ps.save!
     end
 
     self.total_price = product_sells.sum(('sell_price * amount'))

@@ -32,9 +32,9 @@ class Pack < ApplicationRecord
     return sell_price if price_in_usd == in_usd
 
     if in_usd
-      sell_price / rate
+      (sell_price / rate).round(2)
     else
-      sell_price * rate
+      (sell_price * rate).round(2)
     end
   end
 

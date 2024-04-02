@@ -49,16 +49,11 @@ class SalesController < ApplicationController
 
   # PATCH/PUT /sales/1 or /sales/1.json
   def update
-    respond_to do |format|
-      if @sale.update(sale_params.merge(
-          status: sale_params[:status].to_i
-        ))
-        format.html { redirect_to html_view_sale_url(@sale) }
-        format.json { render :show, status: :ok, location: @sale }
-      else
-        format.html { redirect_to request.referrer, notice: @sale.errors.messages.values }
-        format.json { render json: @sale.errors, status: :unprocessable_entity }
-      end
+    currency_was_in_usd = @sale.price_in_usd
+    if @sale.update(sale_params.merge(status: sale_params[:status].to_i))
+      handle_redirect(currency_was_in_usd, @sale.price_in_usd)
+    else
+      redirect_to request.referrer, notice: @sale.errors.messages.values
     end
   end
 
@@ -97,7 +92,7 @@ class SalesController < ApplicationController
     authorize Sale, :manage?
 
     @sale.update(status: @sale.closed? ? 0 : 1)
-    redirect_to request.referrer, notice: 'Successfully updated'
+    redirect_to sale_path(@sale)
   end
 
   def excel
@@ -117,6 +112,15 @@ class SalesController < ApplicationController
   end
 
   private
+
+  def handle_redirect(previous, current)
+    if previous != current
+      # It means, currency is changed
+      redirect_to request.referrer, notice: "Valyuta o'zgartirildi"
+    else
+      redirect_to html_view_sale_url(@sale)
+    end
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_sale

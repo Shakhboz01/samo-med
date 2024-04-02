@@ -129,7 +129,7 @@
         <% @packs.each do |product| %>
           <tr data-category-id="<%= product.product_category.id %>" data-product-sell-price="<%= product.sell_price_based_on_sale_currency(sale_in_usd, rate) %>" data-product-name="<%= product.name %>" data-product-id="<%= product.id %>" class='product_list'>
             <td><%= product.name %></td>
-            <td><%= product.sell_price_based_on_sale_currency(sale_in_usd, rate) %></td>
+            <td><%= currency_convert sale_in_usd, product.sell_price_based_on_sale_currency(sale_in_usd, rate) %></td>
             <td><%= product.initial_remaining %></td>
           </tr>
         <% end %>

@@ -15,6 +15,14 @@
       <%= f.button :submit, 'Sotuvni yakunlash' %>
     </div>
   <% end %>
+</div><br/>
+
+<div class='p-3' style='color: black; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;'>
+  <%= simple_form_for(sale) do |f| %>
+      <%= f.input :price_in_usd, label: false, as: :hidden, input_html: {value: !sale.price_in_usd} %>
+      <%= f.button :submit, 'Valyutani almashtirish', class: 'btn-warning' %>
+    </div>
+  <% end %>
 </div>
 
 <script>
