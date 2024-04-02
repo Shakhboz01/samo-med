@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def main_page
-    @buyers = Buyer.all.order(active: :desc)
-    @providers = Provider.all.order(active: :desc)
+    @buyers = Buyer.where(active: true).order(weight: :desc)
+    @providers = Provider.where(active: true).order(weight: :desc)
   end
 
   def define_sale_destination; end
