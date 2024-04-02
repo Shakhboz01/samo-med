@@ -107,7 +107,7 @@
 
   });
 </script>
-
+<% rate = CurrencyRate.last.rate %>
 <div class='row'>
   <div class='col-sm-12'>
     <div class="form-group decimal required product_sell_amount">
@@ -127,9 +127,9 @@
       </thead>
       <tbody>
         <% @packs.each do |product| %>
-          <tr data-category-id="<%= product.product_category.id %>" data-product-sell-price="<%= product.sell_price %>" data-product-name="<%= product.name %>" data-product-id="<%= product.id %>" class='product_list'>
+          <tr data-category-id="<%= product.product_category.id %>" data-product-sell-price="<%= product.sell_price_based_on_sale_currency(sale_in_usd, rate) %>" data-product-name="<%= product.name %>" data-product-id="<%= product.id %>" class='product_list'>
             <td><%= product.name %></td>
-            <td><%= product.sell_price %></td>
+            <td><%= product.sell_price_based_on_sale_currency(sale_in_usd, rate) %></td>
             <td><%= product.initial_remaining %></td>
           </tr>
         <% end %>

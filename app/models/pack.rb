@@ -28,18 +28,14 @@ class Pack < ApplicationRecord
     remaining_from_entries + initial_remaining
   end
 
-  def break_packs(amount_of_pack_to_break)
-    amount_of_pack_to_break.times do
-      self.product_size_colors.each do |product_size_color|
-        product_size_color.increase_product
-      end
+  def sell_price_based_on_sale_currency(in_usd, rate)
+    return sell_price if price_in_usd == in_usd
+
+    if in_usd
+      sell_price / rate
+    else
+      sell_price * rate
     end
-
-    self.decrement!(:initial_remaining, amount_of_pack_to_break)
-  end
-
-  def restore_packs(amount_of_pack_to_restore)
-    # TODO
   end
 
   private

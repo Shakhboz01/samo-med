@@ -84,7 +84,7 @@ class SalesController < ApplicationController
 
       redirect_to sale_url(last_one), notice: "Теперь добавьте продажу товаров"
     else
-      sfs = Sale.new(buyer: buyer, user: current_user)
+      sfs = Sale.new(buyer: buyer, user: current_user, price_in_usd: ENV.fetch('PRICE_IN_USD'))
       if sfs.save
         redirect_to sale_url(sfs), notice: 'Теперь добавьте продажу товаров'
       else

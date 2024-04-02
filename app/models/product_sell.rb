@@ -6,7 +6,6 @@ class ProductSell < ApplicationRecord
   attr_accessor :initial_remaining
   attr_accessor :remaining_outside_pack
   attr_accessor :barcode
-  attr_accessor :rate
   attr_accessor :min_price_in_usd
 
   belongs_to :sale
@@ -19,9 +18,9 @@ class ProductSell < ApplicationRecord
   enum payment_type: %i[наличные карта click предоплата перечисление дригие]
   scope :price_in_uzs, -> { where('price_in_usd = ?', false) }
   scope :price_in_usd, -> { where('price_in_usd = ?', true) }
-  before_create :increase_amount_sold # TASK 1
-  after_create :increase_total_price_and_send_notify
-  before_destroy :decrease_amount_sold # TASK 2
+  before_create :increase_amount_sold
+  after_create :increase_total_price
+  before_destroy :decrease_amount_sold
   before_destroy :decrease_total_price
 
   scope :price_in_uzs, -> { where('price_in_usd = ?', false) }
@@ -29,12 +28,10 @@ class ProductSell < ApplicationRecord
 
   private
 
-  def increase_total_price_and_send_notify
+  def increase_total_price
     if !sale.nil?
       sale.increment!(:total_price, (sell_price * amount))
     end
-
-    SendMessage.run(message: "Ostatka: #{pack.name} - #{pack.initial_remaining}", chat: 'report')
   end
 
   def decrease_total_price
@@ -51,3 +48,9 @@ class ProductSell < ApplicationRecord
     pack.decrement!(:initial_remaining, amount)
   end
 end
+
+
+# product list select hamxel memonad
+# galochka qati kardan darkor, price_in_usd gufta
+# product_sell.price_in_usd = sale.price_in_usd
+#

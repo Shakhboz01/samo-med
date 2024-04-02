@@ -9,9 +9,6 @@
     $('.products tr').click(function() {
       $('.products tr').removeClass('active');
       $(this).addClass('active');
-      var h1Element = document.querySelector('#pack-name');
-      var selectedProductText = $(this).data('product-name');
-      h1Element.textContent = selectedProductText;
       document.querySelector('#pack-select').value = $(this).data('product-id');
       document.querySelector('#product_sell_sell_price').value = $(this).data('product-sell-price')
 		});
@@ -21,8 +18,6 @@
     });
   })
 </script>
-
-<% rate = CurrencyRate.last.rate %>
 
 <div class='px-3' style='color: black; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;'>
   <%= simple_form_for(product_sell) do |f| %>
@@ -57,9 +52,8 @@
       <div class='product-select-tag'>
         <%= f.input :remaining_outside_pack, label: false, as: :hidden, input_html: { disabled: true } %>
       </div>
-      <%= f.input :rate, as: :hidden, input_html: { value: rate } %>
     </div>
   <% end %>
 
-  <%= render 'product_sells/products_list_select' %>
+  <%= render 'product_sells/products_list_select', sale_in_usd: product_sell.sale.price_in_usd  %>
 </div>
