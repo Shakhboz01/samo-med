@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_06_144156) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_03_161222) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -183,6 +183,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_06_144156) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_owners_operations_on_user_id"
+  end
+
+  create_table "pack_usages", force: :cascade do |t|
+    t.bigint "pack_id", null: false
+    t.decimal "amount", precision: 15, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pack_id"], name: "index_pack_usages_on_pack_id"
   end
 
   create_table "packs", force: :cascade do |t|
@@ -479,6 +487,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_06_144156) do
   add_foreign_key "local_services", "sale_from_local_services"
   add_foreign_key "local_services", "users"
   add_foreign_key "owners_operations", "users"
+  add_foreign_key "pack_usages", "packs"
   add_foreign_key "packs", "product_categories"
   add_foreign_key "participations", "users"
   add_foreign_key "product_entries", "combination_of_local_products"

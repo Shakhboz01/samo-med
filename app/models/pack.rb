@@ -1,7 +1,7 @@
 class Pack < ApplicationRecord
   belongs_to :product_category
   has_many :product_size_colors
-  has_many :product_entries
+  has_many :pack_usages
   has_many :products
   validates :sell_price, comparison: { greater_than: 0 }
   validates :code, presence: true, uniqueness: { scope: [:name], message: "combination already exists" }

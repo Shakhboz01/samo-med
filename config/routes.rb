@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :pack_usages
   resources :product_size_colors
   resources :packs do
     post :toggle_active, on: :member
