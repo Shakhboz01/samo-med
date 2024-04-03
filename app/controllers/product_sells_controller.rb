@@ -77,15 +77,13 @@ class ProductSellsController < ApplicationController
   end
 
   def ajax_sell_price_request
-    return render json: ('Please fill forms') if product_sell_params[:pack_id].empty? || product_sell_params[:amount].to_i.zero?
+    return render json: ('Please fill forms') if product_sell_params[:pack_id].empty?
 
     pack = Pack.find(params[:pack_id])
-    render json:
-            {
-              average_sell_price_in_usd: pack.sell_price,
-              average_sell_price_in_uzs: pack.sell_price,
-              minimum_buy_price_in_usd: pack.sell_price
-            }
+    render json: {
+      sell_price: pack.sell_price.to_i,
+      buy_price: pack.buy_price.to_i
+    }
   end
 
   private
