@@ -1,7 +1,9 @@
 class Pack < ApplicationRecord
   belongs_to :product_category
+  belongs_to :pack_usage, optional: true
   has_many :product_size_colors
   has_many :pack_usages
+  has_many :product_entries
   has_many :products
   validates :sell_price, comparison: { greater_than: 0 }
   validates :code, presence: true, uniqueness: { scope: [:name], message: "combination already exists" }
@@ -39,6 +41,10 @@ class Pack < ApplicationRecord
     else
       (sell_price * rate).round(2)
     end
+  end
+
+  def from_local_production?
+    product_category.weight == 1
   end
 
   private

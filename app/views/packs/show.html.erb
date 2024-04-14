@@ -1,10 +1,2 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @pack %>
-
-<div>
-  <%= link_to "Edit this pack", edit_pack_path(@pack) %> |
-  <%= link_to "Back to packs", packs_path %>
-
-  <%= button_to "Destroy this pack", @pack, method: :delete %>
-</div>
+<%= link_to 'Qo\'shish', new_pack_usage_path(pack_id: @pack.id), class: 'btn btn-success' %>
+<%= render 'pack_usages/pack_usages', pack_usages: @pack.pack_usages %>

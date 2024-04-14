@@ -26,6 +26,9 @@
               <td><%= currency_convert(pack.price_in_usd, pack.sell_price) %></td>
               <td><%= find_by_price(pack) %></td>
               <td>
+                <% if pack.from_local_production? %>
+                  <%= clink_to 'Ko\'rish', pack_path(pack), 'fa-search' %>
+                <% end %>
                 <%= clink_to 'O\'zgartirish', edit_pack_path(pack), 'fa-edit' %>
                 <% if pack.active %>
                   <%= clink_to 'Деактивировать', toggle_active_pack_path(pack), 'fa-ban', :post %>

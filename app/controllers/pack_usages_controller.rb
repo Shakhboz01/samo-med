@@ -12,7 +12,7 @@ class PackUsagesController < ApplicationController
 
   # GET /pack_usages/new
   def new
-    @pack_usage = PackUsage.new
+    @pack_usage = PackUsage.new(pack_id: params[:pack_id])
   end
 
   # GET /pack_usages/1/edit
@@ -25,7 +25,7 @@ class PackUsagesController < ApplicationController
 
     respond_to do |format|
       if @pack_usage.save
-        format.html { redirect_to pack_usage_url(@pack_usage), notice: "Pack usage was successfully created." }
+        format.html { redirect_to pack_url(@pack_usage.pack), notice: "Pack usage was successfully created." }
         format.json { render :show, status: :created, location: @pack_usage }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class PackUsagesController < ApplicationController
     @pack_usage.destroy
 
     respond_to do |format|
-      format.html { redirect_to pack_usages_url, notice: "Pack usage was successfully destroyed." }
+      format.html { redirect_to pack_url(@pack_usage.pack), notice: "Pack usage was successfully created." }
       format.json { head :no_content }
     end
   end
@@ -65,6 +65,8 @@ class PackUsagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def pack_usage_params
-      params.require(:pack_usage).permit(:pack_id, :amount)
+      params.require(:pack_usage).permit(:pack_id, :amount).tap do |whitelisted|
+        whitelisted[:list_of_pack_id] = params[:pack_usage][:list_of_pack_id].to_i if params[:pack_usage][:list_of_pack_id].present?
+      end
     end
 end

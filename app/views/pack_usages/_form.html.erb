@@ -4,8 +4,9 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.association :pack %>
-    <%= f.input :amount %>
+    <%= f.input :pack_id, as: :hidden %>
+    <%= f.input :list_of_pack_id, label: 'Tovar', collection: Pack.pluck(:name, :id) %>
+    <%= f.input :amount, label: 'Soni' %>
   </div>
 
   <div class="form-actions">

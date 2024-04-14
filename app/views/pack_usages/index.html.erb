@@ -5,27 +5,6 @@
       <%= link_to 'Добавить новый', new_pack_usage_path, class: "btn btn-success min-width-btn" %>
     </div>
 
-    <div class="card-body">
-      <table class="table table-hover table-bordered table-striped">
-        <thead>
-          <tr>
-                        <th>Pack</th>
-                        <th>Amount</th>
-                        <th colspan="3"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @pack_usages.each do |pack_usage| %>
-            <tr>
-                              <td><%= pack_usage.pack_id %></td>
-                              <td><%= pack_usage.amount %></td>
-                            <td><%= clink_to 'Посмотреть', pack_usage_path(pack_usage), 'fa-search' %></td>
-              <td><%= clink_to 'Редактировать', edit_pack_usage_path(pack_usage), 'fa-edit' %></td>
-              <td><%= cdlink_to 'удалить', pack_usage %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+    <%= render 'pack_usages', pack_usages: @pack_usages %>
   </div>
 </div>
