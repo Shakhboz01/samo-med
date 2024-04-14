@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'ruby', '~> 3.1.4'
+ruby "3.1.4"
 gem 'kaminari', '~> 1.2'
 gem "ransack"
 gem "byebug"
