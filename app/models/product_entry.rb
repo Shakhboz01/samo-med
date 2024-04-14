@@ -14,7 +14,9 @@ class ProductEntry < ApplicationRecord
   before_validation :set_sell_price
   before_validation :verify_delivery_from_counterparty_is_not_closed
   before_destroy :verify_delivery_from_counterparty_is_not_closed
+  before_destroy :increment_pack_usage
   after_destroy :decrement_pack_remaining
+  before_create :decrement_pack_usage
   after_create :update_delivery_currency
   after_create :increment_pack_remaining
 
@@ -23,6 +25,14 @@ class ProductEntry < ApplicationRecord
   scope :unsold, -> { where('amount > amount_sold') }
 
   private
+
+  def decrement_pack_usage
+    Packs::TogglePackRemaining.run(pack: pack, amount: amount, action: :decrement)
+  end
+
+  def increment_pack_usage
+    Packs::TogglePackRemaining.run(pack: pack, amount: amount, action: :increment)
+  end
 
   def decrement_pack_remaining
       pack.decrement!(:initial_remaining, amount)

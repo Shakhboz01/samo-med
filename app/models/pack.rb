@@ -9,6 +9,7 @@ class Pack < ApplicationRecord
   validates :code, presence: true, uniqueness: { scope: [:name], message: "combination already exists" }
   validates :name, presence: true, uniqueness: { scope: [:code], message: "combination already exists" }
   before_validation :reset_name
+  before_save :say_hi, if: :saved_change_to_initial_remaining?
   before_create :set_buy_price
   before_update :send_notify_on_remaining_change, if: :saved_change_to_initial_remaining?
 

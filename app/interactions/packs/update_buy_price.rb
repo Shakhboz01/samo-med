@@ -30,7 +30,7 @@ module Packs
 
       if pack_usage_in_usd && !pack_price_in_usd
         pack_usage_total_price * rate
-      elsif
+      elsif !pack_usage_in_usd && pack_price_in_usd
         pack_usage_total_price / rate
       end
     end
