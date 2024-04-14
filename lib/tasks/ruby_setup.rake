@@ -1,17 +1,24 @@
-# lib/tasks/ruby_setup.rake
+# lib/tasks/disable_assets_precompile.rake
 
-namespace :ruby do
-  desc "Setup Ruby version"
-  task :setup do
-    ruby_version_file = "/root/.rbenv/version"
+Rake::Task["assets:precompile"].clear
 
-    if File.exist?(ruby_version_file)
-      File.write(ruby_version_file, "3.1.4")
-    else
-      sh "rbenv install 3.1.4"
-      sh "rbenv global 3.1.4"
+namespace :assets do
+  task 'precompile' do
+    puts "Precompiling only assets in config/secrets/ directory..."
+    # Define the directory to precompile assets from
+    assets_directory = Rails.root.join("config/secrets")
+
+    # Get all files in the directory
+    files = Dir.glob("#{assets_directory}/*")
+
+    # Precompile each file
+    files.each do |file|
+      # Check if the file is a regular file (not a directory)
+      if File.file?(file)
+        # Precompile the file
+        puts "Precompiling: #{file}"
+        `RAILS_ENV=#{Rails.env} bundle exec rake assets:precompile:primary RAILS_ASSETS_PRECOMPILE_PATHS=#{file}`
+      end
     end
-
-    sh "gem install bundler:2.5.9"
   end
 end

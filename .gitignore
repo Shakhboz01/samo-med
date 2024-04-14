@@ -30,3 +30,4 @@
 /config/master.key
 /config/storage.yml
 /config/application.yml
+.ruby-version
