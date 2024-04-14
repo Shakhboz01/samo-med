@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     post :toggle_active, on: :member
     get :filtered_packs, on: :collection
     get :calculate_product_remaining, on: :member
+    post :update_buy_price, on: :member
   end
 
   resources :colors

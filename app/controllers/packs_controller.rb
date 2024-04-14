@@ -1,5 +1,5 @@
 class PacksController < ApplicationController
-  before_action :set_pack, only: %i[ toggle_active show edit update destroy calculate_product_remaining]
+  before_action :set_pack, only: %i[ toggle_active show edit update destroy calculate_product_remaining update_buy_price]
 
   def toggle_active
     @pack.toggle(:active).save
@@ -85,6 +85,11 @@ class PacksController < ApplicationController
 
   def calculate_product_remaining
     render json: { calculate_product_remaining: @pack.initial_remaining }
+  end
+
+  def update_buy_price
+    Packs::UpdateBuyPrice.run!(pack: @pack)
+    redirect_to request.referrer, notice: 'Narx o\'zgartirildi'
   end
 
   private
