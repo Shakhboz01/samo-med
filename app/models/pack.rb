@@ -1,4 +1,5 @@
 class Pack < ApplicationRecord
+  has_one_attached :image
   belongs_to :product_category
   belongs_to :pack_usage, optional: true
   has_many :product_size_colors
