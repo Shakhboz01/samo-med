@@ -2,7 +2,7 @@
 # NOTE sell_price buy price might be 0
 class Product < ApplicationRecord
   include ProtectDestroyable
-
+  has_one_attached :image
   belongs_to :color
   belongs_to :pack
   belongs_to :size, optional: true

@@ -6,6 +6,7 @@
     <%= f.input :name, label: 'Название' %>
     <%= f.input :code, input_html: {value: product.persisted? ? product.code : random_code}, label: 'код' %>
     <%= f.input :barcode, input_html: {value: product.persisted? ? product.barcode : random_barcode}, label: 'баркод' %>
+    <%= f.input :image, input_html: { accept: "image/*" }, label: 'Загрузить изображение' %><br/>
   </div>
 
   <div class="form-actions">
