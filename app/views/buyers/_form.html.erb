@@ -4,17 +4,19 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :name, label: 'Ism' %>
-    <%= f.input :phone_number, label: 'Telefon nomer' %>
+    <%= f.input :name, label: 'Имя' %>
+    <%= f.input :phone_number, label: 'Телефон номер' %>
     <% unless buyer.persisted? %>
-      <%= f.input :debt_in_uzs, label: "So'mda qarzi", as: :numeric %>
-      <%= f.input :debt_in_usd, label: false, as: :hidden %>
+      <%= f.input :debt_in_uzs, label: "Долг в сумах", as: :numeric %>
+      <%= f.input :debt_in_usd, label: 'Долг в $', as: :numeric %>
     <% end %>
-    <%= f.input :comment, label: 'Kommentariya' %>
-    <%= f.file_field :image, label: 'Rasm yuklash', accept: 'image/*' %>
+
+    <%= f.input :is_worker, label: 'Бригадер' %>
+    <%= f.input :comment, label: 'Коммент' %>
+    <%= f.file_field :image, label: 'Загрузить изображение', accept: 'image/*' %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, 'Saqlash' %>
+    <%= f.button :submit, 'Сохранить' %>
   </div>
 <% end %>

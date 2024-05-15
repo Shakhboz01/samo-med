@@ -28,6 +28,5 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-/config/storage.yml
 /config/application.yml
 .ruby-version
