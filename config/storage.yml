@@ -13,3 +13,9 @@ google_dev:
   credentials: <%= Rails.root.join("config/secrets/google_key.json") %>
   bucket: bon_samarkand
   cache_control: "public, max-age=3600"
+local:
+    service: GCS
+  project: bon places
+  credentials: <%= Rails.root.join("config/secrets/google_key.json") %>
+  bucket: bon_samarkand
+  cache_control: "public, max-age=3600"
