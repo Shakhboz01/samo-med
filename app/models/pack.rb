@@ -35,13 +35,14 @@ class Pack < ApplicationRecord
     remaining_from_entries + initial_remaining
   end
 
-  def sell_price_based_on_sale_currency(in_usd, rate)
-    return sell_price if price_in_usd == in_usd
+  def sell_price_based_on_sale_currency(in_usd, rate, is_buyer)
+    price = is_buyer ? buy_price : sell_price
+    return price if price_in_usd == in_usd
 
     if in_usd
-      (sell_price / rate).round(2)
+      (price / rate).round(2)
     else
-      (sell_price * rate).round(2)
+      (price * rate).round(2)
     end
   end
 

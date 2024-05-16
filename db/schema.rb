@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_03_161222) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_15_103938) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_03_161222) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "weight", default: 0
+    t.boolean "is_worker", default: false
   end
 
   create_table "colors", force: :cascade do |t|
@@ -329,7 +330,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_03_161222) do
 
   create_table "salaries", force: :cascade do |t|
     t.boolean "prepayment"
-    t.date "month", default: "2024-02-10"
+    t.date "month", default: "2024-05-10"
     t.bigint "team_id"
     t.bigint "user_id"
     t.decimal "price", precision: 10, scale: 2
