@@ -3,7 +3,7 @@
 class ProductEntry < ApplicationRecord
   attr_accessor :barcode
 
-  belongs_to :delivery_from_counterparty
+  belongs_to :delivery_from_counterparty, optional: true
   has_one :provider, through: :delivery_from_counterparty
   has_one :user, through: :delivery_from_counterparty
   belongs_to :pack
@@ -35,10 +35,14 @@ class ProductEntry < ApplicationRecord
   end
 
   def decrement_pack_remaining
-      pack.decrement!(:initial_remaining, amount)
+    return if delivery_from_counterparty.nil?
+
+    pack.decrement!(:initial_remaining, amount)
   end
 
   def increment_pack_remaining
+    return if delivery_from_counterparty.nil?
+
     pack.increment!(:initial_remaining, amount)
   end
 
@@ -49,12 +53,14 @@ class ProductEntry < ApplicationRecord
   end
 
   def verify_delivery_from_counterparty_is_not_closed
-    throw(:abort) if delivery_from_counterparty.closed? && sell_price == sell_price_before_last_save && amount >= amount_sold
+    return if delivery_from_counterparty.nil?
+    return throw(:abort) if delivery_from_counterparty.closed? && sell_price == sell_price_before_last_save && amount >= amount_sold
+
     delivery_from_counterparty.decrement!(:total_price, buy_price)
   end
 
   def update_delivery_currency
-    return if delivery_from_counterparty.price_in_usd == paid_in_usd
+    return if delivery_from_counterparty.nil? || delivery_from_counterparty.price_in_usd == paid_in_usd
 
     delivery_from_counterparty.update(price_in_usd: paid_in_usd)
   end

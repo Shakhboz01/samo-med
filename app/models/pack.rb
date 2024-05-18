@@ -12,6 +12,7 @@ class Pack < ApplicationRecord
   before_validation :reset_name
   before_save :say_hi, if: :saved_change_to_initial_remaining?
   before_create :set_buy_price
+  after_create :create_an_entry
   before_update :send_notify_on_remaining_change, if: :saved_change_to_initial_remaining?
 
   scope :price_in_uzs, -> { where('price_in_usd = ?', false) }
@@ -77,5 +78,16 @@ class Pack < ApplicationRecord
       Edi: #{initial_remaining_was} \n
       Endi: #{initial_remaining_was}"
     )
+  end
+
+  def create_an_entry
+    entry = ProductEntry.new(
+      paid_in_usd: price_in_usd,
+      sell_price: sell_price,
+      buy_price: buy_price,
+      amount: initial_remaining,
+      pack: self
+    )
+    entry.save(:validate => false)
   end
 end

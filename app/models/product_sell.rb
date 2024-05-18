@@ -20,7 +20,10 @@ class ProductSell < ApplicationRecord
   scope :price_in_usd, -> { where('price_in_usd = ?', true) }
   before_save :change_sell_price_based_on_currency
   before_create :increase_amount_sold_and_check_currency
+  after_create :enqueue_perform_sell
+  before_update :enqueue_handle_update_if_needed
   after_create :increase_total_price
+  before_destroy :enqueue_handle_deletion
   before_destroy :decrease_amount_sold
   before_destroy :decrease_total_price
 
@@ -28,6 +31,20 @@ class ProductSell < ApplicationRecord
   scope :price_in_usd, -> { where('price_in_usd = ?', true) }
 
   private
+
+  def enqueue_perform_sell
+    ProductSellJob.perform_later(id, 'perform_sell')
+  end
+
+  def enqueue_handle_update_if_needed
+    if price_in_usd_changed?
+      ProductSellJob.perform_later(id, 'handle_update')
+    end
+  end
+
+  def enqueue_handle_deletion
+    ProductSells::HandleDelete.run(id: id)
+  end
 
   def increase_total_price
     if !sale.nil?

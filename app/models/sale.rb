@@ -1,5 +1,4 @@
 class Sale < ApplicationRecord
-  include HandleTransactionHistory
   attr_accessor :discount_price
   belongs_to :buyer
   belongs_to :user
