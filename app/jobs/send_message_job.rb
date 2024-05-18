@@ -1,10 +1,10 @@
 require "telegram/bot"
 
-class SendMessage < ActiveInteraction::Base
-  string :message
-  string :chat, default: 'tech'
+# app/jobs/send_message_job.rb
+class SendMessageJob < ApplicationJob
+  queue_as :default
 
-  def execute
+  def perform(message, chat = 'tech')
     token = ENV["TELEGRAM_TOKEN"]
     bot = Telegram::Bot::Client.new(token)
     chat_id =
@@ -15,15 +15,16 @@ class SendMessage < ActiveInteraction::Base
         ENV["TELEGRAM_WARNING_CHAT_ID"]
       when 'report'
         ENV["TELEGRAM_REPORT_CHAT_ID"]
+      when 'agent'
+        ENV["TELEGRAM_AGENT_CHAT_ID"]
       end
     begin
       bot.api.send_message(
-        chat_id: ENV["TELEGRAM_CHAT_ID"],
+        chat_id: chat_id,
         text: message,
         parse_mode: "HTML",
         disable_web_page_preview: 1
       )
-
     rescue => exception
       puts "error"
     end
