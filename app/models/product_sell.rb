@@ -18,10 +18,9 @@ class ProductSell < ApplicationRecord
   enum payment_type: %i[наличные карта click предоплата перечисление дригие]
   scope :price_in_uzs, -> { where('price_in_usd = ?', false) }
   scope :price_in_usd, -> { where('price_in_usd = ?', true) }
-  before_save :change_sell_price_based_on_currency
+  before_save :change_price_based_on_currency
   before_create :increase_amount_sold_and_check_currency
   after_create :enqueue_perform_sell
-  before_update :enqueue_handle_update_if_needed
   after_create :increase_total_price
   before_destroy :enqueue_handle_deletion
   before_destroy :decrease_amount_sold
@@ -34,12 +33,6 @@ class ProductSell < ApplicationRecord
 
   def enqueue_perform_sell
     ProductSellJob.perform_later(id, 'perform_sell')
-  end
-
-  def enqueue_handle_update_if_needed
-    if price_in_usd_changed?
-      ProductSellJob.perform_later(id, 'handle_update')
-    end
   end
 
   def enqueue_handle_deletion
@@ -67,14 +60,18 @@ class ProductSell < ApplicationRecord
     pack.decrement!(:initial_remaining, amount)
   end
 
-  def change_sell_price_based_on_currency
+  def change_price_based_on_currency
     return if price_in_usd == price_in_usd_was
 
     rate = CurrencyRate.last.rate
     if price_in_usd_was
       self.sell_price = (rate * sell_price).round(2)
+      self.buy_price = (rate * buy_price).round(2)
+      self.total_profit = (rate * total_profit).round(2)
     else
       self.sell_price = (sell_price / rate).round(2)
+      self.buy_price = (buy_price / rate).round(2)
+      self.total_profit = (total_profit / rate).round(2)
     end
   end
 end

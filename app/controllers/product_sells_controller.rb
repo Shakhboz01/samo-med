@@ -45,7 +45,7 @@ class ProductSellsController < ApplicationController
 
     respond_to do |format|
       if @product_sell.save
-        format.html { redirect_to request.referrer, notice: "Product sell was successfully created." }
+        format.html { redirect_to request.referrer }
         format.json { render :show, status: :created, location: @product_sell }
       else
         format.html { redirect_to request.referrer, notice: @product_sell.errors.messages.values.join("\n") }
@@ -58,7 +58,7 @@ class ProductSellsController < ApplicationController
   def update
     respond_to do |format|
       if @product_sell.update(product_sell_params)
-        format.html { redirect_to product_sell_url(@product_sell), notice: "Product sell was successfully updated." }
+        format.html { redirect_to product_sell_url(@product_sell) }
         format.json { render :show, status: :ok, location: @product_sell }
       else
         format.html { render :edit, product_sell: @product_sell, status: :unprocessable_entity }

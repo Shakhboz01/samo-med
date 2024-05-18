@@ -14,7 +14,7 @@ class ProductSellJob < ApplicationJob
     sell_amount = product_sell.amount
 
     ActiveRecord::Base.transaction do
-      total_buy_price = 0
+      total_buy_price_usd = 0
       total_sell_price = 0
       total_profit = 0
       usd_to_uzs_rate = CurrencyRate.last.rate
@@ -28,31 +28,37 @@ class ProductSellJob < ApplicationJob
         available_amount = entry.amount - entry.amount_sold
         amount_to_sell = [available_amount, remaining_amount].min
 
-        buy_price = entry.buy_price
-        sell_price = product_sell.price_in_usd ? product_sell.sell_price : product_sell.sell_price / usd_to_uzs_rate.to_f
+        buy_price_usd = entry.paid_in_usd ? entry.buy_price : entry.buy_price / usd_to_uzs_rate
+        sell_price_usd = product_sell.price_in_usd ? product_sell.sell_price : product_sell.sell_price / usd_to_uzs_rate.to_f
 
-        total_buy_price += buy_price * amount_to_sell
-        total_sell_price += sell_price * amount_to_sell
-        total_profit += (sell_price - buy_price) * amount_to_sell
+        total_buy_price_usd += buy_price_usd * amount_to_sell
+        total_sell_price += sell_price_usd * amount_to_sell
+        total_profit += (sell_price_usd - buy_price_usd) * amount_to_sell
 
         entry.update!(amount_sold: entry.amount_sold + amount_to_sell)
         remaining_amount -= amount_to_sell
       end
 
       if remaining_amount > 0
-        last_entry = product_entries.last || create_placeholder_entry(pack.id, product_sell)
-        buy_price = last_entry.buy_price
-        sell_price = product_sell.price_in_usd ? product_sell.sell_price : product_sell.sell_price / usd_to_uzs_rate
+        last_entry = product_entries.last
+        buy_price_usd = last_entry.paid_in_usd ? last_entry.buy_price : last_entry.buy_price / usd_to_uzs_rate
+        sell_price_usd = product_sell.price_in_usd ? product_sell.sell_price : product_sell.sell_price / usd_to_uzs_rate
 
-        total_buy_price += buy_price * remaining_amount
-        total_sell_price += sell_price * remaining_amount
-        total_profit += (sell_price - buy_price) * remaining_amount
+        total_buy_price_usd += buy_price_usd * remaining_amount
+        total_sell_price += sell_price_usd * remaining_amount
+        total_profit += (sell_price_usd - buy_price_usd) * remaining_amount
 
         last_entry.update!(amount_sold: last_entry.amount_sold + remaining_amount)
       end
 
+      unless product_sell.price_in_usd
+        total_buy_price_usd *= usd_to_uzs_rate
+        total_sell_price *= usd_to_uzs_rate
+        total_profit *= usd_to_uzs_rate
+      end
+
       product_sell.update!(
-        buy_price: total_buy_price / sell_amount,
+        buy_price: total_buy_price_usd / sell_amount,
         sell_price: total_sell_price / sell_amount,
         total_profit: total_profit
       )
@@ -61,48 +67,5 @@ class ProductSellJob < ApplicationJob
   rescue => e
     # Handle exceptions, possibly logging the error or notifying
     puts "Error: #{e.message}"
-  end
-
-  def handle_update(product_sell)
-    if product_sell.price_in_usd_changed?
-      handle_deletion(product_sell)
-      perform_sell(product_sell)
-    end
-  end
-
-  def handle_deletion(product_sell)
-    pack = product_sell.pack
-    usd_to_uzs_rate = CurrencyRate.last.rate
-
-    ActiveRecord::Base.transaction do
-      remaining_amount = product_sell.amount
-
-      product_entries = ProductEntry.where(pack_id: pack.id).order(created_at: :desc)
-
-      product_entries.each do |entry|
-        break if remaining_amount <= 0
-
-        amount_to_revert = [entry.amount_sold, remaining_amount].min
-
-        entry.update!(amount_sold: entry.amount_sold - amount_to_revert)
-        remaining_amount -= amount_to_revert
-      end
-
-    end
-  rescue => e
-    # Handle exceptions, possibly logging the error or notifying
-    puts "Error: #{e.message}"
-  end
-
-  def create_placeholder_entry(pack_id, product_sell)
-    # Create a placeholder entry with buy_price and sell_price as per pack or product_sell
-    ProductEntry.create!(
-      pack_id: pack_id,
-      buy_price: pack.buy_price,
-      sell_price: pack.sell_price,
-      amount: 0,
-      amount_sold: 0,
-      paid_in_usd: pack.price_in_usd
-    )
   end
 end

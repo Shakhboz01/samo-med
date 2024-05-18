@@ -58,7 +58,7 @@ class Sale < ApplicationRecord
   end
 
   def update_product_sales_currencies
-    return if product_sells.empty?
+    return if product_sells.empty? || !price_in_usd_changed?
 
     product_sells.each do |ps|
       ps.price_in_usd = price_in_usd
