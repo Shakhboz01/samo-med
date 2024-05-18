@@ -1,5 +1,5 @@
 class PacksController < ApplicationController
-  before_action :set_pack, only: %i[ toggle_active show edit update destroy calculate_product_remaining update_buy_price]
+  before_action :set_pack, only: %i[ product_entries toggle_active show edit update destroy calculate_product_remaining update_buy_price]
 
   def toggle_active
     @pack.toggle(:active).save
@@ -90,6 +90,15 @@ class PacksController < ApplicationController
   def update_buy_price
     Packs::UpdateBuyPrice.run!(pack: @pack)
     redirect_to request.referrer, notice: 'Narx o\'zgartirildi'
+  end
+
+  def product_entries
+    entries = @pack.product_entries.where('amount > amount_sold').order(created_at: :asc)
+    @product_entries = entries.map { |entry| {
+      ostatok: entry.amount - entry.amount_sold,
+      buy_price: "#{entry.buy_price} #{entry.paid_in_usd ? '$' : 'uzs'}"
+    } }
+    render json: @product_entries
   end
 
   private

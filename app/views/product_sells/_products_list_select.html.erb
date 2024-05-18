@@ -105,8 +105,25 @@
       }
     });
 
+    // Function to handle click on product icon
+    function handleProductIconClick(product) {
+      const productId = product.dataset.productId;
+      // Send JSON request to fetch data
+      $.getJSON(`/packs/${productId}/product_entries.json`, function(data) {
+        // Display data in alert
+        alert(JSON.stringify(data));
+      });
+    }
+
+    // Event listener for product icon click
+    $('.product_icon').on('click', function() {
+      const product = $(this).closest('.product_list')[0];
+      handleProductIconClick(product);
+    });
+
   });
 </script>
+
 <% rate = CurrencyRate.last.rate %>
 <div class='row'>
   <div class='col-sm-12'>
@@ -133,7 +150,9 @@
                 <div class='pack-image'>
                   <%= image_tag product.image %>
                 </div>
-              <% end %>  <%= product.name %>
+              <% end %>
+              <%= product.name %>
+              <i class="fas fa-info-circle product_icon" style="cursor: pointer;"></i>
             </td>
             <td><%= currency_convert sale_in_usd, product.sell_price_based_on_sale_currency(sale_in_usd, rate, @sale.buyer.is_worker) %></td>
             <td><%= product.initial_remaining %></td>
