@@ -6,6 +6,7 @@
         <div class="card-body">
           <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form' }) do |f| %>
             <div class="form-group">
+              <%= f.input :telegram_chat_id, label: false, as: :hidden, input_html: { value: params[:telegram_chat_id] } %>
               <%= f.input :email,
                           required: false,
                           autofocus: true,
