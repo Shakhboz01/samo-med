@@ -43,7 +43,7 @@ Thread.new do
               buyers = Buyer.where('LOWER(name) LIKE ?', "%#{message.text.downcase}%")
               if buyers.any?
                 buyers.each do |buyer|
-                  bot.api.send_message(chat_id: id, text: "Buyer: #{buyer.name}, Phone: #{buyer.phone_number}", reply_markup: start_keyboard)
+                  bot.api.send_message(chat_id: id, text: "Mijoz: #{buyer.name}, Telefon: #{buyer.phone_number}, Qarzi: #{buyer.calculate_debt_in_usd}$ | #{buyer.calculate_debt_in_uzs}", reply_markup: start_keyboard)
                 end
               else
                 bot.api.send_message(chat_id: id, text: "Topilmadi.", reply_markup: start_keyboard)
@@ -52,7 +52,7 @@ Thread.new do
               packs = Pack.active.where('LOWER(name) LIKE ?', "%#{message.text.downcase}%")
               if packs.any?
                 packs.each do |pack|
-                  bot.api.send_message(chat_id: id, text: "Pack: #{pack.name}, Code: #{pack.code}, Price: #{pack.sell_price}", reply_markup: start_keyboard)
+                  bot.api.send_message(chat_id: id, text: "Tovar: #{pack.name}, Kod: #{pack.code}, Narx: #{pack.sell_price}, Ostatka: #{pack.initial_remaining}", reply_markup: start_keyboard)
                 end
               else
                 bot.api.send_message(chat_id: id, text: "Topilmadi.", reply_markup: start_keyboard)
