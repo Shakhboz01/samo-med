@@ -22,6 +22,7 @@
           <tr>
             <th></th>
             <th>Umumiy savdo narxi</th>
+            <th>Umumiy foyda</th>
             <th>To'langan summa</th>
             <th>Mijozlar yana to'lashi lozim bo'lgan summa</th>
           </tr>
@@ -30,12 +31,14 @@
           <tr>
             <th>So'mda</th>
             <td><%= num_to_usd(@sales_data.price_in_uzs.sum(:total_price)) %></td>
+            <td><%= num_to_usd(@total_profit_in_uzs) if policy(Sale.last).profit? %></td>
             <td><%= num_to_usd @sales_data.price_in_uzs.sum(:total_paid) %></td>
             <td><%= num_to_usd(@sales_data.price_in_uzs.sum(:total_price) - @sales_data.price_in_uzs.sum(:total_paid)) %></td>
           </tr>
           <tr>
             <th>Dollarda</th>
             <td><%= number_to_currency @sales_data.price_in_usd.sum(:total_price) %></td>
+            <td><%= number_to_currency(@total_profit_in_usd) if policy(Sale.last).profit? %></td>
             <td><%= number_to_currency @sales_data.price_in_usd.sum(:total_paid) %></td>
             <td><%= number_to_currency(@sales_data.price_in_usd.sum(:total_price) - @sales_data.price_in_usd.sum(:total_paid)) %></td>
           </tr>

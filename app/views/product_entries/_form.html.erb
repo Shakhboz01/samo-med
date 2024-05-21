@@ -16,6 +16,9 @@
       <%= f.input :buy_price, label: 'Kelish narxi (1 dona/kv) :', input_html: {id: 'product_entry_buy_price'} %>
       <%= f.input :sell_price, label: 'Sotish narxi', input_html: {id: 'product_entry_sell_price'} %>
       <%= f.input :price_in_percentage, label: false, as: :hidden, input_html: {id: 'product_entry_price_in_percentage', value: defined?(price_in_percentage) ? price_in_percentage : 0} %>
+      <% if ENV.fetch('HAS_LOCAL_ENTRY') %>
+        <%= f.association :user, label: 'Ishchini tanlang(agar o\'zimizning maxsulot bo\'lsa)', collection: User.active.order(:name).pluck(:name, :id), input_html: {id: 'product_entry_price_in_percentage', value: defined?(price_in_percentage) ? price_in_percentage : 0} %>
+      <% end %>
       <%= f.button :submit, 'Sotib olish', class: 'btn btn-warning' %>
     </div>
   <% end %>

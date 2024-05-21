@@ -8,6 +8,12 @@
           <%= f.label :pack_id_eq, 'tovar:', class: 'control-label' %>
           <%= f.select :pack_id_eq, Pack.pluck(:name, :id), { include_blank: true }, class: 'form-control' %>
         </div>
+        <% if ENV.fetch('HAS_LOCAL_ENTRY') %>
+          <div class="form-group col-xs-12 col-sm-2">
+            <%= f.label :user_id_eq, 'Ishchi:', class: 'control-label' %>
+            <%= f.select :user_id_eq, User.pluck(:name, :id), { include_blank: true }, class: 'form-control' %>
+          </div>
+        <% end %>
         <div class="form-group col-xs-12 col-sm-2">
           <%= f.label :created_at_gteq, 'Dan:', class: 'control-label' %>
           <%= f.text_field :created_at_gteq, value: @q.created_at_gteq, class: 'datepicker form-control', autocomplete: :off %>

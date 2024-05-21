@@ -7,12 +7,14 @@
       <% end %>
       <th><%= sort_link q, :buy_price, 'Kelish narxi' %></th>
       <th><%= sort_link q, :buy_price, 'Sotish narxi' %></th>
-      <th>Jami</th>
-      <th>Tovar</th>
       <th><%= sort_link q, :amount, 'Soni' %></th>
-      <th><%= sort_link q, :amount, 'Sotildi' %></th>
+      <th>Tovar</th>
       <% unless defined?(shrink) %>
+        <th><%= sort_link q, :amount_sold, 'Sotildi' %></th>
         <th><%= sort_link q, :created_at, 'kelgan sana' %></th>
+      <% end %>
+      <% if ENV.fetch('HAS_LOCAL_ENTRY') %>
+        <th>Ishchi</th>
       <% end %>
       <th colspan="3"></th>
     </tr>
@@ -32,11 +34,14 @@
           <%= currency_convert(product_entry.paid_in_usd, product_entry.sell_price) %> |
           <%= currency_convert(product_entry.paid_in_usd, product_entry.amount * product_entry.sell_price) %>
         </td>
-        <td><%= product_entry.pack.name %></td>
         <td><%= product_entry.amount %></td>
-        <td><%= product_entry.amount_sold %></td>
+        <td><%= product_entry.pack.name %></td>
         <% unless defined?(shrink) %>
+          <td><%= product_entry.amount_sold %></td>
           <td><%= strf_datetime(product_entry.created_at) %></td>
+        <% end %>
+        <% if ENV.fetch('HAS_LOCAL_ENTRY') %>
+          <td><%= product_entry&.user&.name %></td>
         <% end %>
         <td>
           <% unless defined?(shrink) %>

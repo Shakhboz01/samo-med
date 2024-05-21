@@ -7,6 +7,7 @@ class ProductEntry < ApplicationRecord
   has_one :provider, through: :delivery_from_counterparty
   has_one :user, through: :delivery_from_counterparty
   belongs_to :pack
+  belongs_to :user, optional: true
 
   validates :amount, comparison: { greater_than: 0 }
   validates_presence_of :buy_price

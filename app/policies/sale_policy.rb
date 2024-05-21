@@ -6,4 +6,8 @@ class SalePolicy < ApplicationPolicy
   def manage?
     user_is_accaontant?
   end
+
+  def profit?
+    user_is_manager?
+  end
 end

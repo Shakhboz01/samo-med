@@ -25,6 +25,9 @@
         <th>Soni</th>
         <th>Narxi</th>
         <th>Jami</th>
+        <% unless defined?(shrink) && policy(Sale.last).profit? %>
+          <th>Jami foyda</th>
+        <% end %>
         <% unless defined?(shrink) %>
           <th>Sotilgan sana</th>
         <% end %>

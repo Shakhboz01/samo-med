@@ -5,7 +5,7 @@ class ProductEntriesController < ApplicationController
   # GET /product_entries or /product_entries.json
   def index
     @q = ProductEntry.ransack(params[:q])
-    @product_entries = @q.result.includes(:pack).order(created_at: :desc)
+    @product_entries = @q.result.includes(:pack, :user).order(created_at: :desc)
     @product_entries_data = @product_entries
     @product_entries = @product_entries.page(params[:page]).per(70)
   end
@@ -88,6 +88,6 @@ class ProductEntriesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def product_entry_params
-    params.require(:product_entry).permit(:local_entry, :product_code, :product_category, :buy_price, :sell_price, :price_in_percentage, :delivery_from_counterparty_id, :pack_id, :storage_id, :service_price, :provider_id, :amount, :amount_sold, :total_paid, :total_price, :comment, :return)
+    params.require(:product_entry).permit(:local_entry, :product_code, :product_category, :buy_price, :sell_price, :user_id, :price_in_percentage, :delivery_from_counterparty_id, :pack_id, :storage_id, :service_price, :provider_id, :amount, :amount_sold, :total_paid, :total_price, :comment, :return)
   end
 end
