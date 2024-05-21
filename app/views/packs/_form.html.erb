@@ -12,6 +12,7 @@
           <%= link_to "добавить новую папку", new_product_category_path %>
         </div>
         <%= f.input :initial_remaining, label: 'Остаток' %>
+        <%= f.input :unit, label: 'Единица измерения' %>
         <%= f.input :price_in_usd, label: 'В долларах', input_html: {checked: ENV.fetch('PRICE_IN_USD') == 'true'} %>
         <%= f.input :sell_price, label: 'Цена продажи (1 шт)' %>
         <%= f.input :buy_price, label: 'Цена прихода (1 шт)' %>
