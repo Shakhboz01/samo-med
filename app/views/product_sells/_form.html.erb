@@ -1,58 +1,60 @@
-<script>
-  $(document).on('turbo:load',function() {
-    $('#add_manually').click(function(){
-      $('#pack_name').toggle();
-      $('.pack-select').toggle();
-    });
+<% cache ['products_list', @packs.maximum(:updated_at)] do %>
+  <script>
+    $(document).on('turbo:load',function() {
+      $('#add_manually').click(function(){
+        $('#pack_name').toggle();
+        $('.pack-select').toggle();
+      });
 
-    $("#product_search_input").focus();
-    $('.products tr').click(function() {
-      $('.products tr').removeClass('active');
-      $(this).addClass('active');
-      document.querySelector('#pack-select').value = $(this).data('product-id');
-      document.querySelector('#product_sell_sell_price').value = $(this).data('product-sell-price')
-		});
-    $('.product-select-tag').hide();
-    $("input").focus(function() {
-      $(this).select();
-    });
-  })
-</script>
+      $("#product_search_input").focus();
+      $('.products tr').click(function() {
+        $('.products tr').removeClass('active');
+        $(this).addClass('active');
+        document.querySelector('#pack-select').value = $(this).data('product-id');
+        document.querySelector('#product_sell_sell_price').value = $(this).data('product-sell-price')
+      });
+      $('.product-select-tag').hide();
+      $("input").focus(function() {
+        $(this).select();
+      });
+    })
+  </script>
 
-<div class='px-3' style='color: black; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;'>
-  <%= simple_form_for(product_sell) do |f| %>
-    <div class='form-inputs'>
-      <%= f.error_notification %>
-      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-      <%= f.association :sale, as: :hidden %>
-      <%= f.input :sell_by_piece, label: false, as: :hidden %>
-      <div class='row'>
-        <div class='col-sm-8'>
-          <div class='pack-select'>
-            <%= f.association :pack, label: false, collection: Pack.where(active: true).order(:name), include_blank: true, input_html: { hidden: true, id: 'pack-select' } %>
-          </div>
-          <div id='pack_name' style='display: none'>
-            <%= f.input :pack_name, label: t('pack_name_label') %>
+  <div class='px-3' style='color: black; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;'>
+    <%= simple_form_for(product_sell) do |f| %>
+      <div class='form-inputs'>
+        <%= f.error_notification %>
+        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+        <%= f.association :sale, as: :hidden %>
+        <%= f.input :sell_by_piece, label: false, as: :hidden %>
+        <div class='row'>
+          <div class='col-sm-8'>
+            <div class='pack-select'>
+              <%= f.association :pack, label: false, collection: Pack.where(active: true).order(:name), include_blank: true, input_html: { hidden: true, id: 'pack-select' } %>
+            </div>
+            <div id='pack_name' style='display: none'>
+              <%= f.input :pack_name, label: t('pack_name_label') %>
+            </div>
           </div>
         </div>
-      </div>
-      <div class='product-select-tag'>
-        <%= f.association :product, label: t('product_select_label'), as: :hidden, collection: Product.all.order('LOWER(name) ASC'), include_blank: false, input_html: { id: 'product-select', placeholder: t('product_placeholder') } %>
-      </div>
-      <div class='row'>
-        <div class='col-sm-4'><%= f.input :amount, label: t('amount_label'), input_html: {value: 1} %></div>
-        <div class='col-sm-4'><%= f.input :sell_price, label: t('price_per_unit_label') %></div>
-        <div class='col-sm-4 align-self-center'>
-          <%= f.submit t('sell_button_label'), class: 'btn btn-primary'%><br/>
+        <div class='product-select-tag'>
+          <%= f.association :product, label: t('product_select_label'), as: :hidden, collection: Product.all.order('LOWER(name) ASC'), include_blank: false, input_html: { id: 'product-select', placeholder: t('product_placeholder') } %>
+        </div>
+        <div class='row'>
+          <div class='col-sm-4'><%= f.input :amount, label: t('amount_label'), input_html: {value: 1} %></div>
+          <div class='col-sm-4'><%= f.input :sell_price, label: t('price_per_unit_label') %></div>
+          <div class='col-sm-4 align-self-center'>
+            <%= f.submit t('sell_button_label'), class: 'btn btn-primary'%><br/>
+          </div>
+        </div>
+        <%= f.input :min_price_in_usd, label: false, as: :hidden, input_html: { disabled: true } %>
+        <%= f.input :initial_remaining, label: false, input_html: { disabled: true, hidden: true } %>
+        <div class='product-select-tag'>
+          <%= f.input :remaining_outside_pack, label: false, as: :hidden, input_html: { disabled: true } %>
         </div>
       </div>
-      <%= f.input :min_price_in_usd, label: false, as: :hidden, input_html: { disabled: true } %>
-      <%= f.input :initial_remaining, label: false, input_html: { disabled: true, hidden: true } %>
-      <div class='product-select-tag'>
-        <%= f.input :remaining_outside_pack, label: false, as: :hidden, input_html: { disabled: true } %>
-      </div>
-    </div>
-  <% end %>
+    <% end %>
 
-  <%= render 'product_sells/products_list_select', sale_in_usd: product_sell.sale.price_in_usd  %>
-</div>
+    <%= render 'product_sells/products_list_select', sale_in_usd: product_sell.sale.price_in_usd, cached: true  %>
+  </div>
+<% end %>

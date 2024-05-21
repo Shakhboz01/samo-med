@@ -115,49 +115,13 @@
       });
     }
 
+    // Remove any existing click handlers to avoid multiple bindings
+    $('.product_icon').off('click');
+
     // Event listener for product icon click
     $('.product_icon').on('click', function() {
       const product = $(this).closest('.product_list')[0];
       handleProductIconClick(product);
     });
-
   });
 </script>
-
-<% rate = CurrencyRate.last.rate %>
-<div class='row'>
-  <div class='col-sm-12'>
-    <div class="form-group decimal required product_sell_amount">
-      <input class="form-control text required"  type="text" id="product_search_input" placeholder='Qidirish' autocomplete="off" style='box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;'/>
-    </div>
-  </div>
-</div>
-<div style='max-height: 650px; overflow: auto' class='row'>
-  <div id='products-list' class='col-sm-12 products'>
-    <table class='table table-sm' id="product-table">
-      <thead>
-        <tr>
-          <th>Товар</th>
-          <th>Цена</th>
-          <th>Остатка</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @packs.each do |product| %>
-          <tr data-category-id="<%= product.product_category.id %>" data-product-sell-price="<%= product.sell_price_based_on_sale_currency(sale_in_usd, rate, @sale.buyer.is_worker) %>" data-product-name="<%= product.name %>" data-product-id="<%= product.id %>" class='product_list'>
-            <td class='d-flex align-items-center'>
-              <% if product.image.persisted? %>
-                <div class='pack-image'>
-                  <%= image_tag product.image %>
-                </div>
-              <% end %>
-              <%= product.name %>  <i class="fas fa-info-circle product_icon" style="cursor: pointer;"></i>
-            </td>
-            <td><%= currency_convert sale_in_usd, product.sell_price_based_on_sale_currency(sale_in_usd, rate, @sale.buyer.is_worker) %></td>
-            <td><%= product.initial_remaining %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
