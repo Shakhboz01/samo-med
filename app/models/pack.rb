@@ -8,8 +8,7 @@ class Pack < ApplicationRecord
   has_many :products
   enum unit: %i[шт кг метр кв другой]
   validates :sell_price, comparison: { greater_than: 0 }
-  validates :code, presence: true, uniqueness: { scope: [:name], message: "combination already exists" }
-  validates :name, presence: true, uniqueness: { scope: [:code], message: "combination already exists" }
+  validates :name, presence: true, uniqueness: true
   before_validation :reset_name
   before_save :say_hi, if: :saved_change_to_initial_remaining?
   before_create :set_buy_price
