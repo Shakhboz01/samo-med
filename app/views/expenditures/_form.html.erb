@@ -5,14 +5,14 @@
   <div class="form-inputs">
     <%= f.association :combination_of_local_product, as: :hidden %>
     <%= f.association :delivery_from_counterparty, as: :hidden %>
-    <%= f.input :payment_type, label: 'Tolov turini tanlang', collection: Expenditure.payment_types.keys.map { |unit| [Expenditure.human_attribute_name("unit.#{unit}"), unit] }, include_blank: false %>
-    <%= f.input :price_in_usd, label: 'Dollarda', input_html: {checked: ENV.fetch('PRICE_IN_USD') == 'true'} %>
-    <%= f.input :price, as: :numeric, label: 'Narxni kiriting:' %>
-    <%= f.input :expenditure_type, label: 'xarajat turini tanlang', collection: Expenditure.expenditure_types.keys.map { |unit| [Expenditure.human_attribute_name("unit.#{unit}"), unit] }, include_blank: false %>
-    <%= f.input :comment, label: 'Kommentariya', input_html: { placeholder: 'Shart emas' } %>
+    <%= f.input :payment_type, label: t('expenditures.form.select_payment_type'), collection: Expenditure.payment_types.keys.map { |unit| [Expenditure.human_attribute_name("unit.#{unit}"), unit] }, include_blank: false, class: 'form-control' %>
+    <%= f.input :price_in_usd, label: t('expenditures.form.in_usd'), input_html: { checked: ENV.fetch('PRICE_IN_USD') == 'true' }, class: 'form-control' %>
+    <%= f.input :price, as: :numeric, label: t('expenditures.form.enter_price'), class: 'form-control' %>
+    <%= f.input :expenditure_type, label: t('expenditures.form.select_expenditure_type'), collection: Expenditure.expenditure_types.keys.map { |unit| [Expenditure.human_attribute_name("unit.#{unit}"), unit] }, include_blank: false, class: 'form-control' %>
+    <%= f.input :comment, label: t('expenditures.form.comment'), input_html: { placeholder: t('expenditures.form.optional') }, class: 'form-control' %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, 'Xarajat amalga oshirish' %>
+    <%= f.button :submit, t('expenditures.form.submit'), class: 'btn btn-primary' %>
   </div>
 <% end %>

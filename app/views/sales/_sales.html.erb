@@ -1,18 +1,18 @@
 <table class="table table-hover table-bordered table-striped">
   <thead>
     <tr>
-      <th>ID</th>
+      <th><%= t('sales.id') %></th>
       <% unless defined?(shrink) %>
-        <td>Qulflangan</td>
+        <td><%= t('sales.locked') %></td>
       <% end %>
-      <th>Mijoz</th>
-      <th>Umumiy xarid narxi</th>
-      <th>Umumiy foyda</th>
-      <th>To'langan summa</th>
+      <th><%= t('sales.buyer') %></th>
+      <th><%= t('sales.total_purchase_price') %></th>
+      <th><%= t('sales.total_profit') %></th>
+      <th><%= t('sales.total_paid') %></th>
       <% unless defined?(shrink) %>
-        <th>Komentariya.</th>
-        <th>Sotuv sanasi</th>
-        <th>Kim tomondan sotildi</th>
+        <th><%= t('sales.comment') %></th>
+        <th><%= t('sales.sale_date') %></th>
+        <th><%= t('sales.sold_by') %></th>
         <th colspan="3"></th>
       <% end %>
     </tr>
@@ -24,9 +24,9 @@
         <% unless defined?(shrink) %>
           <td>
             <% if sale.closed? %>
-              <%= clink_to 'Open', toggle_status_sale_path(sale),'fa-lock', :post %>
+              <%= clink_to t('sales.open'), toggle_status_sale_path(sale), 'fa-lock', :post %>
             <% else %>
-              <%= clink_to 'Close', toggle_status_sale_path(sale),'fa-lock-open', :post %>
+              <%= clink_to t('sales.close'), toggle_status_sale_path(sale), 'fa-lock-open', :post %>
             <% end %>
           </td>
         <% end %>
@@ -47,8 +47,7 @@
           <%= link_to html_view_sale_path(sale) do %>
             <%= image_tag image_url('printer.png'), style: 'width: 25px; height: 25px; cursor: pointer' %>
           <% end %>
-
-          <%= clink_to 'Посмотреть', sale_path(sale), 'fa-search' %>
+          <%= clink_to t('sales.view'), sale_path(sale), 'fa-search' %>
         </td>
       </tr>
     <% end %>

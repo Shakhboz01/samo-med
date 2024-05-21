@@ -1,31 +1,35 @@
 <div class="container my-5">
-  <%= link_to 'yangi xarajat q"shish', new_expenditure_path, class: "btn btn-success min-width-btn" %>
-  <h1 class='text-center'>Xarajatlar</h1>
+  <%= link_to t('expenditures.new_expenditure'), new_expenditure_path, class: "btn btn-success min-width-btn mb-3" %>
+  <h1 class='text-center'><%= t('expenditures.title') %></h1>
+
   <%= render 'filter_form', q: @q, url: request.path %>
-  <div class="card shadow-lg">
-    <%= render 'expenditures', expenditures: @expenditures, expenditures_data: @expenditures_data %>
-    <%= paginate @expenditures %>
-    <table class='table-bordered'>
+
+  <div class="card shadow-lg mt-3">
+    <div class="card-body">
+      <%= render 'expenditures', expenditures: @expenditures, expenditures_data: @expenditures_data %>
+      <%= paginate @expenditures %>
+
+      <table class="table table-bordered mt-4">
         <thead>
           <tr>
             <th></th>
-            <th>Umumiy summa</th>
-            <th>Разница</th>
+            <th><%= t('expenditures.total_amount') %></th>
+            <th><%= t('expenditures.difference') %></th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th>Dollarda</th>
+            <th><%= t('expenditures.in_usd') %></th>
             <td><%= number_to_currency @expenditures_data.price_in_usd.sum(:price) %></td>
             <td><%= number_to_currency(@expenditures_data.price_in_usd.sum(:price) - @expenditures_data.price_in_usd.sum(:total_paid)) %></td>
           </tr>
           <tr>
-            <th>So'mda </th>
+            <th><%= t('expenditures.in_uzs') %></th>
             <td><%= num_to_usd(@expenditures_data.price_in_uzs.sum(:price)) %></td>
-            <td><%= num_to_usd @expenditures_data.price_in_uzs.sum(:total_paid) %></td>
             <td><%= num_to_usd(@expenditures_data.price_in_uzs.sum(:price) - @expenditures_data.price_in_uzs.sum(:total_paid)) %></td>
           </tr>
         </tbody>
       </table>
+    </div>
   </div>
 </div>

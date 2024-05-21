@@ -1,17 +1,17 @@
 <table class="table table-hover table-bordered table-striped">
   <thead>
     <tr>
-      <th>ID</th>
+      <th><%= t('delivery_from_counterparties.id') %></th>
       <% unless defined?(shrink) %>
-        <th>Qulflangan</th>
+        <th><%= t('delivery_from_counterparties.closed') %></th>
       <% end %>
-      <th>Yuk beruvchi</th>
-      <th>Umumiy xarid narxi</th>
-      <th>To'langan summa</th>
+      <th><%= t('delivery_from_counterparties.provider') %></th>
+      <th><%= t('delivery_from_counterparties.total_price') %></th>
+      <th><%= t('delivery_from_counterparties.total_paid') %></th>
       <% unless defined?(shrink) %>
-        <th>Komment</th>
+        <th><%= t('delivery_from_counterparties.comment') %></th>
       <% end %>
-      <th>Kelgan sana</th>
+      <th><%= t('delivery_from_counterparties.created_at') %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -22,9 +22,9 @@
         <% unless defined?(shrink) %>
           <td>
             <% if delivery_from_counterparty.closed? %>
-              <%= clink_to 'Open', toggle_status_delivery_from_counterparty_path(delivery_from_counterparty),'fa-lock', :post %>
+              <%= clink_to t('delivery_from_counterparties.open'), toggle_status_delivery_from_counterparty_path(delivery_from_counterparty),'fa-lock', :post %>
             <% else %>
-              <%= clink_to 'Close', toggle_status_delivery_from_counterparty_path(delivery_from_counterparty),'fa-lock-open', :post %>
+              <%= clink_to t('delivery_from_counterparties.close'), toggle_status_delivery_from_counterparty_path(delivery_from_counterparty),'fa-lock-open', :post %>
             <% end %>
           </td>
         <% end %>
@@ -36,7 +36,7 @@
         <% end %>
         <td><%= strf_datetime(delivery_from_counterparty.created_at) %></td>
         <td>
-          <%= clink_to 'Посмотреть', delivery_from_counterparty_path(delivery_from_counterparty), 'fa-search' %>
+          <%= clink_to t('delivery_from_counterparties.view'), delivery_from_counterparty_path(delivery_from_counterparty), 'fa-search' %>
         </td>
       </tr>
     <% end %>

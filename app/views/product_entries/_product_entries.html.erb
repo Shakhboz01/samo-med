@@ -2,19 +2,19 @@
   <thead>
     <tr>
       <% unless defined?(shrink) %>
-        <th><%= sort_link q, :id, 'ID' %></th>
-        <th>Yuk beruvchi</th>
+        <th><%= sort_link q, :id, t('product_entries.id') %></th>
+        <th><%= t('product_entries.provider') %></th>
       <% end %>
-      <th><%= sort_link q, :buy_price, 'Kelish narxi' %></th>
-      <th><%= sort_link q, :buy_price, 'Sotish narxi' %></th>
-      <th><%= sort_link q, :amount, 'Soni' %></th>
-      <th>Tovar</th>
+      <th><%= sort_link q, :buy_price, t('product_entries.buy_price') %></th>
+      <th><%= sort_link q, :sell_price, t('product_entries.sell_price') %></th>
+      <th><%= sort_link q, :amount, t('product_entries.amount') %></th>
+      <th><%= t('product_entries.product') %></th>
       <% unless defined?(shrink) %>
-        <th><%= sort_link q, :amount_sold, 'Sotildi' %></th>
-        <th><%= sort_link q, :created_at, 'kelgan sana' %></th>
+        <th><%= sort_link q, :amount_sold, t('product_entries.amount_sold') %></th>
+        <th><%= sort_link q, :created_at, t('product_entries.created_at') %></th>
       <% end %>
       <% if ENV.fetch('HAS_LOCAL_ENTRY') %>
-        <th>Ishchi</th>
+        <th><%= t('product_entries.worker') %></th>
       <% end %>
       <th colspan="3"></th>
     </tr>
@@ -45,10 +45,10 @@
         <% end %>
         <td>
           <% unless defined?(shrink) %>
-            <%= clink_to 'Sotish narxini ozgartirish', edit_product_entry_path(product_entry), 'fa-edit' %>
+            <%= cdlink_to t('product_entries.edit_sell_price'), edit_product_entry_path(product_entry), 'fa-edit' %>
           <% end %>
           <% if defined?(deletable) %>
-            <%= cdlink_to 'Ochirish', product_entry %>
+            <%= cdlink_to t('product_entries.delete'), product_entry %>
           <% end %>
         </td>
       </tr>

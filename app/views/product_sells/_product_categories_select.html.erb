@@ -44,7 +44,7 @@
 </script>
 
 <div class='categories' id='product-categories'>
-  <span id="show-all-products" class='category-row'>Все</span>
+  <span id="show-all-products" class='category-row'><%= t('all') %></span>
   <% ProductCategory.all.order(weight: :desc).each do |category| %>
     <div data-category-id="<%= category.id %>" data-category-name="<%= category.name %>" class='category-row flex-column category-names'>
       <% cache category do %>

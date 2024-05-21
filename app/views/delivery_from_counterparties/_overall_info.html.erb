@@ -1,4 +1,4 @@
 <div class='d-flex justify-content-around'>
-  <b>JAMI TO'LASHIMIZ LOZIM: <%= num_to_usd @delivery_from_counterparty.calculate_total_price %></b>
-  <b>JAMI TOVARLAR SONI: <%= @delivery_from_counterparty.product_entries.sum(:amount) %></b>
+  <b><%= t('summary.total_payment_required') %>: <%= num_to_usd @delivery_from_counterparty.calculate_total_price %></b>
+  <b><%= t('summary.total_product_count') %>: <%= @delivery_from_counterparty.product_entries.sum(:amount) %></b>
 </div>

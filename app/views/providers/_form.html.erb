@@ -1,19 +1,18 @@
-
 <%= simple_form_for(provider) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :name, label: 'Ism' %>
-    <%= f.input :phone_number, label: 'Telefon raqam' %>
+    <%= f.input :name, label: t('provider.name_label') %>
+    <%= f.input :phone_number, label: t('provider.phone_label') %>
     <% unless provider.persisted? %>
-      <%= f.input :debt_in_uzs, label: "So'mda qarzimiz", as: :numeric %>
-      <%= f.input :debt_in_usd, label: false, as: :hidden %>
+      <%= f.input :debt_in_uzs, label: t('provider.debt_in_uzs_label'), as: :numeric %>
+      <%= f.input :debt_in_usd, label: t('provider.debt_in_usd_label'), as: :numeric %>
     <% end %>
-    <%= f.input :comment, label: 'Komment' %>
+    <%= f.input :comment, label: t('provider.comment_label') %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, 'Saqlash' %>
+    <%= f.button :submit, t('provider.save_button_label') %>
   </div>
 <% end %>

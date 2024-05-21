@@ -1,16 +1,16 @@
 <table class='table'>
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Цена прихода</th>
-      <th>Цена продажи</th>
+      <th><%= t('product_entries.id') %></th>
+      <th><%= t('product_entries.buy_price') %></th>
+      <th><%= t('product_entries.sell_price') %></th>
       <th>
-        Цена услуги
-        <i title='Цена продажи при оказании услуги или в обьектах' class="fa-solid fa-circle-info"></i>
+        <%= t('product_entries.service_price') %>
+        <i title='<%= t('product_entries.sell_price_description') %>' class="fa-solid fa-circle-info"></i>
       </th>
-      <th>Товар</th>
-      <th>Количество</th>
-      <th>Продано</th>
+      <th><%= t('product_entries.product') %></th>
+      <th><%= t('product_entries.amount') %></th>
+      <th><%= t('product_entries.amount_sold') %></th>
     </tr>
   </thead>
   <tbody>
@@ -25,4 +25,3 @@
     </tr>
   </tbody>
 </table>
-

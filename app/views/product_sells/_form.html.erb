@@ -32,18 +32,18 @@
             <%= f.association :pack, label: false, collection: Pack.where(active: true).order(:name), include_blank: true, input_html: { hidden: true, id: 'pack-select' } %>
           </div>
           <div id='pack_name' style='display: none'>
-            <%= f.input :pack_name, label: 'Xizmat nomini kiriting' %>
+            <%= f.input :pack_name, label: t('pack_name_label') %>
           </div>
         </div>
       </div>
       <div class='product-select-tag'>
-        <%= f.association :product, label: 'выберите размера', as: :hidden, collection: Product.all.order('LOWER(name) ASC'), include_blank: false, input_html: { id: 'product-select', placeholder: 'выберите размер' } %>
+        <%= f.association :product, label: t('product_select_label'), as: :hidden, collection: Product.all.order('LOWER(name) ASC'), include_blank: false, input_html: { id: 'product-select', placeholder: t('product_placeholder') } %>
       </div>
       <div class='row'>
-        <div class='col-sm-4'><%= f.input :amount, label: 'Soni', input_html: {value: 1} %></div>
-        <div class='col-sm-4'><%= f.input :sell_price, label: 'dona narxi' %></div>
+        <div class='col-sm-4'><%= f.input :amount, label: t('amount_label'), input_html: {value: 1} %></div>
+        <div class='col-sm-4'><%= f.input :sell_price, label: t('price_per_unit_label') %></div>
         <div class='col-sm-4 align-self-center'>
-          <%= f.submit "Sotish", class: 'btn btn-primary'%><br/>
+          <%= f.submit t('sell_button_label'), class: 'btn btn-primary'%><br/>
         </div>
       </div>
       <%= f.input :min_price_in_usd, label: false, as: :hidden, input_html: { disabled: true } %>

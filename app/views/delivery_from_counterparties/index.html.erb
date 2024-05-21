@@ -1,10 +1,10 @@
 <div class="container my-5">
   <div class="card shadow-lg">
-    <h1 class='text-center'>Yuklar kelishi tarixi</h1>
+    <h1 class='text-center'><%= t('delivery_history.title') %></h1>
     <div class="card-header d-flex justify-content-between align-items-center">
       <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-primary">Umumiy malumot</button>
-        <%= link_to "Batafsil ko'rish", product_entries_path, class: 'btn btn-secondary' %>
+        <button type="button" class="btn btn-primary"><%= t('delivery_history.general_info') %></button>
+        <%= link_to t('delivery_history.details'), product_entries_path, class: 'btn btn-secondary' %>
       </div>
     </div>
     <%= render 'filter_form', q: @q, url: request.path %>
@@ -15,21 +15,21 @@
         <thead>
           <tr>
             <th></th>
-            <th>Umumiy kelish narxi |</th>
-            <th>Biz to'lagan summa |</th>
-            <th>Yana to'lashimiz lozim bo'lgan summa</th>
+            <th><%= t('delivery_history.total_price') %> |</th>
+            <th><%= t('delivery_history.total_paid') %> |</th>
+            <th><%= t('delivery_history.remaining_amount') %></th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th>dollarda</th>
+            <th><%= t('delivery_history.in_usd') %></th>
             <td><%= number_to_currency @delivery_from_counterparties_data.price_in_usd.sum(:total_price) %></td>
             <td><%= number_to_currency @delivery_from_counterparties_data.price_in_usd.sum(:total_paid) %></td>
             <td><%= number_to_currency(@delivery_from_counterparties_data.price_in_usd.sum(:total_price) - @delivery_from_counterparties_data.price_in_usd.sum(:total_paid)) %></td>
           </tr>
           <tr>
-            <th>So'mda</th>
-            <td><%= num_to_usd(@delivery_from_counterparties_data.price_in_uzs.sum(:total_price)) %></td>
+            <th><%= t('delivery_history.in_uzs') %></th>
+            <td><%= num_to_usd @delivery_from_counterparties_data.price_in_uzs.sum(:total_price) %></td>
             <td><%= num_to_usd @delivery_from_counterparties_data.price_in_uzs.sum(:total_paid) %></td>
             <td><%= num_to_usd(@delivery_from_counterparties_data.price_in_uzs.sum(:total_price) - @delivery_from_counterparties_data.price_in_uzs.sum(:total_paid)) %></td>
           </tr>

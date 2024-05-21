@@ -1,19 +1,19 @@
 <div class="container my-5">
   <div class="card shadow-lg">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <h3 class="card-title font-weight-bold">Sklad</h3>
-      <%= link_to 'Yangi tovar qoshish', new_pack_path, class: "btn btn-success min-width-btn" %>
+      <h3 class="card-title font-weight-bold"><%= t('sklad.title') %></h3>
+      <%= link_to t('sklad.new_pack'), new_pack_path, class: "btn btn-success min-width-btn" %>
     </div>
     <%= render 'filter_form', url: request.path %>
     <div class="card-body">
       <table class="table table-hover table-bordered table-striped">
         <thead>
           <tr>
-            <th>Nomi</th>
-            <th>Kodi</th>
-            <th>Ostatkasi</th>
-            <th>Sotish Narxi</th>
-            <th>Sotib olish narxi</th>
+            <th><%= t('sklad.name') %></th>
+            <th><%= t('sklad.code') %></th>
+            <th><%= t('sklad.remaining') %></th>
+            <th><%= t('sklad.sell_price') %></th>
+            <th><%= t('sklad.buy_price') %></th>
             <th colspan="3"></th>
           </tr>
         </thead>
@@ -27,13 +27,13 @@
               <td><%= find_by_price(pack) %></td>
               <td>
                 <% if pack.from_local_production? %>
-                  <%= clink_to 'Ko\'rish', pack_path(pack), 'fa-search' %>
+                  <%= clink_to t('sklad.view'), pack_path(pack), 'fa-search' %>
                 <% end %>
-                <%= clink_to 'O\'zgartirish', edit_pack_path(pack), 'fa-edit' %>
+                <%= clink_to t('sklad.edit'), edit_pack_path(pack), 'fa-edit' %>
                 <% if pack.active %>
-                  <%= clink_to 'Деактивировать', toggle_active_pack_path(pack), 'fa-ban', :post %>
+                  <%= clink_to t('sklad.deactivate'), toggle_active_pack_path(pack), 'fa-ban', :post %>
                 <% else %>
-                  <%= clink_to 'Активировать', toggle_active_pack_path(pack), 'fa-chart-line', :post %>
+                  <%= clink_to t('sklad.activate'), toggle_active_pack_path(pack), 'fa-chart-line', :post %>
                 <% end %>
               </td>
             </tr>
@@ -42,11 +42,11 @@
       </table>
       <%= paginate @packs %>
     </div>
-    <table>
+    <table class="mt-4">
       <tr>
-        <th>Jami tovarlar soni</th>
-        <th>Jami summa miqdori (so'mdagilar)</th>
-        <th>Jami summa miqdori (dollardagilar)</th>
+        <th><%= t('sklad.total_items') %></th>
+        <th><%= t('sklad.total_amount_uzs') %></th>
+        <th><%= t('sklad.total_amount_usd') %></th>
       </tr>
       <tr>
         <td><%= @all_packs.sum(:initial_remaining) %></td>

@@ -1,23 +1,29 @@
 <div class='m-2'>
   <%= simple_form_for(pack, html: { multipart: true }) do |f| %>
     <div class='row'>
-      <div style='box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;' class='form-inputs col-sm-12 col-md-10 m-2'>
+      <div class='form-inputs col-sm-12 col-md-10 m-2 p-4' style='box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;'>
         <%= f.error_notification %>
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-        <%= f.input :name, label: 'Название', input_html: {autofocus: 'true'} %>
-        <%= f.input :code, label: 'Код', input_html: {value: @random_code} %>
-        <%= f.input :delivery_id, input_html: {value: params[:delivery_id] }, as: :hidden  %>
-        <div>
-          <%= f.association :product_category, label: 'Выберите папку', include_blank: false  %>
-          <%= link_to "добавить новую папку", new_product_category_path %>
+
+        <%= f.input :name, label: t('packs.form.name'), input_html: { autofocus: 'true' } %>
+        <%= f.input :code, label: t('packs.form.code'), input_html: { value: @random_code } %>
+        <%= f.input :delivery_id, input_html: { value: params[:delivery_id] }, as: :hidden %>
+
+        <div class="mb-3">
+          <%= f.association :product_category, label: t('packs.form.select_folder'), include_blank: false %>
+          <%= link_to t('packs.form.add_new_folder'), new_product_category_path, class: 'btn btn-link' %>
         </div>
-        <%= f.input :initial_remaining, label: 'Остаток' %>
-        <%= f.input :unit, label: 'Единица измерения' %>
-        <%= f.input :price_in_usd, label: 'В долларах', input_html: {checked: ENV.fetch('PRICE_IN_USD') == 'true'} %>
-        <%= f.input :sell_price, label: 'Цена продажи (1 шт)' %>
-        <%= f.input :buy_price, label: 'Цена прихода (1 шт)' %>
-        <%= f.input :image, input_html: { accept: "image/*" }, label: 'Загрузить изображение' %><br/>
-        <%= f.submit 'Сохранить', class: 'btn btn-primary' %>
+
+        <%= f.input :initial_remaining, label: t('packs.form.initial_remaining') %>
+        <%= f.input :unit, label: t('packs.form.unit') %>
+        <%= f.input :price_in_usd, label: t('packs.form.price_in_usd'), input_html: { checked: ENV.fetch('PRICE_IN_USD') == 'true' } %>
+        <%= f.input :sell_price, label: t('packs.form.sell_price') %>
+        <%= f.input :buy_price, label: t('packs.form.buy_price') %>
+        <%= f.input :image, input_html: { accept: "image/*" }, label: t('packs.form.upload_image') %>
+
+        <div class="mt-4">
+          <%= f.submit t('packs.form.save'), class: 'btn btn-primary' %>
+        </div>
       </div>
     </div>
   <% end %>
