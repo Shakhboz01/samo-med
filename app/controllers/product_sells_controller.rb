@@ -45,6 +45,11 @@ class ProductSellsController < ApplicationController
 
     respond_to do |format|
       if @product_sell.save
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.update('product-sells-list', partial: 'product_sells/product_sells', locals: { shrink: true, sale: @product_sell.sale, product_sell: @product_sell, buyer: @product_sell.sale.buyer, product_sells: @product_sell.sale.product_sells })
+          ]
+        end
         format.html { redirect_to request.referrer }
         format.json { render :show, status: :created, location: @product_sell }
       else

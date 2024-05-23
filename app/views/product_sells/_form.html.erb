@@ -21,7 +21,7 @@
   </script>
 
   <div class='px-3' style='color: black; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;'>
-    <%= simple_form_for(product_sell) do |f| %>
+    <%= simple_form_for(product_sell, remote: true) do |f| %>
       <div class='form-inputs'>
         <%= f.error_notification %>
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>

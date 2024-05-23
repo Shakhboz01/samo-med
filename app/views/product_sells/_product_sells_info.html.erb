@@ -1,0 +1,11 @@
+  <tbody>
+    <% if defined?(shrink) %>
+      <tr>
+        <th></th>
+        <th><%= total_amount %></th>
+        <th></th>
+        <th><%= currency_convert sale.price_in_usd, sale.total_price %></th>
+      </tr>
+    <% end %>
+  </tbody>
+
