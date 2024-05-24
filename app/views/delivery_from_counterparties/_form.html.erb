@@ -8,9 +8,9 @@
       <%= f.input :price_in_usd, label: false %>
       <% not_disabled = delivery_from_counterparty.persisted? && delivery_from_counterparty.product_entries.empty? %>
       <%= f.input :total_price, label: t('delivery_form.total_price_required'), input_html: { disabled: !not_disabled } %>
-      <%= f.input :total_paid, label: t('delivery_form.total_paid') %>
+      <%= f.input :total_paid, label: t('delivery_form.total_paid'), input_html: {value: 0} %>
       <%= f.association :provider, label: t('delivery_form.select_provider'), collection: Provider.active.order(weight: :desc).order(name: :asc), include_blank: false %>
-      <%= f.input :payment_type, label: t('delivery_form.select_payment_type'), collection: DeliveryFromCounterparty.payment_types, include_blank: false %>
+      <%= f.input :payment_type, label: t('delivery_form.select_payment_type'), collection: DeliveryFromCounterparty.payment_types.keys.map { |unit| [DeliveryFromCounterparty.human_attribute_name("unit.#{unit}"), unit] }, include_blank: false %>
       <%= f.input :comment, label: t('delivery_form.comment') %>
       <%= f.button :submit, t('delivery_form.finish_purchase') %>
     </div>
