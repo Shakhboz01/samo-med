@@ -102,6 +102,7 @@ uz:
     in_uzs: "So'mda"
   packs:
     filter_form:
+      product_category: "Papkani tanlang"
       product_name: "Tovar nomi:"
       product_code: "Tovar kodi:"
       search: "Qidirish"
@@ -308,6 +309,8 @@ uz:
     add_customer: "Mijoz qo'shish"
     add_product: "Tovar qo'shish"
     give_monthly_advance: "Oylik/avans berish"
+    add_participation: "Yangi davomat"
+    participations: "Davomatlar"
     admin: "Admin"
     currency_rate: "Dollar kursi"
     logout: "Chiqish"

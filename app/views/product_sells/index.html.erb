@@ -12,7 +12,7 @@
 
     <div class="card-body">
       <%= render 'filter_form', q: @q, url: request.path %>
-      <%= render 'product_sells', product_sells: @product_sells, rate: @rate %>
+      <%= render 'product_sells', product_sells: @product_sells, rate: @rate, shrink: false %>
       <%= paginate @product_sells %>
     </div>
   </div>

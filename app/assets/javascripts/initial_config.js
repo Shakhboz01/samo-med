@@ -1,5 +1,4 @@
 $(document).on('turbo:load', function() {
-  console.log('I am loadeeeeddd withhh')
   $("input").focus(function() {
     $(this).select();
   });

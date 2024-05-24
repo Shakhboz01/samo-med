@@ -11,7 +11,7 @@
     <% else %>
       <%= f.association :user, label: 'Ishchini tanlang:', collection: User.active, label_method: :name, value_method: :id %>
     <% end %>
-    <%= f.input :month, label: 'Qaysi oy uchun?:' %>
+    <%= f.date_field :month, label: 'Qaysi oy uchun?:' %>
     <%= f.input :payment_type, label: 'To\'lov turi', collection: Salary.payment_types.keys.map { |unit| [Salary.human_attribute_name("unit.#{unit}"), unit] }, include_blank: false %>
     <%= f.input :price, as: :numeric, label: 'So\'mda:' %>
     <%= f.input :prepayment , label: 'Avansmi?' %>

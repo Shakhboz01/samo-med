@@ -102,11 +102,11 @@ ru:
     in_uzs: "В сумах"
   packs:
     filter_form:
+      product_category: "Выберите папку"
       product_name: "Название товара:"
       product_code: "Код товара:"
       search: "Поиск"
       reset: "Сброс"
-  packs:
     title: "Список товаров, используемых для 1 товара"
     add_new: "Добавить новый"
     price_per_item: "Цена за единицу"
@@ -308,6 +308,8 @@ ru:
     add_customer: "Добавить покупателя"
     add_product: "Добавить продукт"
     give_monthly_advance: "Выдать ежемесячный аванс"
+    add_participation: "Добавить перекличку"
+    participations: "переклички"
     admin: "Администрирование"
     currency_rate: "Курс валюты"
     logout: "Выйти"
