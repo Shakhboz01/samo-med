@@ -7,24 +7,16 @@
     <div class="form-inputs">
       <%= f.input :price_in_usd, label: false, as: :hidden %>
       <% if sale.persisted? && sale.product_sells.empty? %>
-        <%= f.input :total_price, label: t('sale.total_price_label'), input_html: { hidden: false, id: 'total-price' } %>
+        <%= f.input :total_price, label: false, input_html: { hidden: true, id: 'total-price' } %>
       <% end %>
       <%= f.association :buyer, label: false, collection: Buyer.active.order(weight: :desc).order(name: :asc), include_blank: false, as: :hidden %>
-      <%= f.input :total_paid, label: t('sale.total_paid_label') %>
+      <%= f.input :total_paid, label: t('sale.total_paid_label'), as: :hidden %>
       <%= f.input :payment_type, label: false, collection: Sale.payment_types.keys.map { |unit| [t("sale.payment_type.#{unit}"), unit] }, include_blank: false, as: :hidden %>
       <%= f.input :comment, label: t('sale.comment_label') %>
       <%= f.button :submit, t('sale.finish_sale_button_label') %>
     </div>
   <% end %>
 </div><br/>
-
-<div class='p-3' style='color: black; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;'>
-  <%= simple_form_for(sale) do |f| %>
-      <%= f.input :price_in_usd, label: false, as: :hidden, input_html: {value: !sale.price_in_usd} %>
-      <%= f.button :submit, t('sale.change_currency_button_label'), class: 'btn-warning' %>
-    </div>
-  <% end %>
-</div>
 
 <script>
   document.querySelector('#sale_total_paid').addEventListener('focus', function(e) {

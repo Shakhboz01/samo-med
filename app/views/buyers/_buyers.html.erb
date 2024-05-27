@@ -5,8 +5,8 @@
         <th><%= t('buyers.index.id') %></th>
       <% end %>
       <th><%= t('buyers.index.name') %></th>
-      <% unless defined?(shrink) %>
         <th><%= t('buyers.index.phone_number') %></th>
+      <% unless defined?(shrink) %>
         <th><%= t('buyers.index.comment') %></th>
       <% end %>
     </tr>
@@ -23,8 +23,8 @@
             <%= link_to image_tag(buyer.image, style: 'width: 60px; height:55px; object-fit:contain'), buyer.image %>
           <% end %>
         </td>
+        <td><%= buyer.phone_number %></td>
         <% unless defined?(shrink) %>
-          <td><%= buyer.phone_number %></td>
           <td><%= buyer.comment %></td>
           <td>
             <%= clink_to t('buyers.index.edit'), edit_buyer_path(buyer), 'fa-edit' %>
