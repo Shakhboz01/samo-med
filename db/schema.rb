@@ -333,7 +333,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_21_084938) do
 
   create_table "salaries", force: :cascade do |t|
     t.boolean "prepayment"
-    t.date "month", default: "2024-05-10"
+    t.date "month", default: "2024-05-27"
     t.bigint "team_id"
     t.bigint "user_id"
     t.decimal "price", precision: 10, scale: 2

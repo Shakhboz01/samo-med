@@ -5,12 +5,6 @@
   <div class="form-inputs">
     <%= f.input :name, label: t('buyers.form.name') %>
     <%= f.input :phone_number, label: t('buyers.form.phone_number') %>
-    <% unless buyer.persisted? %>
-      <%= f.input :debt_in_uzs, label: t('buyers.form.debt_in_uzs'), as: :numeric %>
-      <%= f.input :debt_in_usd, label: t('buyers.form.debt_in_usd'), as: :numeric %>
-    <% end %>
-
-    <%= f.input :is_worker, label: t('buyers.form.is_worker') %>
     <%= f.input :comment, label: t('buyers.form.comment') %>
     <%= f.file_field :image, label: t('buyers.form.upload_image'), accept: 'image/*' %>
   </div>

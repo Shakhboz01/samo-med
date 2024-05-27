@@ -5,7 +5,6 @@
         <th><%= t('buyers.index.id') %></th>
       <% end %>
       <th><%= t('buyers.index.name') %></th>
-      <th><%= t('buyers.index.debt') %></th>
       <% unless defined?(shrink) %>
         <th><%= t('buyers.index.phone_number') %></th>
         <th><%= t('buyers.index.comment') %></th>
@@ -23,10 +22,6 @@
           <% if buyer.image.persisted? %>
             <%= link_to image_tag(buyer.image, style: 'width: 60px; height:55px; object-fit:contain'), buyer.image %>
           <% end %>
-        </td>
-        <td>
-          <%= link_to num_to_usd(buyer.calculate_debt_in_uzs), sales_url(q_other: {total_paid_less_than_price: '1'},q: {buyer_id_eq: buyer.id, price_in_usd_true: false}), method: :get, style: "color: #{ (buyer.calculate_debt_in_uzs < 0) ? 'red' : 'blue' }; font-size: large" %> |
-          <%= link_to number_to_currency(buyer.calculate_debt_in_usd), sales_url(q_other: {total_paid_less_than_price: '1'},q: {buyer_id_eq: buyer.id, price_in_usd_true: true}), method: :get, style: "color: #{ (buyer.calculate_debt_in_uzs < 0) ? 'red' : 'blue' }; font-size: large" %>
         </td>
         <% unless defined?(shrink) %>
           <td><%= buyer.phone_number %></td>
