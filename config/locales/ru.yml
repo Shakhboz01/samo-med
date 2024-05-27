@@ -12,6 +12,7 @@ ru:
     filter:
       search_icon_title: "Поиск"
       name_contains: "Имя содержит:"
+      phone_number_contains: "Номер телефона содержит:"
       active_buyers: "Активные покупатели:"
       search: "Поиск"
       cancel: "Отмена"

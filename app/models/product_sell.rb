@@ -22,14 +22,24 @@ class ProductSell < ApplicationRecord
   before_create :increase_amount_sold_and_check_currency
   after_create :enqueue_perform_sell
   after_create :increase_total_price
+  after_create :decrement_pack_usage
   before_destroy :enqueue_handle_deletion
   before_destroy :decrease_amount_sold
   before_destroy :decrease_total_price
+  before_destroy :increment_pack_usage
 
   scope :price_in_uzs, -> { where('price_in_usd = ?', false) }
   scope :price_in_usd, -> { where('price_in_usd = ?', true) }
 
   private
+
+  def decrement_pack_usage
+    Packs::TogglePackRemaining.run(pack: pack, amount: amount, action: :decrement)
+  end
+
+  def increment_pack_usage
+    Packs::TogglePackRemaining.run(pack: pack, amount: amount, action: :increment)
+  end
 
   def enqueue_perform_sell
     ProductSellJob.perform_later(id, 'perform_sell')

@@ -84,6 +84,7 @@ Rails.application.routes.draw do
   end
   root "pages#main_page"
   get "pages#define_sale_destination", to: "pages#define_sale_destination", as: :define_sale_destination
+  get "qr_scanner", to: "pages#qr_scanner", as: :qr_scanner
   get "pages#shortcut", to: "pages#shortcut", as: :shortcut
   get "daily_report", to: "pages#daily_report", as: :daily_report
   get "admin_page", to: "pages#admin_page", as: :admin_page

@@ -12,7 +12,9 @@ uz:
     filter:
       search_icon_title: "Qidirish"
       name_contains: "Ism o'z ichiga oladi:"
-      active_buyers: "Faol xaridorlar:"
+      phone_number_contains: "Telefon raqam:"
+      active_buyers: "Faol mijozlar:"
+      phone_number_contains: "Номер телефона содержит:"
       search: "Qidirish"
       cancel: "Bekor qilish"
     form:
