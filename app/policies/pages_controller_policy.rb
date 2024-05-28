@@ -1,5 +1,5 @@
 class PagesControllerPolicy < ApplicationPolicy
   def access?
-    %w[руководитель бухгалтер].include?(user.role)
+    %w[вдмин].include?(user.role)
   end
 end

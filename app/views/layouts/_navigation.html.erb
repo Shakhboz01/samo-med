@@ -38,7 +38,7 @@
       <li class="nav-item">
         <%= link_to t('navigation.warehouse'), packs_path, class: 'nav-link' %>
       </li>
-      <% if %w[manager accountant].include?(current_user.role) %>
+      <% if %w[вдмин].include?(current_user.role) %>
         <li class="nav-item">
           <%= link_to t('navigation.admin'), admin_page_path, class: 'nav-link' %>
         </li>

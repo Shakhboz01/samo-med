@@ -1,4 +1,159 @@
-<div>
-  <%= render 'pages/admin_pages/filter_form', q: @q, url: request.path %>
-  <%= render 'pages/admin_pages/overall_info' %>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinic Financial Overview</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center">Clinic Financial Overview</h2>
+    <div class="row mb-4">
+      <div class="col-md-3">
+        <label for="fromDate">From:</label>
+        <input type="date" id="fromDate" class="form-control">
+      </div>
+      <div class="col-md-3">
+        <label for="tillDate">Till:</label>
+        <input type="date" id="tillDate" class="form-control">
+      </div>
+      <div class="col-md-3 align-self-end">
+        <button id="filterButton" class="btn btn-primary">Filter</button>
+      </div>
+    </div>
+    <div class="table-responsive mb-4">
+      <table class="table table-bordered shadow-lg">
+        <thead class="thead-dark">
+          <tr>
+            <th>Клиника</th>
+            <th>Приход</th>
+            <th>Расход</th>
+            <th>Прибыль</th>
+            <th>Разница</th>
+          </tr>
+        </thead>
+        <tbody id="clinicTableBody">
+          <!-- Example rows -->
+          <tr>
+            <td>Clinic A</td>
+            <td>$400</td>
+            <td>$200</td>
+            <td>$350</td>
+            <td>
+              <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar" style="width: 40%">Income: 40%</div>
+              </div>
+              <div class="progress mt-1">
+                <div class="progress-bar bg-danger" role="progressbar" style="width: 20%">Expenditure: 20%</div>
+              </div>
+              <div class="progress mt-1">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 35%">Revenue: 35%</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Clinic B</td>
+            <td>$600</td>
+            <td>$300</td>
+            <td>$450</td>
+            <td>
+              <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar" style="width: 40%">Income: 40%</div>
+              </div>
+              <div class="progress mt-1">
+                <div class="progress-bar bg-danger" role="progressbar" style="width: 20%">Expenditure: 20%</div>
+              </div>
+              <div class="progress mt-1">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 30%">Revenue: 30%</div>
+              </div>
+            </td>
+          </tr>
+          <!-- More rows as needed -->
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <canvas id="incomeChart"></canvas>
+      </div>
+      <div class="col-md-6">
+        <canvas id="revenueChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  $(document).on('turbo:load', function(){
+    // Placeholder for filter functionality
+    document.getElementById('filterButton').addEventListener('click', function() {
+      const fromDate = document.getElementById('fromDate').value;
+      const tillDate = document.getElementById('tillDate').value;
+
+      // Implement your filter logic here
+      console.log(`Filtering from ${fromDate} to ${tillDate}`);
+
+      // Example: Filter and update table dynamically based on the date range
+      // You will likely need to fetch filtered data from your backend/server
+    });
+
+    // Sample data for charts
+    const clinicNames = ['Clinic A', 'Clinic B'];
+    const incomes = [400, 600];
+    const expenditures = [200, 300];
+    const revenues = [350, 450];
+
+    // Income Chart
+    const ctxIncome = document.getElementById('incomeChart').getContext('2d');
+    const incomeChart = new Chart(ctxIncome, {
+      type: 'bar',
+      data: {
+        labels: clinicNames,
+        datasets: [{
+          label: 'Income',
+          data: incomes,
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Revenue Chart
+    const ctxRevenue = document.getElementById('revenueChart').getContext('2d');
+    const revenueChart = new Chart(ctxRevenue, {
+      type: 'bar',
+      data: {
+        labels: clinicNames,
+        datasets: [{
+          label: 'Revenue',
+          data: revenues,
+          backgroundColor: 'rgba(153, 102, 255, 0.2)',
+          borderColor: 'rgba(153, 102, 255, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+    });
+  </script>
+</body>
+</html>

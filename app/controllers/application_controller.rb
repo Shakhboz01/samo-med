@@ -25,6 +25,8 @@ class ApplicationController < ActionController::Base
       qr_scanner_path
     elsif resource.регистратор?
       new_buyer_path
+    elsif resource.админ?
+      admin_page_path
     else
       super
     end
