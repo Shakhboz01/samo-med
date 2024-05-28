@@ -9,6 +9,8 @@ class BuyersController < ApplicationController
 
   # GET /buyers/1 or /buyers/1.json
   def show
+    @treatment = Treatment.new(buyer_id: @buyer.id)
+    @treatments = @buyer.treatments.order(id: :desc)
   end
 
   # GET /buyers/new

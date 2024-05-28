@@ -258,7 +258,7 @@ uz:
     total_paid: "To'langan summa"
     comment: "Komentariya"
     sale_date: "Sotuv sanasi"
-    sold_by: "Kim tomondan sotildi"
+    sold_by: "Registrator"
     open: "Ochish"
     close: "Yopish"
   print:
@@ -283,6 +283,7 @@ uz:
     title: "Bu yerda tarixni filterlash mumkin:"
     from: "Dan:"
     to: "Gacha:"
+    user: "Врач"
     payment_type: "To'lov turi"
     customer: "Mijoz"
     partial_payment: "To'liq to'lanmagan sotuvlar"
@@ -292,6 +293,7 @@ uz:
     search: "Qidirish"
     reset: "Bekor qilish"
   navigation:
+    treatments: "Tashxislar"
     company_name: "Kompaniya nomi"
     view: "Ko'rish"
     sales_history: "Sotuvlar tarixi"
@@ -318,3 +320,7 @@ uz:
     logout: "Chiqish"
     confirm_logout: "Siz rostdan ham chiqmoqchimisiz?"
     login: "Kirish"
+  treatments:
+    buyer_name: Mijoz
+    user_name: Врач
+    comment: Kommentariya

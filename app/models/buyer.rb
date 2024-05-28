@@ -10,6 +10,7 @@ class Buyer < ApplicationRecord
   validates :phone_number, length: { is: 9 }
   has_one_attached :image
   has_many :sales
+  has_many :treatments
   has_many :sale_from_local_services
   has_many :sale_from_services
   scope :active, -> { where(:active => true) }

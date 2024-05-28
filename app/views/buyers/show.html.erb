@@ -1,0 +1,9 @@
+<div class='container'>
+  <h4><%= @buyer.name %></h4>
+  <div class='card'>
+    <%= render 'treatments/form', treatment: @treatment %>
+  </div>
+  <div class='card-body'>
+    <%= render 'treatments/treatments', treatments: @treatments %>
+  </div>
+</div>
