@@ -124,7 +124,7 @@ class SalesController < ApplicationController
       # It means, currency is changed
       redirect_to request.referrer, notice: "Valyuta o'zgartirildi"
     else
-      redirect_to html_view_sale_url(@sale)
+      redirect_to new_buyer_url
     end
   end
 

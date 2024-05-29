@@ -45,12 +45,15 @@ class Sale < ApplicationRecord
     if closed? && status_before_last_save != 'closed'
       if enable_to_send_sms
         price_sign = price_in_usd ? '$' : 'сум'
-        message =  "Sotuv amalga oshirildi\n" \
-          "<b>Mijoz</b>: #{buyer.name}\n" \
-          "<b>To'lov turi</b>: #{payment_type}\n" \
-          "<b>Jami narx:</b> #{total_price} #{price_sign}\n"
-        message << "&#9888<b>To'landi:</b> #{total_paid} #{price_sign}\n" if total_price > total_paid
+        message =  "<b>Xizmat amalga oshirildi</b>\n" \
+          "<b>Bemor</b>: #{buyer.name.capitalize}\n"
+
         message << "<b>Комментарие:</b> #{comment}\n" if comment.present?
+        product_sells.each do |ps|
+          message << "#{ps.pack.name} - #{ps.sell_price} * #{ps.amount} = #{ps.total_price}\n"
+        end
+
+        message << "<b>Jami narx:</b> #{total_price} #{price_sign}\n"
         SendMessageJob.perform_later(message)
       else
         self.enable_to_send_sms = false

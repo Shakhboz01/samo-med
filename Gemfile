@@ -18,7 +18,8 @@ gem "bulma-rails", "~> 0.9.4"
 gem 'active_link_to'
 gem "image_processing", ">= 1.2"
 gem 'receipts'
-
+gem 'escpos', require: false
+gem 'escpos-image', require: false
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -59,6 +60,7 @@ gem 'active_interaction'
 gem 'telegram-bot-ruby'
 gem 'figaro'
 gem 'whenever'
+gem 'translit'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
