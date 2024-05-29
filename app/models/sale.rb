@@ -44,6 +44,7 @@ class Sale < ApplicationRecord
   def process_status_change
     if closed? && status_before_last_save != 'closed'
       if enable_to_send_sms
+        ProcessReceiptJob.perform_later(self)
         price_sign = price_in_usd ? '$' : 'сум'
         message =  "<b>Xizmat amalga oshirildi</b>\n" \
           "<b>Bemor</b>: #{buyer.name.capitalize}\n"
