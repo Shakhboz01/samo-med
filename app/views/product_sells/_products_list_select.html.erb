@@ -1,13 +1,3 @@
-<style>
-  .active {
-    background: blue;
-    color: white
-  }
-  .product_list:hover {
-    background: blue;
-    color: white;
-  }
-</style>
 <script>
   $(document).on('turbo:load', function() {
     var productSearchInput = document.getElementById('product_search_input');
@@ -146,7 +136,7 @@
 </div>
 <div style='max-height: 650px; overflow: auto' class='row'>
   <div id='products-list' class='col-sm-12 products'>
-    <table class='table table-sm' id="product-table">
+    <table class='table table-lg' style='--bs-table-bg: none; --bs-table-color: none' id="product-table">
       <thead class='table-dark'>
         <tr>
           <th>Товар</th>
