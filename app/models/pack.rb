@@ -20,6 +20,12 @@ class Pack < ApplicationRecord
 
   attr_accessor :delivery_id
 
+  def analize_remaining
+    return '' unless product_category.weight.zero?
+
+    initial_remaining
+  end
+
   def product_size_colors_attributes=(product_size_colors_attributes)
     product_size_colors_attributes.each do |i, dog_attributes|
       next if dog_attributes.values.any?(&:empty?)

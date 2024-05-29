@@ -294,6 +294,7 @@ uz:
     reset: "Bekor qilish"
   navigation:
     treatments: "Tashxislar"
+    registration: "Registratsiya"
     company_name: "Kompaniya nomi"
     view: "Ko'rish"
     sales_history: "Sotuvlar tarixi"

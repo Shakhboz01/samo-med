@@ -292,6 +292,7 @@ ru:
     reset: "Сброс"
   navigation:
     treatments: "Анализ"
+    registration: "Регистратция"
     company_name: "Название компании"
     view: "Просмотр"
     sales_history: "История продаж"

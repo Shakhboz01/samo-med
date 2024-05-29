@@ -39,6 +39,9 @@
       <li class="nav-item">
         <%= link_to t('navigation.warehouse'), packs_path, class: 'nav-link' %>
       </li>
+      <li class="nav-item">
+        <%= link_to t('navigation.registration'), new_buyer_path, class: 'nav-link' %>
+      </li>
       <% if %w[админ].include?(current_user.role) %>
         <li class="nav-item">
           <%= link_to t('navigation.admin'), admin_page_path, class: 'nav-link' %>

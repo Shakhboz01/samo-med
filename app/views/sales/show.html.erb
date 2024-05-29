@@ -23,8 +23,10 @@
     </div>
 
     <% unless @sale.closed? %>
-      <div class='col-sm-12 col-md-2' id='sale-form'>
-        <%= render 'sales/form', sale: @sale %>
+      <div class='col-sm-12 col-md-2'>
+        <div id='sale-form'>
+          <%= render 'sales/form', sale: @sale %>
+        </div>
       </div>
     <% end %>
   </div>
