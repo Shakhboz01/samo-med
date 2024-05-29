@@ -18,9 +18,16 @@
       <%= form.label :allowed_to_use, 'Shu programmadan foydalansinmi?' %>
       <%= form.check_box :allowed_to_use, {} %>
     </div>
-
     <div class="form-group">
-      <%= form.label :role, 'Roli' %>
+      <%= form.label :phone_number, 'Telefon raqam' %>
+      <%= form.text_field :phone_number, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= form.label :address, 'Manzil' %>
+      <%= form.text_field :address, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= form.label :role, 'Lavozimi' %>
       <%= form.select :role, User.roles.keys, {}, class: 'form-control' %>
     </div>
     <div class="form-group">

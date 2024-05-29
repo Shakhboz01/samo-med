@@ -12,7 +12,10 @@
         <thead class='table-dark'>
           <tr>
             <th>Ism</th>
-            <th>Roli</th>
+            <th>Telefon raqami</th>
+            <th>Manzili</th>
+            <th>Pochta</th>
+            <th>Lavozimi</th>
             <th></th>
           </tr>
         </thead>
@@ -20,6 +23,9 @@
           <% @users.each do |user| %>
             <tr class="<%= !user.active && 'table-dark'  %>">
               <td><%= user.name %></td>
+              <td><%= user.phone_number %></td>
+              <td><%= user.address %></td>
+              <td><%= user.email %></td>
               <td><%= user.role.capitalize %></td>
               <td>
                 <%= clink_to 'oylik istoriyasini korish', salaries_path(q: {user_id_eq: user.id}), 'fa-money' %>
