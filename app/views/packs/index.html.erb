@@ -22,7 +22,7 @@
             <tr class="<%= active_tr(pack.active) %>">
               <td><%= pack.name %></td>
               <td><%= pack.code %></td>
-              <td><%= pack.initial_remaining %></td>
+              <td><%= pack.analize_remaining %></td>
               <td><%= currency_convert(pack.price_in_usd, pack.sell_price) %></td>
               <td><%= find_by_price(pack) %></td>
               <td>
