@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     get :html_view, on: :member
     post :default_create, on: :collection
     post :toggle_status, on: :member
+    post :print_receipt, on: :member
     get :generate_pdf, on: :member
   end
   resources :local_services

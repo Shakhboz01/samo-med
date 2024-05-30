@@ -42,8 +42,8 @@
           <td><%= sale.user.name %></td>
         <% end %>
         <td>
-          <%= link_to html_view_sale_path(sale) do %>
-            <%= image_tag image_url('printer.png'), style: 'width: 25px; height: 25px; cursor: pointer' %>
+          <%= button_to print_receipt_sale_path(sale), class: 'btn' do %>
+            <%= image_tag image_url('printer.png'), style: 'width: 25px; height: 25px; cursor: pointer;' %>
           <% end %>
           <%= clink_to t('sales.view'), sale_path(sale), 'fa-search' %>
         </td>

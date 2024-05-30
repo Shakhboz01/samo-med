@@ -1,5 +1,5 @@
 class SalesController < ApplicationController
-  before_action :set_sale, only: %i[ show edit update destroy toggle_status html_view]
+  before_action :set_sale, only: %i[ show edit update destroy toggle_status html_view print_receipt]
 
   include Pundit::Authorization
   # GET /sales or /sales.json
@@ -115,6 +115,11 @@ class SalesController < ApplicationController
     @total_debt_in_usd = @sale.buyer.calculate_debt_in_usd
     # current_total_price = @sale.total_price - @sale.total_paid
     # @debt_with_exception = @total_debt - current_total_price
+  end
+
+  def print_receipt
+    ProcessReceiptJob.perform_later(@sale)
+    redirect_to request.referrer, message: 'Loading...'
   end
 
   private
