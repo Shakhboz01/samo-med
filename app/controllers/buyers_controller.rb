@@ -11,6 +11,7 @@ class BuyersController < ApplicationController
   def show
     @treatment = Treatment.new(buyer_id: @buyer.id)
     @treatments = @buyer.treatments.order(id: :desc)
+    @sales = @buyer.sales
   end
 
   # GET /buyers/new

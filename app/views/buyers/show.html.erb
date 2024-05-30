@@ -1,9 +1,16 @@
 <div class='container'>
-  <h4><%= @buyer.name %></h4>
-  <div class='card'>
-    <%= render 'treatments/form', treatment: @treatment %>
-  </div>
-  <div class='card-body'>
-    <%= render 'treatments/treatments', treatments: @treatments %>
-  </div>
+  <h3 class='text-center'><%= @buyer.name %></h3>
+
+  <% if @treatments.exists? %>
+    <div class='card-body'>
+      <%= render 'treatments/treatments', treatments: @treatments %>
+    </div>
+  <% end %>
+  <br/><hr/>
+  <% if @sales.exists? %>
+    <h4>История</h4>
+    <div class='card-footer'>
+      <%= render 'sales/sales', sales: @sales %>
+    </div>
+  <% end %>
 </div>
