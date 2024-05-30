@@ -233,7 +233,7 @@ ru:
   sale:
     total_price_label: "Общая стоимость"
     total_paid_label: "Оплаченная сумма"
-    comment_label: "Комментарий"
+    comment_label: "Жалобы"
     finish_sale_button_label: "Завершить продажу"
     change_currency_button_label: "Изменить валюту"
     payment_type:
