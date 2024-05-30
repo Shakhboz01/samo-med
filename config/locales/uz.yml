@@ -129,7 +129,7 @@ uz:
       upload_image: "Rasm yuklash"
       save: "Saqlash"
   sklad:
-    title: "Sklad"
+    title: "Sklad/xizmatlar"
     new_pack: "Yangi tovar qo'shish"
     name: "Nomi"
     code: "Kodi"
@@ -299,7 +299,7 @@ uz:
     view: "Ko'rish"
     sales_history: "Sotuvlar tarixi"
     delivery_history: "Yuk olish tarixi"
-    warehouse: "Sklad"
+    warehouse: "Sklad/xizmatlar"
     other_expenses: "Boshqa xarajatlar"
     suppliers: "Yuk beruvchilar"
     customers: "Mijozlar"
