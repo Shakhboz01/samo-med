@@ -39,7 +39,7 @@
                 return bot.api.send_message(chat_id: id, text: 'Mijoz topilmadi. ID ni qayta kiriting:', reply_markup: start_keyboard) unless sale
 
                 buyer = sale.buyer
-                if sale &&
+                if buyer
                   user.update(context: 'comment', buyer_context: buyer.id)
                   bot.api.send_message(chat_id: id, text: buyer.name.capitalize, reply_markup: start_keyboard)
                   treatments = buyer.treatments.order(id: :desc)
