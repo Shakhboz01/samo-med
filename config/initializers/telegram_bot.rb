@@ -1,4 +1,3 @@
-if Rails.env.production?
   require 'telegram/bot'
 
   Thread.new do
@@ -74,4 +73,3 @@ if Rails.env.production?
       end
     end
   end
-end
