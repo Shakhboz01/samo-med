@@ -35,6 +35,18 @@
       <% product_sells.order(created_at: :desc).each do |product_sell| %>
         <%= render 'product_sells/product_sell', product_sell: product_sell, shrink: shrink, show_delete_button: defined?(buyer) %>
       <% end %>
+      <% if defined?(@product_sells_data) %>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <th><%= @product_sells_data.sum(:amount) %></th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      <% end %>
     </tbody>
     <!-- app/views/products/_product_sells_info.html.erb -->
     <div>

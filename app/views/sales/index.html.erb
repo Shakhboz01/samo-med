@@ -17,26 +17,6 @@
       <%= render 'sale_from_local_services/filter_form', q: @q, url: request.path %>
       <%= render 'sales', sales: @sales %>
       <%= paginate @sales %>
-      <table class='table table-bordered'>
-        <thead class='table-dark'>
-          <tr>
-            <th></th>
-            <th><%= t('sales.total_sale_price') %></th>
-            <th><%= t('sales.total_profit') %></th>
-            <th><%= t('sales.total_paid_amount') %></th>
-            <th><%= t('sales.remaining_amount_due') %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th><%= t('currency.uzs') %></th>
-            <td><%= num_to_usd(@sales_data.price_in_uzs.sum(:total_price)) %></td>
-            <td><%= num_to_usd(@total_profit_in_uzs) if policy(Sale).profit? %></td>
-            <td><%= num_to_usd(@sales_data.price_in_uzs.sum(:total_paid)) %></td>
-            <td><%= num_to_usd(@sales_data.price_in_uzs.sum(:total_price) - @sales_data.price_in_uzs.sum(:total_paid)) %></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 </div>

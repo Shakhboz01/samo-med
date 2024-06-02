@@ -19,7 +19,7 @@
   <tbody>
     <% sales.each do |sale| %>
       <tr id="sale_<%= sale.id %>">
-        <td class="<%= detect_danger_row(sale.total_price, sale.total_paid) %>"><%= sale.id %></td>
+        <td><%= sale.id %></td>
         <% unless defined?(shrink) %>
           <td>
             <% if sale.closed? %>
@@ -45,8 +45,17 @@
           <%= button_to print_receipt_sale_path(sale), class: 'btn' do %>
             <%= image_tag image_url('printer.png'), style: 'width: 25px; height: 25px; cursor: pointer;' %>
           <% end %>
+        </td>
+        <td>
           <%= clink_to t('sales.view'), sale_path(sale), 'fa-search' %>
         </td>
+      </tr>
+    <% end %>
+    <% if defined?(@sales_data) %>
+      <tr>
+        <td></td><td></td><td></td>
+        <th><%= num_to_usd @sales_data.sum(:total_price) %></th>
+        <td><%= num_to_usd(@total_profit_in_uzs) if policy(Sale).profit? %></td>
       </tr>
     <% end %>
   </tbody>
