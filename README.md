@@ -1,4 +1,1 @@
-Mijoz polya
-telefon raqam check uchun
-adres
-Nom
+jshr, tugilgan sana,  ism-IFO, printer

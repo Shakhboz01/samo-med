@@ -12,16 +12,19 @@ uz:
     filter:
       search_icon_title: "Qidirish"
       name_contains: "Ism o'z ichiga oladi:"
+      jshr_contains: "Jshr ichiga oladi:"
+      comment_contains: "Komment o'z ichiga oladi:"
       phone_number_contains: "Telefon raqam:"
       active_buyers: "Faol mijozlar:"
-      phone_number_contains: "Номер телефона содержит:"
       search: "Qidirish"
       cancel: "Bekor qilish"
     form:
-      name: "Ism"
+      name: "IFO"
       phone_number: "Telefon raqami"
       debt_in_uzs: "Qarzi UZS"
       debt_in_usd: "Qarzi $"
+      jshr: JSHR
+      birthday: Tug'ilgan sana
       is_worker: "Brigadir"
       comment: "Komment"
       upload_image: "Rasm yuklash"
@@ -109,7 +112,6 @@ uz:
       product_code: "Tovar kodi:"
       search: "Qidirish"
       reset: "Bekor qilish"
-  packs:
     title: "1 dona maxsulot uchun sarflangan maxsulotlar ro'yxati"
     add_new: "Qo'shish"
     price_per_item: "Tovar narxi"

@@ -88,6 +88,6 @@ class BuyersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def buyer_params
-    params.require(:buyer).permit(:name, :phone_number, :comment, :active, :debt_in_uzs, :debt_in_usd, :image, :is_worker)
+    params.require(:buyer).permit(:jshr, :birthday, :name, :phone_number, :comment, :active, :debt_in_uzs, :debt_in_usd, :image, :is_worker)
   end
 end

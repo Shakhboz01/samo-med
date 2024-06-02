@@ -12,6 +12,8 @@ ru:
     filter:
       search_icon_title: "Поиск"
       name_contains: "Имя содержит:"
+      jshr_contains: "Jshr ichiga oladi:"
+      comment_contains: "Komment o'z ichiga oladi:"
       phone_number_contains: "Номер телефона содержит:"
       active_buyers: "Активные пациенты:"
       search: "Поиск"
@@ -21,6 +23,8 @@ ru:
       phone_number: "Телефон номер"
       debt_in_uzs: "Долг в сумах"
       debt_in_usd: "Долг в $"
+      jshr: JSHR
+      birthday: Tug'ilgan sana
       is_worker: "Бригадир"
       comment: "Коммент"
       upload_image: "Загрузить изображение"

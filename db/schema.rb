@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_29_093439) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_02_154918) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,6 +51,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_29_093439) do
     t.datetime "updated_at", null: false
     t.integer "weight", default: 0
     t.boolean "is_worker", default: false
+    t.string "jshr"
+    t.date "birthday"
   end
 
   create_table "colors", force: :cascade do |t|
