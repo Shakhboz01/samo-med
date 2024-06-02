@@ -7,7 +7,8 @@ Rails.application.configure do
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.hosts << ENV.fetch('APP_HOST_URL')
-  config.web_console.permissions = '185.213.229.172'
+  # config.web_console.permissions = '185.213.229.172'
+  config.web_console.whiny_requests = false
   config.cache_classes = false
   # Do not eager load code on boot.
   config.eager_load = false
