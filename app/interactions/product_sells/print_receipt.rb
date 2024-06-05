@@ -41,7 +41,8 @@ module ProductSells
       printer << Escpos::Helpers.center("Address: #{ENV.fetch('COMPANY_ADDRESS')}\n\n\n\n\n\n\n\n\n")
 
       begin
-        socket = TCPSocket.new ENV.fetch('PRINTER_IP'), ENV.fetch('PRINTER_PORT')
+        ip = PrinterIp.last.ip
+        socket = TCPSocket.new ip, ENV.fetch('PRINTER_PORT')
       rescue => exception
         return errors.add(:base, "Printer connecting error")
       end

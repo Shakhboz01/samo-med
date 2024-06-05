@@ -1,0 +1,2 @@
+class PrinterIp < ApplicationRecord
+end
