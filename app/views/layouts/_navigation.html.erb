@@ -7,6 +7,10 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to t('navigation.registration'), new_buyer_path, class: 'nav-link' %>
+      </li>
+      <% if %w[админ].include?(current_user.role) %>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= t('navigation.view') %>
@@ -23,29 +27,25 @@
           <%= link_to t('navigation.employees'), users_path, class: 'dropdown-item' %>
         </div>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%= t('navigation.actions') %>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <%= link_to t('navigation.sales'), buyers_path, class: 'dropdown-item' %>
-          <%= button_to t('navigation.purchase'), default_create_delivery_from_counterparties_path, method: :post, class: 'dropdown-item' %>
-          <%= link_to t('navigation.expense'), new_expenditure_path, class: 'dropdown-item' %>
-          <%= link_to t('navigation.add_supplier'), new_provider_path, class: 'dropdown-item' %>
-          <%= link_to t('navigation.add_product'), new_pack_path, class: 'dropdown-item' %>
-          <%= link_to t('navigation.give_monthly_advance'), new_salary_path, class: 'dropdown-item' %>
-        </div>
-      </li>
-      <li class="nav-item">
-        <%= link_to t('navigation.warehouse'), packs_path, class: 'nav-link' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to t('navigation.registration'), new_buyer_path, class: 'nav-link' %>
-      </li>
-      <% if %w[админ].include?(current_user.role) %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= t('navigation.actions') %>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to t('navigation.sales'), buyers_path, class: 'dropdown-item' %>
+            <%= button_to t('navigation.purchase'), default_create_delivery_from_counterparties_path, method: :post, class: 'dropdown-item' %>
+            <%= link_to t('navigation.expense'), new_expenditure_path, class: 'dropdown-item' %>
+            <%= link_to t('navigation.add_supplier'), new_provider_path, class: 'dropdown-item' %>
+            <%= link_to t('navigation.add_product'), new_pack_path, class: 'dropdown-item' %>
+            <%= link_to t('navigation.give_monthly_advance'), new_salary_path, class: 'dropdown-item' %>
+          </div>
+        </li>
         <li class="nav-item">
           <%= link_to t('navigation.admin'), admin_page_path, class: 'nav-link' %>
         </li>
+        <li class="nav-item">
+        <%= link_to t('navigation.warehouse'), packs_path, class: 'nav-link' %>
+      </li>
       <% end %>
     </ul>
   </div>
