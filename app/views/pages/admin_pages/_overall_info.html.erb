@@ -9,39 +9,28 @@
     </thead>
     <tbody>
       <tr>
-        <td></td>
-        <th>So'mda</th>
-        <th>Dollarda</th>
-      </tr>
-      <tr>
-        <td>Sotishdan tushgan pullar</td>
+        <td>Xizmat ko'rsatishdan tushgan pullar</td>
         <td><%= num_to_usd @sales_in_uzs %></td>
-        <td><%= num_to_usd @sales_in_usd %></td>
       </tr>
       <tr>
         <td>Yuk beruvchilarga berilgan pullar</td>
         <td><%= num_to_usd @delivery_from_counterparties_in_uzs %></td>
-        <td><%= num_to_usd @delivery_from_counterparties_in_usd %></td>
       </tr>
       <tr>
         <td>Ishchilarga oylik</td>
         <td><%= num_to_usd @salaries %></td>
-        <td>-</td>
       </tr>
       <tr>
         <td>Ishchilarga avans</td>
         <td><%= num_to_usd @prepayment %></td>
-        <td>-</td>
       </tr>
       <tr>
         <td>Boshqa xarajatlar</td>
         <td><%= num_to_usd @expenditures_in_uzs %></td>
-        <td><%= num_to_usd @expenditures_in_usd %></td>
       </tr>
       <tr>
         <td style='color: green; font-weight: bold'>Shundan qolgan foyda:</td>
         <td><%= num_to_usd @overall_income_in_uzs %></td>
-        <td><%= num_to_usd @overall_income_in_usd %></td>
       </tr>
     </tbody>
   </table>

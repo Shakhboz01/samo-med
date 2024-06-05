@@ -71,8 +71,8 @@ class PagesController < ApplicationController
     expenditures = Expenditure.ransack(params[:q]).result
     salaries = Salary.ransack(params[:q]).result
 
-    @sales_in_usd = sales.price_in_usd.sum(:total_paid)
-    @sales_in_uzs = sales.price_in_uzs.sum(:total_paid)
+    @sales_in_usd = sales.price_in_usd.sum(:total_price)
+    @sales_in_uzs = sales.price_in_uzs.sum(:total_price)
 
     @delivery_from_counterparties_in_usd = delivery_from_counterparties.price_in_usd.sum(:total_paid)
     @delivery_from_counterparties_in_uzs = delivery_from_counterparties.price_in_uzs.sum(:total_paid)
@@ -85,15 +85,6 @@ class PagesController < ApplicationController
     @salaries = salaries.where(prepayment: false).sum(:price)
 
     # calculate profit
-    sales = sales.left_outer_joins(:product_sells)
-                 .where(product_sells: { id: nil })
-                 .where.not(total_price: 0).where(total_paid:0)
-
-    sale_total_price = sales.sum(:total_price)
-    sale_total_paid = sales.sum(:total_paid)
-    unpaid_difference_in_percent_in_usd = sales.where('sales.price_in_usd = ?', true).sum(:total_paid) * 100 / sales.where('sales.price_in_usd = ?', true).sum(:total_price)
-    unpaid_difference_in_percent_in_uzs = sales.where('sales.price_in_usd = ?', false).sum(:total_paid) * 100 / sales.where('sales.price_in_usd = ?', false).sum(:total_price)
-
     @overall_income_in_usd = @sales_in_usd - (@expenditures_in_usd + @delivery_from_counterparties_in_usd)
     @overall_income_in_uzs = @sales_in_uzs - (@prepayment + @salaries + @expenditures_in_uzs + @delivery_from_counterparties_in_uzs)
   end
