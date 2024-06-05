@@ -6,7 +6,6 @@ class Buyer < ApplicationRecord
 
   validates_presence_of :name
   validates_uniqueness_of :phone_number, message: "Mijoz avval ro'yxatdan o'tgan!"
-  validates_uniqueness_of :jshr, message: "Mijoz avval ro'yxatdan o'tgan!"
   validates :phone_number, length: { is: 9 }
   has_one_attached :image
   has_many :sales

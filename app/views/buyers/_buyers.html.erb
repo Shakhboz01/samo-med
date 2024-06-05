@@ -6,7 +6,7 @@
       <% end %>
       <th><%= t('buyers.index.name') %></th>
       <th><%= t('buyers.index.phone_number') %></th>
-      <th><%= t('buyers.index.jshr') %></th>
+      <th><%= t('buyers.index.birthday') %></th>
       <% unless defined?(shrink) %>
         <th><%= t('buyers.index.comment') %></th>
       <% end %>
@@ -22,7 +22,7 @@
           <%= button_to buyer.name, default_create_sales_path(buyer_id: buyer.id), method: :post, style: 'background: none; cursor: pointer' %>
         </td>
         <td><%= buyer.phone_number %></td>
-        <td><%= buyer.jshr %> <%= clink_to t('buyers.index.show'), buyer_path(buyer), 'fa-search' %></td>
+        <td><%= buyer.birthday %> <%= clink_to t('buyers.index.show'), buyer_path(buyer), 'fa-search' %></td>
         <% unless defined?(shrink) %>
           <td><%= buyer.comment %></td>
           <td>

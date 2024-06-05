@@ -1,4 +1,6 @@
 uz:
+  date:
+    order: ["day", "month", "year"]
   buyers:
     index:
       id: "ID"
@@ -8,6 +10,7 @@ uz:
       comment: "Коммент"
       edit: "Ozgartirish"
       deactivate: "Деактивировать"
+      birthday: "Tug'ilgan sana"
       activate: "Активировать"
     filter:
       search_icon_title: "Qidirish"
