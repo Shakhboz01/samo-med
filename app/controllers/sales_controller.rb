@@ -119,7 +119,7 @@ class SalesController < ApplicationController
 
   def print_receipt
     user_ip = request.remote_ip
-    ProcessReceiptJob.perform_later(@sale, user_ip)
+    ProductSells::PrintReceipt.run(sale: @sale, user_ip: user_ip)
     redirect_to request.referrer, notice: 'Loading...'
   end
 
