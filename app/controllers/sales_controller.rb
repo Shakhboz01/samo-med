@@ -118,8 +118,9 @@ class SalesController < ApplicationController
   end
 
   def print_receipt
-    ProcessReceiptJob.perform_later(@sale)
-    redirect_to request.referrer, message: 'Loading...'
+    user_ip = request.remote_ip
+    ProcessReceiptJob.perform_later(@sale, user_ip)
+    redirect_to request.referrer, notice: 'Loading...'
   end
 
   private
