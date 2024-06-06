@@ -42,7 +42,7 @@ module ProductSells
         port = 9100
 
         Rails.logger.info("Connecting to printer at #{ip}:#{port}")
-        socket = TCPSocket.new(192.168.0.98, port)
+        socket = TCPSocket.new "192.168.0.98", port
 
         printer.cut!
         socket.write printer.to_escpos
