@@ -1,5 +1,5 @@
 <div class='p-3' style='color: black; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;'>
-  <%= simple_form_for(sale) do |f| %>
+  <%= simple_form_for(sale, html: {data: {turbo: 'false'}}) do |f| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
     <%= f.input :status, as: :hidden, input_html: { value: 1 } %>
