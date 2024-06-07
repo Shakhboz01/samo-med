@@ -16,3 +16,17 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).on('turbo:load', function(){
+    const url = new URL(window.location.href);
+
+    if (url.searchParams.has('reload')) {
+      // Remove all search params to construct a clean URL
+      url.search = '';
+
+      // Reload the page without any parameters
+      window.location.href = url.href;
+    }
+  });
+</script>

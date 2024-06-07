@@ -42,7 +42,7 @@
           <td><%= sale.user.name %></td>
         <% end %>
         <td>
-          <%= button_to "http://localhost:4000/print/#{sale.id}", class: 'btn' do %>
+          <%= link_to "http://localhost:4000/print/#{sale.id}" do %>
             <%= image_tag image_url('printer.png'), style: 'width: 25px; height: 25px; cursor: pointer;' %>
           <% end %>
         </td>
