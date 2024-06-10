@@ -13,5 +13,6 @@ class Treatment < ApplicationRecord
       "Bemor: #{buyer.name}\n" \
       "Vrach: #{user.name}\n" \
       "#{comment}"
+      SendMessageJob.perform_later(message)
   end
 end
