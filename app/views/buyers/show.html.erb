@@ -1,6 +1,9 @@
 <div class='container'>
   <h3 class='text-center'><%= @buyer.name %></h3>
-
+  <div class='card'>
+    <h5>Yangi tashxis:</h5>
+    <%= render 'treatments/form', treatment: @treatment %>
+  </div>
   <% if @treatments.exists? %>
     <div class='card-body'>
       <%= render 'treatments/treatments', treatments: @treatments %>

@@ -18,6 +18,7 @@ class Sale < ApplicationRecord
             all
           end
         }
+  before_create :send_message
   before_update :update_product_sales_currencies
   after_save :process_status_change, if: :saved_change_to_status?
 
@@ -40,6 +41,14 @@ class Sale < ApplicationRecord
 
 
   private
+
+  def send_message
+    message =
+      "YANGI BEMOR!\n" \
+      "<a href=\"https://#{ENV.fetch('HOST_URL')}/buyers/#{buyer_id}\">#{buyer.name}</a>\n"
+    message << buyer.comment if buyer.comment
+    SendMessageJob.perform_later(message)
+  end
 
   def process_status_change
     if closed? && status_before_last_save != 'closed'
