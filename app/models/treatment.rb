@@ -6,8 +6,9 @@ class Treatment < ApplicationRecord
   private
 
   def send_message
+    sale_id = buyer.sales&.last&.id
     message =
-      "<b><a href=\"https://#{ENV.fetch('HOST_URL')}/sales/#{sales.last.id}\">TASHXIS</a>\n" \
+      "<b><a href=\"https://#{ENV.fetch('HOST_URL')}/sales/#{sale_id}\">TASHXIS</a>\n" \
       "Bemor: #{buyer.name}\n" \
       "Vrach: #{user.name}\n" \
       "#{comment}"
