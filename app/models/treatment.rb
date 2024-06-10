@@ -7,11 +7,10 @@ class Treatment < ApplicationRecord
 
   def send_message
     sale_id = buyer.sales&.last&.id
-    message =
-      "<b><a href=\"https://#{ENV.fetch('HOST_URL')}/sales/#{sale_id}\">TASHXIS</a>\n" \
+    message = "<b><a href=\"https://#{ENV.fetch('HOST_URL')}/sales/#{sale_id}\">TASHXIS</a>\n" \
       "Bemor: #{buyer.name}\n" \
-      "Vrach: #{user.name}\n" \
-      "#{comment}"
+      "Vrach: #{user.name}\n"
+    message << "#{comment}"
     SendMessageJob.perform_later(message)
   end
 end
