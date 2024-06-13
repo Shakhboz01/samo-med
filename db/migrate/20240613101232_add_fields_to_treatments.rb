@@ -15,7 +15,6 @@ class AddFieldsToTreatments < ActiveRecord::Migration[7.0]
     add_column :treatments, :orqa_qichishishi, :boolean, default: false
     add_column :treatments, :toshma_va_doglar, :boolean, default: false
     add_column :treatments, :ishtaxasizlik, :boolean, default: false
-    add_column :treatments, :holsizlik, :boolean, default: false
     add_column :treatments, :boy_osmaslik, :boolean, default: false
     add_column :treatments, :oyoq_ogrigi, :boolean, default: false
     add_column :treatments, :siyib_qoyish, :boolean, default: false
