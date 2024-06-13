@@ -4,6 +4,20 @@
  *= require_self
 */
 @import "jquery-ui/datepicker";
+.erkak {
+  padding: 2px 5px;
+  border-radius: 8px;
+  background: rgb(15, 105, 232);
+  color: white;
+  font-size: small
+}
+.ayol {
+  padding: 2px 5px;
+  border-radius: 8px;
+  background: rgb(232, 15, 210);
+  color: white;
+  font-size: small
+}
 .categories span {
   padding: 5px 10px;
   border: 1px solid grey;

@@ -6,6 +6,7 @@
     <%= f.input :name, label: t('buyers.form.name') %>
     <%= f.input :phone_number, label: t('buyers.form.phone_number') %>
     <%= f.input :birthday, label: 'Tug\'ilgan sana', as: :date, html5: true %>
+    <%= f.input :gender, label: 'Jinsi', collection: Buyer.genders.keys.map { |unit| [Buyer.human_attribute_name("unit.#{unit}"), unit] }, include_blank: false, class: 'form-control' %>
     <%= f.input :comment, label: t('buyers.form.comment') %>
   </div>
 

@@ -4,6 +4,7 @@ class Buyer < ApplicationRecord
   attr_accessor :debt_in_usd
   attr_accessor :debt_in_uzs
 
+  enum gender: %i[erkak ayol]
   validates_presence_of :name
   validates_uniqueness_of :phone_number, message: "Mijoz avval ro'yxatdan o'tgan!"
   validates :phone_number, length: { is: 9 }

@@ -26,7 +26,7 @@
           <% else %>
             <%= buyer.name %>
           <% end %>
-
+          <span class="<%= buyer.gender %>"><%= buyer.gender %></span>
         </td>
         <td><%= buyer.phone_number %></td>
         <td><%= buyer.birthday %></td>
@@ -45,6 +45,8 @@
             <td>
               <%= clink_to t('buyers.index.show'), buyer_path(buyer), 'fa-search' %>
               <%= clink_to t('buyers.index.edit'), edit_buyer_path(buyer), 'fa-edit' %>
+            </td>
+            <td>
               <% if buyer.active %>
                 <%= clink_to t('buyers.index.deactivate'), toggle_active_buyer_path(buyer), 'fa-ban', :post %>
               <% else %>
