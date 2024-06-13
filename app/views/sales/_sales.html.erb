@@ -43,7 +43,7 @@
         </td>
       </tr>
       <% sale.product_sells.each do |ps| %>
-        <tr class='table-warning'>
+        <tr class="<%= ps.danger_zone ? 'table-danger' : 'table-warning' %>">
           <td></td>
           <td></td>
           <td><%= ps.pack.name %></td>

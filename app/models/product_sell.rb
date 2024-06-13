@@ -20,7 +20,8 @@ class ProductSell < ApplicationRecord
   scope :price_in_usd, -> { where('price_in_usd = ?', true) }
   before_save :change_price_based_on_currency
   before_create :increase_amount_sold_and_check_currency
-  after_create :enqueue_perform_sell
+  before_create :set_danger
+  before_update :set_danger
   after_create :increase_total_price
   after_create :decrement_pack_usage
   before_destroy :enqueue_handle_deletion
@@ -36,6 +37,12 @@ class ProductSell < ApplicationRecord
   end
 
   private
+
+  def set_danger
+    return if pack.sell_price == sell_price
+
+    self.danger_zone = true
+  end
 
   def decrement_pack_usage
     Packs::TogglePackRemaining.run(pack: pack, amount: amount, action: :decrement)

@@ -104,7 +104,7 @@ class ProductSellsController < ApplicationController
     params.require(:product_sell).permit(
       :sale_from_local_service_id, :sale_id, :combination_of_local_product_id,
       :sell_price, :sell_price_in_uzs, :product_id, :total_profit, :amount, :payment_type, :pack_id, :barcode,
-      :sell_by_piece, :pack_name
+      :sell_by_piece, :pack_name, :danger_zone
     )
   end
 end
