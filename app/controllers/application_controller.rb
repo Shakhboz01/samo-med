@@ -21,9 +21,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(resource)
-    if resource.врач? # Replace :дилер with the actual role check
-      qr_scanner_path
-    elsif resource.регистратор?
+    if resource.регистратор?
       new_buyer_path
     elsif resource.админ?
       admin_page_path
