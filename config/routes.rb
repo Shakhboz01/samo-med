@@ -84,7 +84,7 @@ Rails.application.routes.draw do
       post "accept_new_participation", action: :accept_new_participation, as: :accept_new_participation
     end
   end
-  root "pages#main_page"
+  root "buyers#index"
   get "pages#define_sale_destination", to: "pages#define_sale_destination", as: :define_sale_destination
   get "qr_scanner", to: "pages#qr_scanner", as: :qr_scanner
   get "pages#shortcut", to: "pages#shortcut", as: :shortcut

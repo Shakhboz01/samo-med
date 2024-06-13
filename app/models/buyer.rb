@@ -12,6 +12,8 @@ class Buyer < ApplicationRecord
   has_many :treatments
   has_many :sale_from_local_services
   has_many :sale_from_services
+  before_update :send_message
+  before_create :send_message
   scope :active, -> { where(:active => true) }
 
   def calculate_debt_in_usd
@@ -20,5 +22,14 @@ class Buyer < ApplicationRecord
 
   def calculate_debt_in_uzs
     self.sales.price_in_uzs.sum(:total_price) - self.sales.price_in_uzs.sum(:total_paid)
+  end
+
+  private
+
+  def send_message
+    message =
+      "<a href=\"https://#{ENV.fetch('HOST_URL')}/buyers/#{id}\">#{name} vrach ko'rigiga yuborildi</a>\n"
+    message << comment if comment
+    SendMessageJob.perform_later(message)
   end
 end

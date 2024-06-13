@@ -3,8 +3,9 @@ class BuyersController < ApplicationController
 
   # GET /buyers or /buyers.json
   def index
+    @user = current_user
     @q = Buyer.ransack(params[:q])
-    @buyers = @q.result.order(active: :desc).page(params[:pahe]).per(70)
+    @buyers = @q.result.order(updated_at: :desc).page(params[:pahe]).per(70)
   end
 
   # GET /buyers/1 or /buyers/1.json
@@ -29,21 +30,7 @@ class BuyersController < ApplicationController
 
     respond_to do |format|
       if @buyer.save
-        last_one = @buyer.sales.order(created_at: :asc).last
-        if !last_one.nil? && !last_one.closed?
-          if last_one.product_sells.empty?
-            last_one.update(created_at: DateTime.current)
-          end
-
-          format.html { redirect_to sale_url(last_one), notice: "Теперь добавьте продажу товаров" }
-        else
-          sfs = Sale.new(buyer: @buyer, user: current_user, price_in_usd: ENV.fetch('PRICE_IN_USD'))
-          if sfs.save
-            format.html { redirect_to sale_url(sfs), notice: 'Теперь добавьте продажу товаров' }
-          else
-            format.html { redirect_to request.referrer, notice: "Something went wrong" }
-          end
-        end
+        format.html { redirect_to buyers_url, notice: '' }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @buyer.errors, status: :unprocessable_entity }
@@ -88,6 +75,6 @@ class BuyersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def buyer_params
-    params.require(:buyer).permit(:jshr, :birthday, :name, :phone_number, :comment, :active, :debt_in_uzs, :debt_in_usd, :image, :is_worker)
+    params.require(:buyer).permit(:jshr, :birthday, :weight, :name, :phone_number, :comment, :active, :debt_in_uzs, :debt_in_usd, :image, :is_worker)
   end
 end

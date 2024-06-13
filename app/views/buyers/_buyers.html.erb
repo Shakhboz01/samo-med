@@ -2,7 +2,7 @@
   <thead class='table-dark'>
     <tr>
       <% unless defined?(shrink) %>
-        <th><%= t('buyers.index.id') %></th>
+        <th>#</th>
       <% end %>
       <th><%= t('buyers.index.name') %></th>
       <th><%= t('buyers.index.phone_number') %></th>
@@ -13,28 +13,45 @@
     </tr>
   </thead>
   <tbody style='font-size: large' id='buyers-list'>
-    <% buyers.order(:name).each do |buyer| %>
+    <% buyers.order(:name).each_with_index do |buyer, index| %>
       <tr data-buyer-name="<%= buyer.name %>" class="<%= active_tr(buyer.active) %>">
         <% unless defined?(shrink) %>
-          <td><%= buyer.id %></td>
+          <td><%= index +1 %></td>
         <% end %>
         <td>
-          <%= button_to buyer.name, default_create_sales_path(buyer_id: buyer.id), method: :post, style: 'background: none; cursor: pointer' %>
+          <% if @user.врач? %>
+            <%= link_to buyer.name, buyer_path(buyer) %>
+          <% elsif @user.кассир? %>
+            <%= button_to buyer.name, default_create_sales_path(buyer_id: buyer.id), method: :post, style: 'background: none; cursor: pointer' %>
+          <% else %>
+            <%= buyer.name %>
+          <% end %>
+
         </td>
         <td><%= buyer.phone_number %></td>
-        <td><%= buyer.birthday %> <%= clink_to t('buyers.index.show'), buyer_path(buyer), 'fa-search' %></td>
-        <% unless defined?(shrink) %>
-          <td><%= buyer.comment %></td>
+        <td><%= buyer.birthday %></td>
+        <td><%= buyer.comment %></td>
+
+        <% if @user.регистратор? %>
           <td>
-            <%= clink_to t('buyers.index.show'), buyer_path(buyer), 'fa-search' %>
-            <%= clink_to t('buyers.index.edit'), edit_buyer_path(buyer), 'fa-edit' %>
-            <% if buyer.active %>
-              <%= clink_to t('buyers.index.deactivate'), toggle_active_buyer_path(buyer), 'fa-ban', :post %>
-            <% else %>
-              <%= clink_to t('buyers.index.activate'), toggle_active_buyer_path(buyer), 'fa-chart-line', :post %>
+            <%= simple_form_for(buyer) do |f| %>
+              <%= f.input :weight, lable: false, as: :hidden, input_html: {value: buyer.weight + 1} %>
+              <%= f.submit 'Vrachga yuborish', class: 'btn btn-success' %>
             <% end %>
           </td>
         <% end %>
+
+          <% if @user.админ? %>
+            <td>
+              <%= clink_to t('buyers.index.show'), buyer_path(buyer), 'fa-search' %>
+              <%= clink_to t('buyers.index.edit'), edit_buyer_path(buyer), 'fa-edit' %>
+              <% if buyer.active %>
+                <%= clink_to t('buyers.index.deactivate'), toggle_active_buyer_path(buyer), 'fa-ban', :post %>
+              <% else %>
+                <%= clink_to t('buyers.index.activate'), toggle_active_buyer_path(buyer), 'fa-chart-line', :post %>
+              <% end %>
+            </td>
+          <% end %>
       </tr>
     <% end %>
   </tbody>

@@ -1,5 +1,10 @@
 <div class="container my-5">
-  <%= render 'filter_form', q: @q, url: request.path %>
+  <% if @user.врач? || @user.кассир? %>
+    <button class="text-center center btn btn-warning" onclick="window.location.reload();">Обновить</button>
+  <% else %>
+    <%= render 'filter_form', q: @q, url: request.path %>
+  <% end %>
+
   <div class="card shadow-lg">
     <div class="card-header d-flex justify-content-between align-items-center">
       <h3 class="card-title font-weight-bold">Mijozlar</h3>
