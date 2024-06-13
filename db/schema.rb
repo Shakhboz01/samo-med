@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_13_100211) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_13_101232) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -473,6 +473,24 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_13_100211) do
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "bosh_ogriq", default: false
+    t.boolean "qon_bosimi_kotarilishi", default: false
+    t.boolean "holsizlik", default: false
+    t.boolean "bel_va_oyoq_ogriqi", default: false
+    t.boolean "gejga_tolishi", default: false
+    t.boolean "teri_kasalliklari", default: false
+    t.boolean "koz_kasalliklari", default: false
+    t.boolean "jkt_kasalliklari", default: false
+    t.boolean "boshqa_shikoyatlar", default: false
+    t.boolean "tish_gijirlashi", default: false
+    t.boolean "jirrakilik", default: false
+    t.boolean "orqa_qichishishi", default: false
+    t.boolean "toshma_va_doglar", default: false
+    t.boolean "ishtaxasizlik", default: false
+    t.boolean "halsizlik", default: false
+    t.boolean "boy_osmaslik", default: false
+    t.boolean "oyoq_ogrigi", default: false
+    t.boolean "siyib_qoyish", default: false
     t.index ["buyer_id"], name: "index_treatments_on_buyer_id"
     t.index ["user_id"], name: "index_treatments_on_user_id"
   end

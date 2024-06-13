@@ -6,6 +6,102 @@
     <div class="card-body">
       <%= render 'filter_form', q: @q, url: request.path %>
     </div>
+    <div class='bg-light'>
+    <!-- app/views/treatments/statistics.html.erb -->
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h5>Statistika</h5>
+    </div>
+    <div class="card-body">
+      <h6>Jami: <%= @total_treatments %></h6>
+      <hr>
+      <div class='row'>
+        <div class='col-sm-12 col-md-6'>
+          <h5>Хиджама</h5>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Bosh Og'riq
+              <span class="badge badge-primary badge-pill"><%= @bosh_ogriq_count %></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Qon Bosimi Ko'tarilishi
+              <span class="badge badge-primary badge-pill"><%= @qon_bosimi_kotarilishi_count %></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Holsizlik
+              <span class="badge badge-primary badge-pill"><%= @holsizlik_count %></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Bel va Oyoq Og'riqi
+              <span class="badge badge-primary badge-pill"><%= @bel_va_oyoq_ogriqi_count %></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Gejga Tolishi
+              <span class="badge badge-primary badge-pill"><%= @gejga_tolishi_count %></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Teri Kasalliklari
+              <span class="badge badge-primary badge-pill"><%= @teri_kasalliklari_count %></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Ko'z Kasalliklari
+              <span class="badge badge-primary badge-pill"><%= @koz_kasalliklari_count %></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              JKT Kasalliklari
+              <span class="badge badge-primary badge-pill"><%= @jkt_kasalliklari_count %></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Boshqa Shikoyatlar
+              <span class="badge badge-primary badge-pill"><%= @boshqa_shikoyatlar_count %></span>
+            </li>
+          </ul>
+        </div>
+
+        <div class='col-sm-12 col-md-6'>
+          <h5>Гижжа</h5>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Tish G'ijirlashi
+              <span class="badge badge-primary badge-pill"><%= @tish_gijirlashi_count %></span>
+            </li>
+            <li class="list-group-item d-flex  justify-content-between align-items-center">
+              Jirrakilik
+              <span class="badge badge-primary badge-pill"><%= @jirrakilik_count %></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Orqa Qichishishi
+              <span class="badge badge-primary badge-pill"><%= @orqa_qichishishi_count %></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Toshma va Dog'lar
+              <span class="badge badge-primary badge-pill"><%= @toshma_va_doglar_count %></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Ishtaxasizlik
+              <span class="badge badge-primary badge-pill"><%= @ishtaxasizlik_count %></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Bo'y Osmaslik
+              <span class="badge badge-primary badge-pill"><%= @boy_osmaslik_count %></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Oyoq Og'rigi
+              <span class="badge badge-primary badge-pill"><%= @oyoq_ogrigi_count %></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Siyib Qo'yish
+              <span class="badge badge-primary badge-pill"><%= @siyib_qoyish_count %></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
 
     <%= render 'treatments', treatments: @treatments %>
     <%= paginate @treatments %>

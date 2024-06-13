@@ -1,15 +1,82 @@
-
 <%= simple_form_for(treatment) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h5>Yangi tashxis</h5>
+    </div>
+    <div class="card-body">
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
-    <%= f.association :buyer, as: :hidden %>
-    <%= f.input :comment, label: 'Комментарие' %>
-  </div>
+      <div class="form-inputs">
+        <%= f.association :buyer, as: :hidden %>
+        <div class="row">
+          <div class="col-sm-6 mb-3">
+            <h5 class="bg-light p-2 rounded">Хиджама</h5>
+            <div class="form-check">
+              <%= f.input :bosh_ogriq, as: :boolean, label: 'Bosh Og\'riq', input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } %>
+            </div>
+            <div class="form-check">
+              <%= f.input :qon_bosimi_kotarilishi, as: :boolean, label: 'Qon Bosimi Ko\'tarilishi', input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } %>
+            </div>
+            <div class="form-check">
+              <%= f.input :holsizlik, as: :boolean, label: 'Holsizlik', input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } %>
+            </div>
+            <div class="form-check">
+              <%= f.input :bel_va_oyoq_ogriqi, as: :boolean, label: 'Bel va Oyoq Og\'riqi', input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } %>
+            </div>
+            <div class="form-check">
+              <%= f.input :gejga_tolishi, as: :boolean, label: 'Gejga Tolishi', input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } %>
+            </div>
+            <div class="form-check">
+              <%= f.input :teri_kasalliklari, as: :boolean, label: 'Teri Kasalliklari', input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } %>
+            </div>
+            <div class="form-check">
+              <%= f.input :koz_kasalliklari, as: :boolean, label: 'Ko\'z Kasalliklari', input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } %>
+            </div>
+            <div class="form-check">
+              <%= f.input :jkt_kasalliklari, as: :boolean, label: 'JKT Kasalliklari', input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } %>
+            </div>
+          </div>
+          <div class="col-sm-6 mb-3">
+            <h5 class="bg-light p-2 rounded">Гижжа</h5>
+            <div class="form-check">
+              <%= f.input :tish_gijirlashi, as: :boolean, label: 'Tish G\'ijirlashi', input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } %>
+            </div>
+            <div class="form-check">
+              <%= f.input :jirrakilik, as: :boolean, label: 'Jirrakilik', input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } %>
+            </div>
+            <div class="form-check">
+              <%= f.input :orqa_qichishishi, as: :boolean, label: 'Orqa Qichishishi', input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } %>
+            </div>
+            <div class="form-check">
+              <%= f.input :toshma_va_doglar, as: :boolean, label: 'Toshma va Dog\'lar', input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } %>
+            </div>
+            <div class="form-check">
+              <%= f.input :ishtaxasizlik, as: :boolean, label: 'Ishtaxasizlik', input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } %>
+            </div>
+            <div class="form-check">
+              <%= f.input :boy_osmaslik, as: :boolean, label: 'Bo\'y Osmaslik', input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } %>
+            </div>
+            <div class="form-check">
+              <%= f.input :oyoq_ogrigi, as: :boolean, label: 'Oyoq Og\'rigi', input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } %>
+            </div>
+            <div class="form-check">
+              <%= f.input :siyib_qoyish, as: :boolean, label: 'Siyib Qo\'yish', input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } %>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="form-check">
+          <%= f.input :boshqa_shikoyatlar, as: :boolean, label: 'Boshqa Shikoyatlar', input_html: { class: 'form-check-input' }, label_html: { class: 'form-check-label' } %>
+        </div>
+        <div class="form-group">
+          <%= f.input :comment, label: 'Qo\'shimcha shikoyatlar', input_html: { class: 'form-control' } %>
+        </div>
+      </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, 'Создать' %>
+      <div class="form-actions">
+        <%= f.button :submit, 'Создать', class: 'btn btn-primary' %>
+      </div>
+    </div>
   </div>
-  <br/>
 <% end %>

@@ -36,6 +36,13 @@
   height: 70px;
   overflow: hidden;
 }
+.badge {
+  padding: 4px 6px;
+  border-radius: 8px;
+  background: #112520;
+  color: white;
+  font-size: 14px
+}
 .categories{
   max-width: 100%;
   overflow: auto;
