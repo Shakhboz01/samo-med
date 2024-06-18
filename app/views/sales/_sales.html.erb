@@ -1,15 +1,14 @@
-<table class="table table-hover table-bordered table-striped">
+<table class="table table-hover table-sm table-bordered table-striped">
   <thead class='table-dark'>
     <tr>
       <th><%= t('sales.id') %></th>
       <% unless defined?(shrink) %>
-        <td><%= t('sales.locked') %></td>
+        <td></td>
       <% end %>
       <th><%= t('sales.buyer') %></th>
       <th><%= t('sales.total_purchase_price') %></th>
       <th>Ro'yxat</th>
       <% unless defined?(shrink) %>
-        <th><%= t('sales.comment') %></th>
         <th><%= t('sales.sale_date') %></th>
         <th colspan="3"></th>
       <% end %>
@@ -36,7 +35,6 @@
         <% end %>
         </td>
         <% unless defined?(shrink) %>
-          <td><%= sale.comment %></td>
           <td><%= strf_datetime sale.created_at %></td>
         <% end %>
         <td>
