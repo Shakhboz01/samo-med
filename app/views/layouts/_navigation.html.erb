@@ -32,7 +32,6 @@
             <%= t('navigation.actions') %>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= link_to t('navigation.sales'), buyers_path, class: 'dropdown-item' %>
             <%= button_to t('navigation.purchase'), default_create_delivery_from_counterparties_path, method: :post, class: 'dropdown-item' %>
             <%= link_to t('navigation.expense'), new_expenditure_path, class: 'dropdown-item' %>
             <%= link_to t('navigation.add_supplier'), new_provider_path, class: 'dropdown-item' %>
