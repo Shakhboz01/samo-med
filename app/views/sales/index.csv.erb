@@ -1,0 +1,17 @@
+<%- headers = ['Mijoz', 'Umumiy xarid narxi', 'Sotuv sanasi', 'Kassir', 'Kommentariya', 'Mahsulotlar'] -%>
+
+
+<%= CSV.generate_line(headers).strip %>
+
+<%- @sales_data.each do |sale| -%>
+  <%= CSV.generate_line([
+    Translit.convert(sale.buyer.name, :english).gsub(/[^0-9a-zA-Z]/, ' '),
+    sale.total_price.to_i,
+    sale.created_at.strftime("%Y-%m-%d %H:%M"),
+    sale.user.name,
+    (sale.comment.nil? || sale.comment.empty?) ? ' ' : sale.comment,
+    sale.sells_info
+  ],
+  encoding: 'UTF-8'
+  ).strip %>
+<%- end -%>

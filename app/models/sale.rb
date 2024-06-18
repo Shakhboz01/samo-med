@@ -39,6 +39,9 @@ class Sale < ApplicationRecord
     product_sells.sum(:total_profit)
   end
 
+  def sells_info
+    product_sells.map {|ps| "#{Translit.convert(ps.pack.name, :english).gsub(/[^0-9a-zA-Z]/, ' ')} - #{ps.total_price}"}.join(', ')
+  end
 
   private
 

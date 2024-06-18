@@ -1,3 +1,5 @@
+require 'csv'
+
 class SalesController < ApplicationController
   before_action :set_sale, only: %i[ show edit update destroy toggle_status html_view print_receipt]
 
@@ -5,10 +7,7 @@ class SalesController < ApplicationController
   # GET /sales or /sales.json
   def index
     @q = Sale.includes(:buyer, :user).ransack(params[:q])
-    @sales =
-      @q.result.filter_by_total_paid_less_than_price(params.dig(:q_other, :total_paid_less_than_price))
-        .order(created_at: :desc)
-
+    @sales = @q.result.order(created_at: :desc)
     @sales_data = @sales
     @sales = @sales.page(params[:page]).per(70)
     total_profit_in_usd = @sales_data.joins(:product_sells).where('sales.price_in_usd = ?', true).sum('product_sells.total_profit')
