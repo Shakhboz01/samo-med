@@ -1,4 +1,4 @@
-<table class="table shadow table-hover table-bordered table-sm table-striped">
+<table class="table shadow table-hover table-bordered table-sm">
   <thead class='table-dark'>
     <tr>
       <% unless defined?(shrink) %>
@@ -14,7 +14,7 @@
   </thead>
   <tbody style='font-size: large' id='buyers-list'>
     <% buyers.order(:name).each_with_index do |buyer, index| %>
-      <tr data-buyer-name="<%= buyer.name %>" class="<%= active_tr(buyer.active) %>">
+      <tr class="<%= active_tr(buyer.active) %>">
         <% unless defined?(shrink) %>
           <td><%= index +1 %></td>
         <% end %>
@@ -30,7 +30,13 @@
         </td>
         <td><%= buyer.phone_number %></td>
         <td><%= buyer.birthday %></td>
-        <td><%= buyer.comment %></td>
+
+        <% if buyer.has_todays_treatment.nil? %>
+          <td></td>
+        <% else %>
+          <%= render 'treatments/treatment', treatment: buyer.has_todays_treatment %>
+        <% end %>
+
 
         <% if @user.регистратор? %>
           <td>

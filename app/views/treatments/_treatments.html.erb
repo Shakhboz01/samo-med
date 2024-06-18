@@ -16,27 +16,7 @@
       <td><%= treatment.id %></td>
       <td><%= treatment.buyer.name %></td>
       <td><%= treatment.user.name %></td>
-      <td>
-        <%= treatment.comment %>
-        <% if treatment.bosh_ogriq %> <span class="badge badge-primary">Bosh Og'riq</span> <% end %>
-        <% if treatment.qon_bosimi_kotarilishi %> <span class="badge badge-secondary">Qon Bosimi Kotarilishi</span> <% end %>
-        <% if treatment.holsizlik %> <span class="badge badge-success">Holsizlik</span> <% end %>
-        <% if treatment.bel_va_oyoq_ogriqi %> <span class="badge badge-danger">Bel va Oyoq Og'riqi</span> <% end %>
-        <% if treatment.gejga_tolishi %> <span class="badge badge-warning">Gejga Tolishi</span> <% end %>
-        <% if treatment.teri_kasalliklari %> <span class="badge badge-info">Teri Kasalliklari</span> <% end %>
-        <% if treatment.koz_kasalliklari %> <span class="badge badge-light">Koz Kasalliklari</span> <% end %>
-        <% if treatment.jkt_kasalliklari %> <span class="badge badge-dark">JKT Kasalliklari</span> <% end %>
-        <% if treatment.boshqa_shikoyatlar %> <span class="badge badge-primary">Boshqa Shikoyatlar</span> <% end %>
-        <% if treatment.tish_gijirlashi %> <span class="badge badge-secondary">Tish Gijirlashi</span> <% end %>
-        <% if treatment.jirrakilik %> <span class="badge badge-success">Jirrakilik</span> <% end %>
-        <% if treatment.orqa_qichishishi %> <span class="badge badge-danger">Orqa Qichishishi</span> <% end %>
-        <% if treatment.toshma_va_doglar %> <span class="badge badge-warning">Toshma va Dog'lar</span> <% end %>
-        <% if treatment.ishtaxasizlik %> <span class="badge badge-info">Ishtaxasizlik</span> <% end %>
-        <% if treatment.holsizlik %> <span class="badge badge-light">Holsizlik</span> <% end %>
-        <% if treatment.boy_osmaslik %> <span class="badge badge-dark">Boy Osmaslik</span> <% end %>
-        <% if treatment.oyoq_ogrigi %> <span class="badge badge-primary">Oyoq Og'rig'i</span> <% end %>
-        <% if treatment.siyib_qoyish %> <span class="badge badge-secondary">Siyib Qoyish</span> <% end %>
-      </td>
+      <%= render 'treatment', treatment: treatment %>
       <td><%= strf_datetime(treatment.created_at) %></td>
     </tr>
   <% end %>

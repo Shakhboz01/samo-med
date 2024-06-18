@@ -21,6 +21,14 @@ class Buyer < ApplicationRecord
     self.sales.price_in_usd.sum(:total_price) - self.sales.price_in_usd.sum(:total_paid)
   end
 
+  def has_todays_treatment
+    last_treatment = treatments.order(created_at: :asc).last
+    return nil if last_treatment.nil?
+    return nil if last_treatment.created_at < DateTime.current.beginning_of_day
+
+    last_treatment
+  end
+
   def calculate_debt_in_uzs
     self.sales.price_in_uzs.sum(:total_price) - self.sales.price_in_uzs.sum(:total_paid)
   end
