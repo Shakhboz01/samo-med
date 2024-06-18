@@ -56,7 +56,7 @@ class SalesController < ApplicationController
   def update
     currency_was_in_usd = @sale.price_in_usd
     if @sale.update(sale_params.merge(status: sale_params[:status].to_i))
-      handle_redirect(currency_was_in_usd, @sale.price_in_usd, @sale.id)
+      handle_redirect(currency_was_in_usd, @sale.price_in_usd, @sale, current_user)
     else
       redirect_to request.referrer, notice: @sale.errors.messages.values
     end
@@ -125,15 +125,19 @@ class SalesController < ApplicationController
 
   private
 
-  def handle_redirect(previous, current, sale_id)
+  def handle_redirect(previous, current, sale, current_user)
     if previous != current
       # Currency is changed
       redirect_to request.referrer, notice: "Valyuta o'zgartirildi"
     else
       # Using JavaScript to force a full page reload
       respond_to do |format|
-        format.html { redirect_to "http://localhost:4000/print/#{sale_id}", allow_other_host: true }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("frame_id", partial: "shared/redirect", locals: { url: "http://localhost:4000/print/#{sale_id}" }) }
+        if current_user.кассир?
+          format.html { redirect_to "http://localhost:4000/print/#{sale.id}", allow_other_host: true }
+        else
+          format.html { redirect_to root_path }
+        end
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("frame_id", partial: "shared/redirect", locals: { url: "http://localhost:4000/print/#{sale.id}" }) }
       end
     end
   end

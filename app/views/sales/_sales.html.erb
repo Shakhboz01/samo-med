@@ -7,17 +7,17 @@
       <% end %>
       <th><%= t('sales.buyer') %></th>
       <th><%= t('sales.total_purchase_price') %></th>
+      <th>Ro'yxat</th>
       <% unless defined?(shrink) %>
         <th><%= t('sales.comment') %></th>
         <th><%= t('sales.sale_date') %></th>
-        <th><%= t('sales.sold_by') %></th>
         <th colspan="3"></th>
       <% end %>
     </tr>
   </thead>
   <tbody>
     <% sales.each do |sale| %>
-      <tr class='table-success' id="sale_<%= sale.id %>">
+      <tr id="sale_<%= sale.id %>">
         <td><%= sale.id %></td>
         <td>
           <% if sale.closed? %>
@@ -28,10 +28,16 @@
         </td>
         <td><%= sale.buyer.name %></td>
         <td title="<%= sale.payment_type %>" ><%= currency_convert(sale.price_in_usd, sale.total_price) %></td>
+        <td>
+        <% sale.product_sells.each do |ps| %>
+          <span  class="<%= ps.danger_zone ? 'badge-danger' : 'badge' %> ">
+            <%= ps.pack.name %> - <%= num_to_usd ps.total_price %>
+          </span>
+        <% end %>
+        </td>
         <% unless defined?(shrink) %>
           <td><%= sale.comment %></td>
           <td><%= strf_datetime sale.created_at %></td>
-          <td><%= sale.user.name %></td>
         <% end %>
         <td>
           <%= link_to "http://localhost:4000/print/#{sale.id}" do %>
@@ -42,19 +48,6 @@
           <%= clink_to t('sales.view'), sale_path(sale), 'fa-search' %>
         </td>
       </tr>
-      <% sale.product_sells.each do |ps| %>
-        <tr class="<%= ps.danger_zone ? 'table-danger' : 'table-warning' %>">
-          <td></td>
-          <td></td>
-          <td><%= ps.pack.name %></td>
-          <td><%= num_to_usd ps.total_price %></td>
-          <td></td><td></td><td></td><td></td><td></td><td></td>
-        </tr>
-      <% end %>
-      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
     <% end %>
     <% if defined?(@sales_data) %>
       <tr>

@@ -39,9 +39,16 @@
 .badge {
   padding: 4px 6px;
   border-radius: 8px;
-  background: #112520;
+  background: #2105b0;
   color: white;
-  font-size: 14px
+  font-size: 12px
+}
+.badge-danger{
+  padding: 4px 6px;
+  border-radius: 8px;
+  background: red;
+  color: white;
+  font-size: 12px
 }
 .categories{
   max-width: 100%;
