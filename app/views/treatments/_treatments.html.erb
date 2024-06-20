@@ -16,7 +16,7 @@
       <td><%= treatment.id %></td>
       <td><%= treatment.buyer.name %></td>
       <td><%= treatment.user.name %></td>
-      <%= render 'treatment', treatment: treatment %>
+      <%= render 'treatments/treatment', treatment: treatment %>
       <td><%= strf_datetime(treatment.created_at) %></td>
     </tr>
   <% end %>
