@@ -8,8 +8,9 @@
       <th><%= t('buyers.index.phone_number') %></th>
       <th><%= t('buyers.index.birthday') %></th>
       <% unless defined?(shrink) %>
-        <th><%= t('buyers.index.comment') %></th>
+        <th><%= t('buyers.index.comment2') %></th>
       <% end %>
+      <th><%= t('buyers.index.comment') %></th>
     </tr>
   </thead>
   <tbody style='font-size: large' id='buyers-list'>
@@ -37,6 +38,7 @@
           <%= render 'treatments/treatment', treatment: buyer.has_todays_treatment %>
         <% end %>
 
+        <td><%= buyer.comment %></td>
 
         <% if @user.регистратор? %>
           <td>
