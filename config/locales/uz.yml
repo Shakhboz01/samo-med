@@ -315,7 +315,7 @@ uz:
     actions: "Amalga oshirish"
     sales: "Sotuv"
     purchase: "Xarid"
-    expense: "Xarajat"
+    expense: "Xarajat qo'shish"
     add_supplier: "Yuk beruvchi qo'shish"
     add_customer: "Mijoz qo'shish"
     add_product: "Tovar qo'shish"
