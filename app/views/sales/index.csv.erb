@@ -1,4 +1,4 @@
-<%- headers = ['Mijoz', 'Umumiy xarid narxi', 'Sotuv sanasi', 'Kassir', 'Kommentariya', 'Mahsulotlar'] -%>
+<%- headers = ['Mijoz', 'Umumiy xarid narxi', 'Sotuv sanasi', 'Kassir', 'Kommentariya', "Tolov turi", 'Mahsulotlar'] -%>
 
 
 <%= CSV.generate_line(headers).strip %>
@@ -10,6 +10,7 @@
     sale.created_at.strftime("%Y-%m-%d %H:%M"),
     sale.user.name,
     (sale.comment.nil? || sale.comment.empty?) ? ' ' : sale.comment,
+    sale.payment_type,
     sale.sells_info
   ],
   encoding: 'UTF-8'

@@ -259,6 +259,7 @@ uz:
     locked: "Qulflangan"
     buyer: "Mijoz"
     total_purchase_price: "Umumiy xarid narxi"
+    payment_type: "To'lov turi"
     total_profit: "Umumiy foyda"
     total_paid: "To'langan summa"
     comment: "Komentariya"

@@ -3,7 +3,7 @@ class Sale < ApplicationRecord
   belongs_to :buyer
   belongs_to :user
   enum status: %i[processing closed]
-  enum payment_type: %i[наличные карта click предоплата перечисление дригие]
+  enum payment_type: %i[nalichniy karta click boshqa]
   has_many :product_sells
   has_many :total_profit, through: :product_sells
   has_one :discount
