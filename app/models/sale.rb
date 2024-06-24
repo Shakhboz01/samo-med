@@ -40,7 +40,7 @@ class Sale < ApplicationRecord
   end
 
   def sells_info
-    product_sells.map {|ps| "#{Translit.convert(ps.pack.name, :english).gsub(/[^0-9a-zA-Z]/, ' ')} - #{ps.total_price}"}.join(', ')
+    product_sells.map {|ps| "#{ps.pack.name} - #{ps.total_price}"}.join(', ')
   end
 
   private

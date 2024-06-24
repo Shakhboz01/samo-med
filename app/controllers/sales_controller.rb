@@ -15,6 +15,10 @@ class SalesController < ApplicationController
 
     total_profit_in_uzs = @sales_data.joins(:product_sells).where('sales.price_in_usd = ?', false).sum('product_sells.total_profit')
     @total_profit_in_uzs = total_profit_in_uzs
+    respond_to do |format|
+      format.html
+      format.xlsx
+    end
   end
 
   # GET /sales/1 or /sales/1.json

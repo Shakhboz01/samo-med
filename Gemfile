@@ -61,6 +61,9 @@ gem 'telegram-bot-ruby'
 gem 'figaro'
 gem 'whenever'
 gem 'translit'
+gem 'rubyzip'
+gem 'caxlsx'
+gem 'caxlsx_rails'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
