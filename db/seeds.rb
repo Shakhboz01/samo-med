@@ -53,3 +53,4 @@ Pack.create(name: 'Gidrovanna', buy_price: 0, sell_price: 100000, initial_remain
 User.create(name: 'Admin', email: 'admin@gmail.com', role: 0, password: 111111)
 User.create(name: 'Registrator', email: 'regostrator@gmail.com', role: 2, password: 123456)
 User.create(name: 'Vrach', email: 'vrach@gmail.com', role: 1, password: 123456)
+User.create(name: 'Kassir', email: 'kassir@gmail.com', role: 5, password: 123456)
