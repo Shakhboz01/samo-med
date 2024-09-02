@@ -55,9 +55,13 @@
           <%= link_to t('navigation.admin'), admin_page_path, class: 'nav-link' %>
         </li>
         <li class="nav-item">
-        <%= link_to t('navigation.warehouse'), packs_path, class: 'nav-link' %>
-      </li>
+          <%= link_to t('navigation.warehouse'), packs_path, class: 'nav-link' %>
+        </li>
       <% end %>
+
+      <li class="nav-item">
+        <%= link_to 'Palatalar', rooms_path, class: "nav-link" %>
+      </li>
     </ul>
   </div>
   <ul class="text-center navbar-nav ml-auto">

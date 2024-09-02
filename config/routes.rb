@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :rooms
   resources :treatments
   resources :pack_usages
   resources :product_size_colors
