@@ -343,7 +343,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_13_101232) do
 
   create_table "salaries", force: :cascade do |t|
     t.boolean "prepayment"
-    t.date "month", default: "2024-05-27"
+    t.date "month", default: "2024-09-02"
     t.bigint "team_id"
     t.bigint "user_id"
     t.decimal "price", precision: 10, scale: 2
@@ -487,7 +487,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_13_101232) do
     t.boolean "orqa_qichishishi", default: false
     t.boolean "toshma_va_doglar", default: false
     t.boolean "ishtaxasizlik", default: false
-    t.boolean "halsizlik", default: false
     t.boolean "boy_osmaslik", default: false
     t.boolean "oyoq_ogrigi", default: false
     t.boolean "siyib_qoyish", default: false

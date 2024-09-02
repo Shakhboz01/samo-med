@@ -22,7 +22,7 @@
 
   <div class='px-3' style='color: black; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;'>
     <%= simple_form_for(product_sell, remote: true) do |f| %>
-      <div class='form-inputs'>
+      <div class='form-inputs shadow my-2'>
         <%= f.error_notification %>
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
         <%= f.association :sale, as: :hidden %>
@@ -54,7 +54,7 @@
         </div>
       </div>
     <% end %>
-
+    <br/>
     <%= render 'product_sells/products_list_select', sale_in_usd: product_sell.sale.price_in_usd, cached: true  %>
   </div>
 <% end %>
