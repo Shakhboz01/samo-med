@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :room_members
   resources :rooms
   resources :treatments
   resources :pack_usages

@@ -1,0 +1,11 @@
+<div class="container my-5">
+  <div class="card shadow-lg">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h3 class="card-title font-weight-bold">Palatadagi bemorlar</h3>
+      <%= link_to 'Добавить новый', new_room_member_path, class: "btn btn-success min-width-btn" %>
+    </div>
+    <%= render 'filter_form', q: @q, url: request.path %><br/>
+    <%= render 'room_members', room_members: @room_members %>
+    <%= paginate @room_members %>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_02_100603) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_02_134855) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -342,6 +342,18 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_02_100603) do
     t.integer "weight", default: 0
   end
 
+  create_table "room_members", force: :cascade do |t|
+    t.boolean "active_member", default: true
+    t.string "comment"
+    t.bigint "buyer_id", null: false
+    t.datetime "end_time"
+    t.bigint "room_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_room_members_on_buyer_id"
+    t.index ["room_id"], name: "index_room_members_on_room_id"
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.integer "capacity"
@@ -562,6 +574,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_02_100603) do
   add_foreign_key "product_size_colors", "sizes"
   add_foreign_key "products", "colors"
   add_foreign_key "products", "sizes"
+  add_foreign_key "room_members", "buyers"
+  add_foreign_key "room_members", "rooms"
   add_foreign_key "salaries", "teams"
   add_foreign_key "salaries", "users"
   add_foreign_key "sale_from_local_services", "buyers"

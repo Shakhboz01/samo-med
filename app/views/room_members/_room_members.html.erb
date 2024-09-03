@@ -1,0 +1,26 @@
+<div class="card-body">
+  <table class="table table-hover table-bordered table-striped">
+    <thead class='table-dark'>
+      <tr>
+        <th>Mijoz</th>
+        <th>Hozirda palatada</th>
+        <th>Palata</th>
+        <th>Kommentariya</th>
+        <th>Kelgan sana</th>
+        <th>Ketgan sana</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% room_members.each do |room_member| %>
+        <tr>
+          <td><%= link_to room_member.buyer.name, buyer_path(room_member.buyer) %></td>
+          <td><%= active_check room_member.active_member %></td>
+          <td><%= room_member.room.name %></td>
+          <td><%= room_member.comment %></td>
+          <td><%= strf_datetime room_member.created_at %></td>
+          <td><%= strf_datetime room_member.end_time %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

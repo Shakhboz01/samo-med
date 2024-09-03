@@ -1,0 +1,35 @@
+<div>
+  <%= search_form_for @q, url: url, html: { class: 'form form-horizontal filter-form' } do |f| %>
+    <div class="card shadow-lg">
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-4">
+          <%= f.label :buyer_name_or_buyer_phone_number_cont, 'Mijoz ismi/telefon-raqami:', class: 'control-label' %>
+          <%= f.text_field :buyer_name_or_buyer_phone_number_cont, class: 'form-control', autocomplete: :off %>
+        </div>
+        <div class="form-group col-xs-12 col-sm-4">
+          <%= f.label :room_name_cont, 'Xona nomi/raqami:', class: 'control-label' %>
+          <%= f.text_field :room_name_cont, class: 'form-control', autocomplete: :off %>
+        </div>
+        <div class="form-group col-xs-12 col-sm-4">
+          <%= f.label :active_member_true, 'Hozirda palatada:', class: ' form-control' %>
+          <%= f.check_box :active_member_true, {}, 1, nil %>
+        </div>
+        <div class="form-group col-xs-12 col-sm-2">
+          <%= f.label :created_at_gteq, 'Kelgan sana x dan', class: 'control-label' %>
+          <%= f.text_field :created_at_gteq, value: q.created_at_gteq, class: 'datepicker form-control', autocomplete: :off %>
+        </div>
+        <div class="form-group col-xs-12 col-sm-2">
+          <%= f.label :created_at_lteq, 'Kelgan sana x gacha', class: 'control-label' %>
+          <%= f.text_field :created_at_lteq, value: q.created_at_lteq, class: 'datepicker form-control', autocomplete: :off %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6">
+          <%= f.submit 'Qidirish', class: 'btn btn-primary' %>
+          <%= link_to 'Bekor qilish', request.path, class: 'btn btn-default' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+

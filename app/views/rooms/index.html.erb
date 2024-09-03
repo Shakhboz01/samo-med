@@ -21,7 +21,10 @@
               <td><%= room.name %></td>
               <td><%= room.capacity %></td>
               <td><%= link_to room.active_members, room_path(room) %></td>
-              <td><%= clink_to 'Редактировать', edit_room_path(room), 'fa-edit' %></td>
+              <td>
+                <%= clink_to 'Редактировать', edit_room_path(room), 'fa-edit' %>
+                <%= clink_to 'Yangi bemor qo\'shish', new_room_member_path(room_id: room.id), 'fa-plus' %>
+              </td>
             </tr>
           <% end %>
         </tbody>

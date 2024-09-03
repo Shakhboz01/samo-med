@@ -11,6 +11,7 @@ class Buyer < ApplicationRecord
   has_one_attached :image
   has_many :sales
   has_many :treatments
+  has_many :room_members
   has_many :sale_from_local_services
   has_many :sale_from_services
   before_update :send_message
@@ -31,6 +32,10 @@ class Buyer < ApplicationRecord
 
   def calculate_debt_in_uzs
     self.sales.price_in_uzs.sum(:total_price) - self.sales.price_in_uzs.sum(:total_paid)
+  end
+
+  def name_with_phone
+    "#{name} | #{phone_number}"
   end
 
   private

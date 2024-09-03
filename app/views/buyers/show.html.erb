@@ -1,9 +1,5 @@
 <div class='container'>
   <h3 class='text-center'><%= @buyer.name %></h3>
-  <div class='card'>
-    <h5>Yangi tashxis:</h5>
-    <%= render 'treatments/form', treatment: @treatment %>
-  </div>
   <% if @treatments.exists? %>
     <div class='card-body'>
       <%= render 'treatments/treatments', treatments: @treatments %>
@@ -14,6 +10,12 @@
     <h4>История</h4>
     <div class='card-footer'>
       <%= render 'sales/sales', sales: @sales %>
+    </div>
+  <% end %>
+  <br/><hr/>
+  <% if @room_members.exists? %>
+    <div class='card-body'>
+      <%= render 'room_members/room_members', room_members: @room_members %>
     </div>
   <% end %>
 </div>

@@ -9,6 +9,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1 or /rooms/1.json
   def show
+    @room_members = @room.room_members.where(active_member: true)
   end
 
   # GET /rooms/new
