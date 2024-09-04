@@ -20,14 +20,7 @@
           <td><%= room_member.comment %></td>
           <td><%= strf_datetime room_member.created_at %></td>
           <td><%= strf_datetime room_member.end_time %></td>
-          <% if room_member.active_member %>
-            <td>
-              <%= simple_form_for(room_member) do |f| %>
-                <%= f.input :active_member, label: false, as: :hidden, input_html: {value: !room_member.active_member} %>
-                <%= f.button :submit, 'Palatadan chiqarish' %>
-              <% end %>
-            </td>
-          <% end %>
+          <%= render 'room_members/exit', room_member: room_member %>
         </tr>
       <% end %>
     </tbody>

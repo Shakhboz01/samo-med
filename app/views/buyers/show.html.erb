@@ -1,5 +1,6 @@
 <div class='container'>
   <h3 class='text-center'><%= @buyer.name %></h3>
+  <span><%= @buyer.job %> | <%= @buyer.address %></span>
   <% if @treatments.exists? %>
     <div class='card-body'>
       <%= render 'treatments/treatments', treatments: @treatments %>

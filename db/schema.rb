@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_02_134855) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_04_103544) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +55,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_02_134855) do
     t.date "birthday"
     t.integer "gender", default: 0
     t.boolean "is_room_member", default: false
+    t.string "job"
+    t.string "address"
   end
 
   create_table "colors", force: :cascade do |t|

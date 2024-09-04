@@ -7,8 +7,9 @@
     <%= f.input :phone_number, label: t('buyers.form.phone_number') %>
     <%= f.input :birthday, label: 'Tug\'ilgan sana', as: :date, html5: true %>
     <%= f.input :gender, label: 'Jinsi', collection: Buyer.genders.keys.map { |unit| [Buyer.human_attribute_name("unit.#{unit}"), unit] }, include_blank: false, class: 'form-control' %>
-    <%= f.input :comment, label: t('buyers.form.comment') %>
-    <%= f.input :is_room_member, label: 'Palatada yotadigan bemor?' %>
+    <%= f.input :job, label: 'Ish (o\'qish) joyi' %>
+    <%= f.input :address, label: 'Yashash joyi' %>
+    <%= f.input :comment, label: 'Boshqa malumotlar' %>
   </div>
 
   <div class="form-actions">
