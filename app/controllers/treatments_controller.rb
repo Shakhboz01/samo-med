@@ -35,7 +35,7 @@ class TreatmentsController < ApplicationController
 
   # GET /treatments/new
   def new
-    @treatment = Treatment.new
+    @treatment = Treatment.new(buyer_id: params[:buyer_id])
   end
 
   # GET /treatments/1/edit

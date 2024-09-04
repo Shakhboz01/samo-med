@@ -20,18 +20,13 @@
     <% buyers.order(:name).each_with_index do |buyer, index| %>
       <tr class="<%= active_tr(buyer.active) %>">
         <% unless defined?(shrink) %>
-          <td><%= index +1 %></td>
+          <td class="<%= buyer.is_room_member ? 'text-success' : 'text-dark' %> fw-bold"><%= index +1 %></td>
         <% end %>
         <td>
-          <% if @user.врач? %>
-            <%= link_to buyer.name, buyer_path(buyer) %>
-          <% else @user.кассир? %>
-            <%= button_to buyer.name, default_create_sales_path(buyer_id: buyer.id), method: :post, style: 'background: none; cursor: pointer' %>
-          <% end %>
-          <span class="<%= buyer.gender %>"><%= buyer.gender %></span>
+          <%= button_to buyer.name, default_create_sales_path(buyer_id: buyer.id), method: :post, class: 'btn btn-warning' %>
         </td>
         <td><%= buyer.phone_number %></td>
-        <td><%= buyer.birthday %></td>
+        <td><%= buyer.birthday %> <span class="<%= buyer.gender %>"><%= buyer.gender %></span></td>
 
         <% if buyer.has_todays_treatment.nil? %>
           <td></td>
@@ -50,19 +45,25 @@
           </td>
         <% end %>
 
-          <% if @user.админ? %>
-            <td>
-              <%= clink_to t('buyers.index.show'), buyer_path(buyer), 'fa-search' %>
-              <%= clink_to t('buyers.index.edit'), edit_buyer_path(buyer), 'fa-edit' %>
-            </td>
-            <td>
-              <% if buyer.active %>
-                <%= clink_to t('buyers.index.deactivate'), toggle_active_buyer_path(buyer), 'fa-ban', :post %>
-              <% else %>
-                <%= clink_to t('buyers.index.activate'), toggle_active_buyer_path(buyer), 'fa-chart-line', :post %>
-              <% end %>
-            </td>
+        <td>
+          <%= clink_to "Tashxis qo'yish", new_treatment_path(buyer_id: buyer.id), 'fa-user-doctor' %>
+          <%= clink_to t('buyers.index.show'), buyer_path(buyer), 'fa-search' %>
+
+          <% if buyer.is_room_member %>
+            <%= clink_to 'Palataga olish', new_room_member_path(buyer_id: buyer.id), 'fa-bed' %>
+          <% else %>
+            <%= clink_to 'Palataga olish', new_room_member_path(buyer_id: buyer.id), 'fa-bed' %>
           <% end %>
+
+          <%= clink_to t('buyers.index.edit'), edit_buyer_path(buyer), 'fa-edit' %>
+        </td>
+        <td>
+          <% if buyer.active %>
+            <%= clink_to t('buyers.index.deactivate'), toggle_active_buyer_path(buyer), 'fa-ban', :post %>
+          <% else %>
+            <%= clink_to t('buyers.index.activate'), toggle_active_buyer_path(buyer), 'fa-chart-line', :post %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

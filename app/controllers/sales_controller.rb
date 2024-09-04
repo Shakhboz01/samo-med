@@ -33,7 +33,7 @@ class SalesController < ApplicationController
 
   # GET /sales/new
   def new
-    @sale = Sale.new
+    @sale = Sale.new(user_id: current_user.id)
   end
 
   # GET /sales/1/edit
@@ -43,7 +43,7 @@ class SalesController < ApplicationController
   # POST /sales or /sales.json
   def create
     @sale = Sale.new(sale_params)
-    @sale.user_id = current_user.id
+    @sale.user_id ||= current_user.id
     respond_to do |format|
       if @sale.save
         format.html { redirect_to sales_url(@sale), notice: "Sale was successfully created." }
@@ -138,7 +138,7 @@ class SalesController < ApplicationController
         if current_user.кассир?
           format.html { redirect_to "http://localhost:4000/print/#{sale.id}", allow_other_host: true }
         else
-          format.html { redirect_to root_path }
+          format.html { redirect_to root_path(q: {phone_number_cont: sale.buyer.phone_number}) }
         end
         format.turbo_stream { render turbo_stream: turbo_stream.replace("frame_id", partial: "shared/redirect", locals: { url: "http://localhost:4000/print/#{sale.id}" }) }
       end

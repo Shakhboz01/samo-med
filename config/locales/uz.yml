@@ -38,7 +38,7 @@ uz:
     closed: Yopiq
     open: Och
     provider: Yuk beruvchi
-    total_price: Umumiy xarid narxi
+    total_price: Jami narx
     total_paid: To'langan summa
     comment: Komment
     created_at: Kelgan sana
@@ -258,7 +258,7 @@ uz:
     id: "ID"
     locked: "Qulflangan"
     buyer: "Mijoz"
-    total_purchase_price: "Umumiy xarid narxi"
+    total_purchase_price: "Jami narx"
     payment_type: "To'lov turi"
     total_profit: "Umumiy foyda"
     total_paid: "To'langan summa"

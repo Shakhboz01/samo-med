@@ -11,6 +11,7 @@
       <% unless defined?(shrink) %>
         <th><%= t('sales.sale_date') %></th>
         <th><%= t('sales.payment_type') %></th>
+        <th>Vrach</th>
         <th colspan="3"></th>
       <% end %>
     </tr>
@@ -38,6 +39,7 @@
         <% unless defined?(shrink) %>
           <td><%= strf_datetime sale.created_at %></td>
           <td><%= sale.payment_type %></td>
+          <td><%= sale.user.name %></td>
         <% end %>
         <td>
           <%= link_to "http://localhost:4000/print/#{sale.id}" do %>

@@ -22,7 +22,7 @@ class RoomMember < ApplicationRecord
 
     room.decrement!(:active_members, 1)
     buyer.update(is_room_member: false)
-    total_income = buyer.sales.where('cerated_at > ?', created_at).sum(:total_price)
+    total_income = buyer.sales.where('created_at > ?', created_at).sum(:total_price)
     message =
       "<b>Bemor palatadan olindi:</b>\n" \
       "Palata: #{room.name}\n" \
