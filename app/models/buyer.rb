@@ -41,6 +41,7 @@ class Buyer < ApplicationRecord
   private
 
   def send_message
+    return
     message =
       "<a href=\"https://#{ENV.fetch('HOST_URL')}/buyers/#{id}\">#{name} vrach ko'rigiga yuborildi</a>\n"
     message << comment if comment

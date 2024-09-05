@@ -1,0 +1,222 @@
+[
+   {
+    "XIZMAT_NOMI": "Бош врач куриги",
+    "NARXI": 50000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "Врач куриги",
+    "NARXI": 30000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "УЗИ",
+    "NARXI": 70000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "Эмселла",
+    "NARXI": 200000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "Рентген",
+    "NARXI": 50000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "ЭКГ",
+    "NARXI": 25000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "УВТ ударной волна",
+    "NARXI": 60000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "Кедр",
+    "NARXI": 20000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "Гидромассаж",
+    "NARXI": 20000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "Магнит",
+    "NARXI": 25000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "Лазер терапия",
+    "NARXI": 25000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "Ультра звук",
+    "NARXI": 25000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "УВЧ",
+    "NARXI": 25000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "Электрофарез",
+    "NARXI": 25000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "Парафин 1 та аъзо",
+    "NARXI": 20000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "Массаж 1 та аъзо",
+    "NARXI": 20000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "Умумий массаж",
+    "NARXI": 60000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "Озонтерапия",
+    "NARXI": 35000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "Хижома 1 банка",
+    "NARXI": 15000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "Зулук 1 донаси",
+    "NARXI": 35000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "Плазма 1та муолажа",
+    "NARXI": 100000,
+    "PAPKA_NOMI": "касса"
+   },
+   {
+    "XIZMAT_NOMI": "Умумий сийдик тахлили",
+    "NARXI": 30000,
+    "PAPKA_NOMI": "Лаборатория"
+   },
+   {
+    "XIZMAT_NOMI": "Умумий кон  тахлили",
+    "NARXI": 30000,
+    "PAPKA_NOMI": "Лаборатория"
+   },
+   {
+    "XIZMAT_NOMI": "Билурубин обший",
+    "NARXI": 25000,
+    "PAPKA_NOMI": "Лаборатория"
+   },
+   {
+    "XIZMAT_NOMI": "Глюкоза",
+    "NARXI": 15000,
+    "PAPKA_NOMI": "Лаборатория"
+   },
+   {
+    "XIZMAT_NOMI": "Кальций",
+    "NARXI": 15000,
+    "PAPKA_NOMI": "Лаборатория"
+   },
+   {
+    "XIZMAT_NOMI": "Мачевина",
+    "NARXI": 15000,
+    "PAPKA_NOMI": "Лаборатория"
+   },
+   {
+    "XIZMAT_NOMI": "Обший белок",
+    "NARXI": 20000,
+    "PAPKA_NOMI": "Лаборатория"
+   },
+   {
+    "XIZMAT_NOMI": "Креатинин",
+    "NARXI": 15000,
+    "PAPKA_NOMI": "Лаборатория"
+   },
+   {
+    "XIZMAT_NOMI": "Ремофактор",
+    "NARXI": 45000,
+    "PAPKA_NOMI": "Лаборатория"
+   },
+   {
+    "XIZMAT_NOMI": "Коалограмма",
+    "NARXI": 25000,
+    "PAPKA_NOMI": "Лаборатория"
+   },
+   {
+    "XIZMAT_NOMI": "Свёрт",
+    "NARXI": 15000,
+    "PAPKA_NOMI": "Лаборатория"
+   },
+   {
+    "XIZMAT_NOMI": "Холестирин",
+    "NARXI": 25000,
+    "PAPKA_NOMI": "Лаборатория"
+   },
+   {
+    "XIZMAT_NOMI": "Алфа амиза",
+    "NARXI": 20000,
+    "PAPKA_NOMI": "Лаборатория"
+   },
+   {
+    "XIZMAT_NOMI": "Гепатит (Б-С)",
+    "NARXI": 60000,
+    "PAPKA_NOMI": "Лаборатория"
+   },
+   {
+    "XIZMAT_NOMI": "Мачевина кислота",
+    "NARXI": 20000,
+    "PAPKA_NOMI": "Лаборатория"
+   },
+   {
+    "XIZMAT_NOMI": "ВИЧ",
+    "NARXI": 30000,
+    "PAPKA_NOMI": "Лаборатория"
+   },
+   {
+    "XIZMAT_NOMI": "Железо",
+    "NARXI": 15000,
+    "PAPKA_NOMI": "Лаборатория"
+   },
+   {
+    "XIZMAT_NOMI": "Xona uchun",
+    "NARXI": 80000,
+    "PAPKA_NOMI": "Хона учун"
+   },
+   {
+    "XIZMAT_NOMI": "Xona uchun 100000",
+    "NARXI": 100000,
+    "PAPKA_NOMI": "Хона учун"
+   },
+  {
+    "XIZMAT_NOMI": "Xona uchun 150000",
+    "NARXI": 150000,
+    "PAPKA_NOMI": "Хона учун"
+  },
+  {
+    "XIZMAT_NOMI": "Xona uchun 200000",
+    "NARXI": 200000,
+    "PAPKA_NOMI": "Хона учун"
+  },
+  {
+    "XIZMAT_NOMI": "Xona uchun 250000",
+    "NARXI": 250000,
+    "PAPKA_NOMI": "Хона учун"
+  },
+  {
+    "XIZMAT_NOMI": "Xona uchun 400000",
+    "NARXI": 400000,
+    "PAPKA_NOMI": "Хона учун"
+  }
+]

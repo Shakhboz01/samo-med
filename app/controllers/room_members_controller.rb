@@ -28,7 +28,7 @@ class RoomMembersController < ApplicationController
 
     respond_to do |format|
       if @room_member.save
-        format.html { redirect_to request.referrer, notice: "Room member was successfully created." }
+        format.html { redirect_to room_path(@room_member.room), notice: "Room member was successfully created." }
         format.json { render :show, status: :created, location: @room_member }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +41,7 @@ class RoomMembersController < ApplicationController
   def update
     respond_to do |format|
       if @room_member.update(room_member_params)
-        format.html { redirect_to request.referrer, notice: "Room member was successfully updated." }
+        format.html { redirect_to room_path(@room_member.room), notice: "Room member was successfully updated." }
         format.json { render :show, status: :ok, location: @room_member }
       else
         format.html { render :edit, status: :unprocessable_entity }
