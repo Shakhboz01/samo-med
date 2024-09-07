@@ -34,7 +34,9 @@
           <%= link_to t('navigation.other_expenses'), expenditures_path, class: 'dropdown-item' %>
           <%= link_to t('navigation.suppliers'), providers_path, class: 'dropdown-item' %>
           <%= link_to t('navigation.customers'), buyers_path, class: 'dropdown-item' %>
-          <%= link_to t('navigation.treatments'), treatments_path, class: 'dropdown-item' %>
+          <% unless ENV.fetch('HIDE_TASHXIS', nil).present? %>
+            <%= link_to t('navigation.treatments'), treatments_path, class: 'dropdown-item' %>
+          <% end %>
           <%= link_to t('navigation.monthly_advance'), salaries_path, class: 'dropdown-item' %>
           <%= link_to t('navigation.employees'), users_path, class: 'dropdown-item' %>
         </div>

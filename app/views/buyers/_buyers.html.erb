@@ -31,12 +31,12 @@
         <% if buyer.has_todays_treatment.nil? %>
           <td></td>
         <% else %>
-          <%= render 'treatments/treatment', treatment: buyer.has_todays_treatment %>
+          <%= render 'treatments/treatment', treatment: buyer.has_todays_treatment unless ENV.fetch('HIDE_TASHXIS', nil).present? %>
         <% end %>
 
         <td><%= buyer.comment %></td>
 
-        <% if !@user.врач? %>
+        <% if !@user.врач? && !ENV.fetch('HIDE_VRACHGA_YUBORISH', nil).present? %>
           <td>
             <%= simple_form_for(buyer) do |f| %>
               <%= f.input :weight, lable: false, as: :hidden, input_html: {value: buyer.weight + 1} %>
@@ -46,8 +46,11 @@
         <% end %>
 
         <td>
-          <%= clink_to "Tashxis qo'yish", new_treatment_path(buyer_id: buyer.id), 'fa-user-doctor' %>
-          <%= clink_to t('buyers.index.show'), buyer_path(buyer), 'fa-search' %>
+          <% unless ENV.fetch('HIDE_TASHXIS', nil).present? %>
+            <%= clink_to "Tashxis qo'yish", new_treatment_path(buyer_id: buyer.id), 'fa-user-doctor' %>
+          <% end %>
+
+          <%= clink_to 'Ko\'rish', buyer_path(buyer), 'fa-search' %>
 
           <% if buyer.is_room_member %>
             <%= render 'room_members/exit', room_member: buyer.room_members.last %>
