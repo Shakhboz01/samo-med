@@ -13,6 +13,7 @@ class BuyersController < ApplicationController
     @treatment = Treatment.new(buyer_id: @buyer.id)
     @treatments = @buyer.treatments.order(id: :desc)
     @sales = @buyer.sales
+    @user = current_user
     @room_members = @buyer.room_members
   end
 

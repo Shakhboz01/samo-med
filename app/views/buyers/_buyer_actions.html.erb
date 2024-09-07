@@ -1,0 +1,29 @@
+<% if !user.врач? && !ENV.fetch('HIDE_VRACHGA_YUBORISH', nil).present? %>
+  <td>
+    <%= simple_form_for(buyer) do |f| %>
+      <%= f.input :weight, lable: false, as: :hidden, input_html: {value: buyer.weight + 1} %>
+      <%= f.submit 'Vrachga yuborish', class: 'btn btn-success' %>
+    <% end %>
+  </td>
+<% end %>
+
+<td>
+  <% unless ENV.fetch('HIDE_TASHXIS', nil).present? %>
+    <%= clink_to "Tashxis qo'yish", new_treatment_path(buyer_id: buyer.id), 'fa-user-doctor' %>
+  <% end %>
+
+  <%= clink_to 'Ko\'rish', buyer_path(buyer), 'fa-search' %>
+  <%= clink_to t('buyers.index.edit'), edit_buyer_path(buyer), 'fa-edit' %>
+</td>
+<td>
+  <% if buyer.is_room_member %>
+    <%= render 'room_members/exit', room_member: buyer.room_members.last %>
+  <% else %>
+    <%= clink_to 'Palataga olish', new_room_member_path(buyer_id: buyer.id), 'fa-bed' %>
+  <% end %>
+</td>
+<td>
+  <% if buyer.active %>
+    <%= clink_to t('buyers.index.deactivate'), toggle_active_buyer_path(buyer), 'fa-ban', :post %>
+  <% end %>
+</td>
