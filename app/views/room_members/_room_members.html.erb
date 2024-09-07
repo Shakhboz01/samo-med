@@ -1,4 +1,4 @@
-<div class="card-body">
+<div class="card-body shadow">
   <table class="table table-hover table-bordered table-striped">
     <thead class='table-dark'>
       <tr>
@@ -8,18 +8,22 @@
         <th>Kommentariya</th>
         <th>Kelgan sana</th>
         <th>Ketgan sana</th>
+        <th>Jami savdo summasi</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <% room_members.each do |room_member| %>
         <tr>
-          <td><%= link_to room_member.buyer.name, buyer_path(room_member.buyer) %></td>
+          <td>
+            <%= render 'buyers/buyer_info', buyer: room_member.buyer %>
+            </td>
           <td><%= active_check room_member.active_member %></td>
           <td><%= room_member.room.name %></td>
           <td><%= room_member.comment %></td>
           <td><%= strf_datetime room_member.created_at %></td>
           <td><%= strf_datetime room_member.end_time %></td>
+          <td><%= room_member.calculate_total_sale_price %></td>
           <td><%= render 'room_members/exit', room_member: room_member %></td>
         </tr>
       <% end %>

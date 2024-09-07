@@ -5,6 +5,13 @@ class RoomMember < ApplicationRecord
   before_create :update_data
   before_update :set_end_time
 
+
+  def calculate_total_sale_price
+    sales = buyer.sales.where('created_at >= ?', created_at)
+    sales = sales.where('created_at <= ?', end_time) unless end_time.nil?
+    sales.sum(:total_price)
+  end
+
   private
 
   def update_data

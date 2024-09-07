@@ -1,0 +1,7 @@
+<div title="<%= buyer.job %> | <%= buyer.address %>">
+  <strong><%= link_to buyer.name, buyer_path(buyer), class: 'fs-5' %></strong> <span class="<%= buyer.gender %>"><%= buyer.gender %></span><br/>
+  <small>
+    <%= buyer.birthday %> |
+    <%= buyer.phone_number %>
+  </small>
+</div>

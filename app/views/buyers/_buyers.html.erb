@@ -4,16 +4,12 @@
       <% unless defined?(shrink) %>
         <th>#</th>
       <% end %>
-      <th><%= t('buyers.index.name') %></th>
-      <th><%= t('buyers.index.phone_number') %></th>
-      <th><%= t('buyers.index.birthday') %></th>
+      <th>Mijoz</th>
       <% unless defined?(shrink) %>
         <th><%= t('buyers.index.comment2') %></th>
       <% end %>
       <th><%= t('buyers.index.comment') %></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th></th><th></th><th></th>
     </tr>
   </thead>
   <tbody style='font-size: large' id='buyers-list'>
@@ -22,12 +18,7 @@
         <% unless defined?(shrink) %>
           <td class="<%= buyer.is_room_member ? 'text-success' : 'text-dark' %> fw-bold"><%= index +1 %></td>
         <% end %>
-        <td>
-          <%= button_to buyer.name, default_create_sales_path(buyer_id: buyer.id), method: :post, class: 'btn btn-warning' %>
-        </td>
-        <td><%= buyer.phone_number %></td>
-        <td><%= buyer.birthday %> <span class="<%= buyer.gender %>"><%= buyer.gender %></span></td>
-
+        <td><%= render 'buyer_info', buyer: buyer %></td>
         <% if buyer.has_todays_treatment.nil? %>
           <td></td>
         <% else %>

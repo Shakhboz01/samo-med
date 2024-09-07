@@ -15,7 +15,7 @@ class Buyer < ApplicationRecord
   has_many :sale_from_local_services
   has_many :sale_from_services
   before_update :send_message
-  before_create :send_message
+  after_create :send_create_message
   scope :active, -> { where(:active => true) }
 
   def calculate_debt_in_usd
@@ -39,6 +39,14 @@ class Buyer < ApplicationRecord
   end
 
   private
+
+  def send_create_message
+    message =
+      "YANGI BEMOR!\n" \
+      "<a href=\"https://#{ENV.fetch('HOST_URL')}/buyers/#{id}\">#{name}</a>\n"
+    message << comment if comment
+    SendMessageJob.perform_later(message)
+  end
 
   def send_message
     return

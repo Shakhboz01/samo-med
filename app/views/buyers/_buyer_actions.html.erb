@@ -1,29 +1,32 @@
-<% if !user.врач? && !ENV.fetch('HIDE_VRACHGA_YUBORISH', nil).present? %>
-  <td>
-    <%= simple_form_for(buyer) do |f| %>
-      <%= f.input :weight, lable: false, as: :hidden, input_html: {value: buyer.weight + 1} %>
-      <%= f.submit 'Vrachga yuborish', class: 'btn btn-success' %>
+<td>
+  <div class='d-flex align-items-center'>
+    <%= button_to default_create_sales_path(buyer_id: buyer.id), method: :post, class: 'btn btn-info', title: 'savdo amalga oshirish' do %>
+      <i class="fa-solid fa-sack-dollar"></i>
     <% end %>
-  </td>
-<% end %>
+    <% if !user.врач? && !ENV.fetch('HIDE_VRACHGA_YUBORISH', nil).present? %>
+      <%= simple_form_for(buyer) do |f| %>
+        <%= f.input :weight, lable: false, as: :hidden, input_html: {value: buyer.weight + 1} %>
+        <%= f.submit 'Vrachga yuborish', class: 'btn btn-success' %>
+      <% end %>
+    <% end %>
+    <% unless ENV.fetch('HIDE_TASHXIS', nil).present? %>
+      <%= clink_to "Tashxis qo'yish", new_treatment_path(buyer_id: buyer.id), 'fa-user-doctor' %>
+    <% end %>
+    <div class='me-3 ms-3'><%= clink_to t('buyers.index.edit'), edit_buyer_path(buyer), 'fa-edit' %></div>
+    <% if buyer.is_room_member %>
+      <% room_member = buyer.room_members.last %>
+        <div class='me-3'>
+          <%= clink_to 'Bemor palatasini ko\'rish', room_path(room_member.room), 'fa-person-booth' %>
+        </div>
+        <%= render 'room_members/exit', room_member: room_member %>
+    <% else %>
+      <%= clink_to 'Palataga olish', new_room_member_path(buyer_id: buyer.id), 'fa-bed' %>
+    <% end %>
 
-<td>
-  <% unless ENV.fetch('HIDE_TASHXIS', nil).present? %>
-    <%= clink_to "Tashxis qo'yish", new_treatment_path(buyer_id: buyer.id), 'fa-user-doctor' %>
-  <% end %>
-
-  <%= clink_to 'Ko\'rish', buyer_path(buyer), 'fa-search' %>
-  <%= clink_to t('buyers.index.edit'), edit_buyer_path(buyer), 'fa-edit' %>
-</td>
-<td>
-  <% if buyer.is_room_member %>
-    <%= render 'room_members/exit', room_member: buyer.room_members.last %>
-  <% else %>
-    <%= clink_to 'Palataga olish', new_room_member_path(buyer_id: buyer.id), 'fa-bed' %>
-  <% end %>
-</td>
-<td>
-  <% if buyer.active %>
-    <%= clink_to t('buyers.index.deactivate'), toggle_active_buyer_path(buyer), 'fa-ban', :post %>
-  <% end %>
+    <% if buyer.active %>
+      <div class='ms-2'>
+        <%= clink_to t('buyers.index.deactivate'), toggle_active_buyer_path(buyer), 'fa-ban', :post %>
+      </div>
+    <% end %>
+  </div>
 </td>

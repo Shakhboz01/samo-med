@@ -1,7 +1,7 @@
 <div class='container mt-4 shadow shadow-lg'>
-  <div class='row'>
+  <div class='row shadow'>
     <div class='col-sm-6 col-md-3'>
-      <h3 class='text-center'><%= @buyer.name %></h3>
+      <%= render 'buyer_info', buyer: @buyer %>
     </div>
     <div class='col-sm-6 col-md-4'>
       <table class='table table-warning table-sm'>
@@ -13,7 +13,6 @@
       </table>
     </div>
   </div>
-  <span><%= @buyer.job %> | <%= @buyer.address %></span>
   <% if @treatments.exists? %>
     <h3>Tashxislar</h3>
     <div class='card-body'>
