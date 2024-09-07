@@ -23,7 +23,17 @@
           <td><%= room_member.comment %></td>
           <td><%= strf_datetime room_member.created_at %></td>
           <td><%= strf_datetime room_member.end_time %></td>
-          <td><%= room_member.calculate_total_sale_price %></td>
+          <td>
+            <%= link_to num_to_usd(room_member.calculate_total_sale_price),
+              sales_path(
+                q: {
+                  created_at_gteq: room_member.created_at,
+                  created_at_lteq: room_member.end_time,
+                  buyer_id_eq: room_member.buyer.id
+                }
+              )
+            %>
+          </td>
           <td><%= render 'room_members/exit', room_member: room_member %></td>
         </tr>
       <% end %>

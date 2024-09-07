@@ -4,7 +4,7 @@ class RoomMembersController < ApplicationController
   # GET /room_members or /room_members.json
   def index
     @q = RoomMember.includes(:buyer, :room).ransack(params[:q])
-    @room_members = @q.result.page(params[:pahe]).per(60)
+    @room_members = @q.result.order(created_at: :desc).page(params[:pahe]).per(60)
   end
 
   # GET /room_members/1 or /room_members/1.json

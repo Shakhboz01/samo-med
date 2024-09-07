@@ -25,17 +25,17 @@ class RoomMember < ApplicationRecord
   end
 
   def set_end_time
-    return if end_time != end_time_was
+    return if active_member == active_member_was
 
+    self.end_time = DateTime.current
     room.decrement!(:active_members, 1)
     buyer.update(is_room_member: false)
-    total_income = buyer.sales.where('created_at > ?', created_at).sum(:total_price)
     message =
       "<b>Bemor palatadan olindi:</b>\n" \
       "Palata: #{room.name}\n" \
       "Bemor: #{buyer.name}\n" \
-      "Kelgan sana: #{created_at}\n"
-      "Jami pul tushumi: #{total_income} so'm\n"
+      "Kelgan sana: #{created_at}\n" \
+      "Jami pul tushumi: #{calculate_total_sale_price} so'm\n"
 
     SendMessageJob.perform_later(message)
   end
