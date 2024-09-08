@@ -12,9 +12,9 @@ class BuyersController < ApplicationController
   def show
     @treatment = Treatment.new(buyer_id: @buyer.id)
     @treatments = @buyer.treatments.order(id: :desc)
-    @sales = @buyer.sales
+    @sales = @buyer.sales.order(created_at: :desc)
     @user = current_user
-    @room_members = @buyer.room_members
+    @room_members = @buyer.room_members.order(created_at: :desc)
   end
 
   # GET /buyers/new
