@@ -35,6 +35,7 @@
             %>
           </td>
           <td><%= render 'room_members/exit', room_member: room_member %></td>
+          <td><%= clink_to t('buyers.index.edit'), edit_room_member_path(room_member), 'fa-edit' %></td>
         </tr>
       <% end %>
     </tbody>
