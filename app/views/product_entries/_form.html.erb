@@ -5,18 +5,15 @@
     <%= f.association :delivery_from_counterparty, as: :hidden %>
     <%= f.input :amount_sold, as: :hidden %>
     <div class="form-inputs">
-      <%= f.association :pack, label: t('product_entries.select_product'), collection: Pack.where(active: true).joins(:product_category).where(product_category: {weight: 0}).order('LOWER(name) ASC').pluck(:name, :id, :code), include_blank: true, selected: params.dig(:pack_id).present? ? params.dig(:pack_id) : nil, input_html: { id: 'pack-select' } %>
+      <%= f.association :pack, label: t('product_entries.select_product'), collection: Pack.where(active: true).joins(:product_category).where(product_category: {weight: 0}).order('LOWER(packs.name) ASC').pluck(:name, :id, :code), include_blank: true, selected: params.dig(:pack_id).present? ? params.dig(:pack_id) : nil, input_html: { id: 'pack-select' } %>
       <%= link_to new_pack_path(delivery_id: params[:id]) do %>
-        <div><%= t('product_entries.search_by_code') %> &#128070;</div><br>
+        <div>Tovar topilmadimi? &#128070;</div><br>
       <% end %>
       <%= f.input :barcode, label: t('product_entries.search_by_code'), input_html: { id: 'code-input', autofocus: 'true' } %>
       <%= f.input :amount, label: t('product_entries.amount'), input_html: { id: 'product_entry_amount' } %>
       <%= f.input :buy_price, label: t('product_entries.buy_price'), input_html: { id: 'product_entry_buy_price' } %>
       <%= f.input :sell_price, label: t('product_entries.sell_price'), input_html: { id: 'product_entry_sell_price' } %>
       <%= f.input :price_in_percentage, label: false, as: :hidden, input_html: { id: 'product_entry_price_in_percentage', value: defined?(price_in_percentage) ? price_in_percentage : 0 } %>
-      <% if ENV.fetch('HAS_LOCAL_ENTRY') %>
-        <%= f.association :user, label: t('product_entries.user_select'), collection: User.active.order(:name).pluck(:name, :id), input_html: { id: 'product_entry_price_in_percentage', value: defined?(price_in_percentage) ? price_in_percentage : 0 } %>
-      <% end %>
       <%= f.button :submit, t('product_entries.submit_button'), class: 'btn btn-warning' %>
     </div>
   <% end %>
