@@ -44,7 +44,8 @@ class Buyer < ApplicationRecord
     message =
       "YANGI BEMOR!\n" \
       "<a href=\"https://#{ENV.fetch('HOST_URL')}/buyers/#{id}\">#{name}</a>\n"
-    message << comment if comment
+    message << "#{comment}\n" if comment
+    message << phone_number if phone_number
     SendMessageJob.perform_later(message)
   end
 
