@@ -6,8 +6,7 @@ class Buyer < ApplicationRecord
 
   enum gender: %i[erkak ayol]
   validates_presence_of :name
-  validates_uniqueness_of :phone_number, message: "Mijoz avval ro'yxatdan o'tgan!"
-  validates :phone_number, length: { is: 9 }
+  validates_uniqueness_of :phone_number, message: "Mijoz avval ro'yxatdan o'tgan!", if: -> { phone_number.present? }
   has_one_attached :image
   has_many :sales
   has_many :treatments
