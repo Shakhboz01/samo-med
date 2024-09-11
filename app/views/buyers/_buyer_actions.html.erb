@@ -23,9 +23,9 @@
       <%= clink_to 'Palataga olish', new_room_member_path(buyer_id: buyer.id), 'fa-bed' %>
     <% end %>
 
-    <% if buyer.active %>
+    <% if user.админ? %>
       <div class='ms-2'>
-        <%= clink_to t('buyers.index.deactivate'), toggle_active_buyer_path(buyer), 'fa-ban', :post %>
+        <%= cdlink_to 'удалить', buyer %>
       </div>
     <% end %>
   </div>
