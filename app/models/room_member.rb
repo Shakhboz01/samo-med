@@ -21,14 +21,12 @@ class RoomMember < ApplicationRecord
       "Palata: #{room.name}\n" \
       "Bemor: #{buyer.name}\n"
     SendMessageJob.perform_later(message)
-    room.increment!(:active_members, 1)
   end
 
   def set_end_time
     return if active_member == active_member_was
 
     self.end_time = DateTime.current
-    room.decrement!(:active_members, 1)
     buyer.update(is_room_member: false)
     message =
       "<b>Bemor palatadan olindi:</b>\n" \

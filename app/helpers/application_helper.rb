@@ -93,6 +93,10 @@ module ApplicationHelper
     end
   end
 
+  def count_active_members(room)
+    room.room_members.where(active_member: true).count
+  end
+
   def find_by_price(pack)
     product_entries = pack.product_entries
 
