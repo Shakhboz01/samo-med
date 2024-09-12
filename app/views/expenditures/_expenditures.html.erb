@@ -32,6 +32,7 @@
             <% unless expenditure.sale_ids.nil? %>
               <%= clink_to t('expenditures.view_sales'), expenditure, 'fa-search' %>
             <% end %>
+            <%= cdlink_to 'Удалить', expenditure %>
           </td>
         </tr>
       <% end %>

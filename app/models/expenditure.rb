@@ -28,6 +28,7 @@ class Expenditure < ApplicationRecord
             all # No filter when the checkbox is not selected
           end
         }
+  before_destroy :send_destroy_message
 
   private
 
@@ -40,6 +41,14 @@ class Expenditure < ApplicationRecord
       "<b>Jami summa:</b> #{price} #{price_in_usd ? '$' : 'сум'}\n"
 
     message << "<b>Комментарие:</b> #{comment}" if comment.present?
+    SendMessageJob.perform_later(message)
+  end
+
+  def send_destroy_message
+    message =
+      "#{ user.name} tomonidan xarajat tizimdan o\'chirildi!\n" \
+      "Narx: #{price}\n" \
+      "Sana: #{created_at}\n"
     SendMessageJob.perform_later(message)
   end
 
