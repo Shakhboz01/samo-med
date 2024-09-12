@@ -11,6 +11,7 @@
 
         <div class="mb-3">
           <%= f.association :product_category, label: t('packs.form.select_folder'), include_blank: false %>
+          <%= link_to "Yangi papka qo'shish", new_product_category_path %>
         </div>
 
         <%= f.input :initial_remaining, label: t('packs.form.initial_remaining') %>
