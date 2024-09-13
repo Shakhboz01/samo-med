@@ -9,7 +9,6 @@ class Pack < ApplicationRecord
   enum unit: %i[шт кг метр кв другой]
   validates :sell_price, comparison: { greater_than: 0 }
   validates :name, presence: true, uniqueness: true
-  before_validation :reset_name
   before_save :say_hi, if: :saved_change_to_initial_remaining?
   after_create :create_an_entry
   before_update :send_notify_on_remaining_change, if: :saved_change_to_initial_remaining?
@@ -57,19 +56,6 @@ class Pack < ApplicationRecord
   end
 
   private
-
-
-  def reset_name
-    return unless new_record?
-
-    size_names = ''
-    product_size_colors.each do |product_size_color|
-      size = product_size_color.size.name
-      product_size_color.amount.times do
-        size_names << " #{size}"
-      end
-    end
-  end
 
   def send_notify_on_remaining_change
     message = "Tovar ostatkasi qo'lda o'zgartirildi \n

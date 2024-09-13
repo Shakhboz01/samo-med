@@ -22,7 +22,7 @@
               <td><%= pack.name %></td>
               <td><%= pack.analize_remaining %></td>
               <td><%= currency_convert(pack.price_in_usd, pack.sell_price) %></td>
-              <td><%= find_by_price(pack) %></td>
+              <td><%= num_to_usd(pack.buy_price) %></td>
               <td>
                 <%= clink_to t('sklad.view'), pack_path(pack), 'fa-search' %>
                 <%= clink_to t('sklad.edit'), edit_pack_path(pack), 'fa-edit' %>
