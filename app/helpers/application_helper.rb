@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def clink_to(title, link, image_name, method = :get)
-    styled_image = raw("<i class=\"fa fa-fw #{image_name}\"></i>")
+    styled_image = raw("<i class=\"bi #{image_name}\"></i>")
     if method == :get
       link_to link, title: title, method: method do
         styled_image
@@ -24,7 +24,7 @@ module ApplicationHelper
     end
   end
 
-  def cdlink_to(title, link, icon = "fa-remove", confirm_text = "вы уверены?")
+  def cdlink_to(title, link, icon = "bi bi-x-circle", confirm_text = "вы уверены?")
     button_to link, title: title, style: 'color: blue; cursor: pointer; border: none; background: none', method: :delete, data: { confirm: strip_tags(confirm_text) } do
       content_tag(:i, '', class: %i[fa fa-fw].push(icon))
     end
@@ -32,7 +32,7 @@ module ApplicationHelper
 
   def active_check(active)
     style = active ? "green" : "red"
-    status_class = active ? "true fa-check" : "false fa-remove"
+    status_class = active ? "true fa-check" : "false bi bi-x"
     "<i style=\"color: #{style}\" class=\"fa fa-fw active-check-#{status_class}\"></i>".html_safe
   end
 
