@@ -12,7 +12,7 @@
       <%= f.association :buyer, label: false, collection: Buyer.active.order(weight: :desc).order(name: :asc), include_blank: false, as: :hidden %>
       <%= f.input :total_paid, label: false, as: :hidden %>
       <%= f.input :payment_type, label: "to'lov turi", collection: Sale.payment_types.keys.map { |unit| [t("sale.payment_type.#{unit}"), unit] }, include_blank: false %>
-      <%= f.association :user, label: "Vrach", collection: User.pluck(:name, :id), include_blank: true %>
+      <%= f.association :user, label: "Vrach", collection: User.врач.pluck(:name, :id), include_blank: true %>
       <%= f.input :comment, label: t('sale.comment_label') %>
       <%= f.button :submit, t('sale.finish_sale_button_label'), class: 'btn-success' %>
     </div>

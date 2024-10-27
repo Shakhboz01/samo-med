@@ -17,6 +17,10 @@
           <%= f.select :buyer_id_eq, Buyer.pluck(:name, :id), {include_blank: true}, class: 'form-control' %>
         </div>
         <div class="form-group col-xs-12 col-sm-2">
+          <%= f.label :user_id_eq, 'Vrachni tanlang', class: 'control-label' %>
+          <%= f.select :user_id_eq, User.pluck(:name, :id), {include_blank: true}, class: 'form-control' %>
+        </div>
+        <div class="form-group col-xs-12 col-sm-2">
           <%= f.label :payment_type_eq, "To'lov turi", class: 'control-label' %>
           <%= f.select :payment_type_eq, Sale.payment_types { |p| [p, p.keys] }, {include_blank: true}, class: 'form-control' %>
         </div>
