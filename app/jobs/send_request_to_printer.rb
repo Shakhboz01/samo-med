@@ -5,7 +5,7 @@ class SendRequestToPrinter < ApplicationJob
   def perform(sale_id)
 
     # Use HTTParty to send a request to the printer server
-    response = HTTParty.post("http://localhost:4000/print/#{sale_id}",
+    HTTParty.post("http://localhost:4000/print/#{sale_id}",
       body: {
         id: sale_id,
         # Add any additional data needed for the print request here
