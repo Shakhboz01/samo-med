@@ -7,6 +7,7 @@ ruby "3.1.4"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 gem 'kaminari', '~> 1.2'
 gem "ransack"
+gem 'httparty'
 gem "byebug"
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

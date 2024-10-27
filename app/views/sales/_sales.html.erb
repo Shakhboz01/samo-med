@@ -42,7 +42,7 @@
           <td><%= sale.user.name %></td>
         <% end %>
         <td>
-          <%= link_to "http://localhost:4000/print/#{sale.id}" do %>
+          <%= button_to print_receipt_sale_path(sale.id), method: :post, remote: true do %>
             <%= image_tag image_url('printer.png'), style: 'width: 25px; height: 25px; cursor: pointer;' %>
           <% end %>
         </td>

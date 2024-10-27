@@ -13,19 +13,6 @@
       <%= clink_to "Tashxis qo'yish", new_treatment_path(buyer_id: buyer.id), 'bi-bag-heart' %>
     <% end %>
     <div class='me-3 ms-3'><%= clink_to t('buyers.index.edit'), edit_buyer_path(buyer), 'bi-pencil' %></div>
-    <% if buyer.is_room_member %>
-      <% room_member = buyer.room_members.last %>
-      <% if room_member %>
-        <div class='me-3'>
-          <%= clink_to 'Bemor palatasini ko\'rish', room_path(room_member&.room), 'bi-house-heart-fill' %>
-        </div>
-        <%= render 'room_members/exit', room_member: room_member %>
-      <% else %>
-        <span>--</span>
-      <% end %>
-    <% else %>
-      <%= clink_to 'Palataga olish', new_room_member_path(buyer_id: buyer.id), 'bi-segmented-nav' %>
-    <% end %>
 
     <% if user.админ? %>
       <div class='ms-2'>

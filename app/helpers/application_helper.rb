@@ -8,7 +8,8 @@ module ApplicationHelper
   end
 
   def translit(text)
-    Translit.convert(text, :english)
+    # Translit.convert(text, :english)
+    text
   end
 
   def clink_to(title, link, image_name, method = :get)

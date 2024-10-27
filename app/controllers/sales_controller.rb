@@ -121,9 +121,8 @@ class SalesController < ApplicationController
   end
 
   def print_receipt
-    user_ip = request.remote_ip
-    ProductSells::PrintReceipt.run(sale: @sale, user_ip: user_ip)
-    redirect_to request.referrer, notice: 'Loading...'
+    SendRequestToPrinter.perform_later(@sale.id)
+    redirect_to sales_path
   end
 
   private
@@ -134,13 +133,9 @@ class SalesController < ApplicationController
       redirect_to request.referrer, notice: "Valyuta o'zgartirildi"
     else
       # Using JavaScript to force a full page reload
+      SendRequestToPrinter.perform_later(sale.id)
       respond_to do |format|
-        if current_user.кассир?
-          format.html { redirect_to "http://localhost:4000/print/#{sale.id}", allow_other_host: true }
-        else
-          format.html { redirect_to root_path(q: {phone_number_cont: sale.buyer.phone_number}) }
-        end
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("frame_id", partial: "shared/redirect", locals: { url: "http://localhost:4000/print/#{sale.id}" }) }
+        format.html { redirect_to sales_path }
       end
     end
   end

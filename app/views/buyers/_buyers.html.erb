@@ -5,9 +5,6 @@
         <th>#</th>
       <% end %>
       <th>Mijoz</th>
-      <% unless defined?(shrink) %>
-        <th><%= t('buyers.index.comment2') %></th>
-      <% end %>
       <th><%= t('buyers.index.comment') %></th>
       <th></th><th></th><th></th>
     </tr>
@@ -19,12 +16,6 @@
           <td class="<%= buyer.is_room_member ? 'text-success' : 'text-dark' %> fw-bold"><%= index +1 %></td>
         <% end %>
         <td><%= render 'buyer_info', buyer: buyer %></td>
-        <% if buyer.has_todays_treatment.nil? %>
-          <td></td>
-        <% else %>
-          <%= render 'treatments/treatment', treatment: buyer.has_todays_treatment unless ENV.fetch('HIDE_TASHXIS', nil).present? %>
-        <% end %>
-
         <td><%= buyer.comment %></td>
 
         <%= render 'buyer_actions', user: @user, buyer: buyer %>
