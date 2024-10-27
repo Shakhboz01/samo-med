@@ -126,7 +126,7 @@ uz:
       code: "Kodi"
       select_folder: "Papkani tanlang"
       add_new_folder: "Yangi papka qo'shish"
-      initial_remaining: "Qolgan"
+      initial_remaining: "Ostatkasi"
       unit: "O'lchov birligi"
       price_in_usd: "Narx dollarda"
       sell_price: "Sotish narxi (1 dona)"
