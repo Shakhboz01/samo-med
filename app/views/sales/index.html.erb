@@ -18,6 +18,12 @@
     </div>
     <div class="card-body">
       <%= render 'sale_from_local_services/filter_form', q: @q, url: request.path %>
+      <ul>
+        <li><b>Jami savdolar soni:</b> <%= @sales_data.count %></li>
+        <% unless ENV.fetch('HIDE_BONUS_USER', nil).present? %>
+          <li><b>Jami bonuslar soni:</b> <%= @total_bonuses %></li>
+        <% end %>
+      </ul>
       <%= render 'sales', sales: @sales %>
       <%= paginate @sales %>
     </div>

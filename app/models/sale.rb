@@ -2,6 +2,7 @@ class Sale < ApplicationRecord
   attr_accessor :discount_price
   belongs_to :buyer
   belongs_to :user
+  belongs_to :bonus_user, optional: true
   enum status: %i[processing closed]
   enum payment_type: %i[nalichniy karta click boshqa]
   has_many :product_sells

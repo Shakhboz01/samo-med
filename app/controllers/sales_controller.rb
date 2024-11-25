@@ -9,6 +9,7 @@ class SalesController < ApplicationController
     @q = Sale.includes(:buyer, :user).ransack(params[:q])
     @sales = @q.result.order(created_at: :desc)
     @sales_data = @sales
+    @total_bonuses = @sales.where.not(bonus_user_id: nil).count
     @sales = @sales.page(params[:page]).per(70)
     total_profit_in_usd = @sales_data.joins(:product_sells).where('sales.price_in_usd = ?', true).sum('product_sells.total_profit')
     @total_profit_in_usd = total_profit_in_usd
@@ -149,7 +150,8 @@ class SalesController < ApplicationController
   def sale_params
     params.require(:sale).permit(
       :total_paid, :payment_type, :buyer_id, :total_price, :comment,
-      :user_id, :status, :discount_price, :price_in_usd, :total_worker_price
+      :user_id, :status, :discount_price, :price_in_usd, :total_worker_price,
+      :bonus_user_id
     )
   end
 end
