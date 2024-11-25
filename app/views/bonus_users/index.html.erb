@@ -1,0 +1,29 @@
+<div class="container my-5">
+  <div class="card shadow-lg">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h3 class="card-title font-weight-bold">Bonuschilar</h3>
+      <%= link_to 'Yangi bonuschi qo\'shish', new_bonus_user_path, class: "btn btn-success min-width-btn" %>
+    </div>
+
+    <div class="card-body">
+      <table class="table table-hover table-bordered table-striped">
+        <thead class='table-dark'>
+          <tr>
+            <th>Isim</th>
+            <th>Bu oydagi bonuslar soni</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @bonus_users.each do |bonus_user| %>
+            <tr>
+              <td><%= bonus_user.name %></td>
+              <td><%= clink_to 'Barcha bonuslar sonini ko\'rish', sales_url(q: {bonus_user_id_eq: bonus_user.id}), 'bi-search' %></td>
+              <td><%= clink_to 'Редактировать', edit_bonus_user_path(bonus_user), 'bi-pencil' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_04_103544) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_25_115530) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,23 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_04_103544) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "analysis_results", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "comment"
+    t.bigint "buyer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "uniq_id"
+    t.index ["buyer_id"], name: "index_analysis_results_on_buyer_id"
+    t.index ["user_id"], name: "index_analysis_results_on_user_id"
+  end
+
+  create_table "bonus_users", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "buyers", force: :cascade do |t|
@@ -344,6 +361,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_04_103544) do
     t.integer "weight", default: 0
   end
 
+  create_table "queue_histories", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_queue_histories_on_user_id"
+  end
+
   create_table "room_members", force: :cascade do |t|
     t.boolean "active_member", default: true
     t.string "comment"
@@ -362,6 +387,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_04_103544) do
     t.integer "active_members", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "price", precision: 12, scale: 2
   end
 
   create_table "salaries", force: :cascade do |t|
@@ -513,6 +539,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_04_103544) do
     t.boolean "boy_osmaslik", default: false
     t.boolean "oyoq_ogrigi", default: false
     t.boolean "siyib_qoyish", default: false
+    t.boolean "gepatit_a", default: false
+    t.boolean "gepatit_b", default: false
+    t.boolean "gepatit_c", default: false
+    t.boolean "gepatit_d", default: false
+    t.boolean "gepatit_e", default: false
     t.index ["buyer_id"], name: "index_treatments_on_buyer_id"
     t.index ["user_id"], name: "index_treatments_on_user_id"
   end
@@ -542,6 +573,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_04_103544) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "analysis_results", "buyers"
+  add_foreign_key "analysis_results", "users"
   add_foreign_key "currency_conversions", "users"
   add_foreign_key "daily_transaction_reports", "users"
   add_foreign_key "debt_operations", "debt_users"
@@ -576,6 +609,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_04_103544) do
   add_foreign_key "product_size_colors", "sizes"
   add_foreign_key "products", "colors"
   add_foreign_key "products", "sizes"
+  add_foreign_key "queue_histories", "users"
   add_foreign_key "room_members", "buyers"
   add_foreign_key "room_members", "rooms"
   add_foreign_key "salaries", "teams"

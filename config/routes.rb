@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bonus_users
   resources :room_members
   resources :rooms
   resources :treatments
