@@ -22,7 +22,7 @@
         </div>
         <% unless ENV.fetch('HIDE_BONUS_USER', nil).present? %>
           <div class="form-group col-xs-12 col-sm-2">
-            <%= f.label :user_id_eq, 'Vrachni tanlang', class: 'control-label' %>
+            <%= f.label :user_id_eq, 'Bonuschini tanlang', class: 'control-label' %>
             <%= f.select :user_id_eq, BonusUser.order(:name).pluck(:name, :id), {include_blank: true}, class: 'form-control' %>
           </div>
         <% end %>
