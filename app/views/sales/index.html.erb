@@ -1,7 +1,7 @@
 <div class="my-5">
   <div class="card shadow-lg">
     <div class='d-flex justify-content-between'>
-      <h1 class='text-center'><%= t('sales.history') %></h1>
+      <h1 class='text-center'>Xizmat ko'rsatish tarixi</h1>
       <div class='d-flex'>
       <%= link_to 'Экспорт в Excel', sales_url(q: params.dig(:q)&.permit!, format: :xlsx), class: 'btn btn-success' %>
       <%= simple_form_for :sales_data, url: excel_sales_url, method: :get do |f| %>
