@@ -2,7 +2,7 @@ wb = xlsx_package.workbook
 
 wb.add_worksheet(name: "Sales Data") do |sheet|
   # Define the headers
-  headers = ['Mijoz', 'Umumiy xarid narxi', 'Sotuv sanasi', 'Kassir', 'Kommentariya', 'Tolov turi', 'Mahsulotlar']
+  headers = ['Bemor', "Tug'ilgan sanasi", "Bemorning shikoyatlari", "Bemor yuborgan muosasa nomi", 'Umumiy xizmat korsatish narxi', "Xizmat korsatish sanasi", 'Kassir', 'Kommentariya', 'Tolov turi', 'Mahsulot\Xizmatlar']
   footers = ['Jami:', @sales_data.sum(:total_price), '','','','','']
   styles = wb.styles
   header_style = styles.add_style(b: true)
@@ -12,6 +12,9 @@ wb.add_worksheet(name: "Sales Data") do |sheet|
   @sales_data.each do |sale|
     sheet.add_row [
       sale.buyer.name,
+      sale.buyer.birthday,
+      sale.buyer.comment,
+      sale.buyer.job,
       sale.total_price.to_i,
       sale.created_at.strftime("%Y-%m-%d %H:%M"),
       sale.user.name,
