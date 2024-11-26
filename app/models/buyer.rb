@@ -12,6 +12,7 @@ class Buyer < ApplicationRecord
   has_many :room_members
   has_many :sale_from_local_services
   has_many :sale_from_services
+  before_create :titleize_name
   before_update :send_message
   after_create :send_create_message
   scope :active, -> { where(:active => true) }
@@ -37,6 +38,10 @@ class Buyer < ApplicationRecord
   end
 
   private
+
+  def titleize_name
+    self.name = name.titleize
+  end
 
   def send_create_message
     message =
